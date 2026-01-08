@@ -1,5 +1,9 @@
 # Mithril UI
 
+[![Hex.pm](https://img.shields.io/hexpm/v/mithril_ui.svg)](https://hex.pm/packages/mithril_ui)
+[![Docs](https://img.shields.io/badge/hex-docs-blue.svg)](https://hexdocs.pm/mithril_ui)
+[![License](https://img.shields.io/hexpm/l/mithril_ui.svg)](https://github.com/lockhinator/mithril_ui/blob/master/LICENSE)
+
 A comprehensive Phoenix LiveView component library built with DaisyUI theming and Flowbite-inspired designs.
 
 ## Features
