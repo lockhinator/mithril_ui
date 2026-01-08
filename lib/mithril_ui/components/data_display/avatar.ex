@@ -113,7 +113,7 @@ defmodule MithrilUI.Components.Avatar do
   defp avatar_classes(status, extra_class) do
     [
       "avatar",
-      status && status,
+      status,
       !status && extra_class && "placeholder",
       extra_class
     ]

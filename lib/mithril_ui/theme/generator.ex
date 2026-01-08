@@ -41,8 +41,7 @@ defmodule MithrilUI.Theme.Generator do
   @spec generate_css() :: String.t()
   def generate_css do
     Application.get_env(:mithril_ui, :themes, [])
-    |> Enum.map(&theme_to_css/1)
-    |> Enum.join("\n\n")
+    |> Enum.map_join("\n\n", &theme_to_css/1)
   end
 
   @doc """
@@ -118,22 +117,18 @@ defmodule MithrilUI.Theme.Generator do
   # Private functions
 
   defp colors_to_css(colors) when is_map(colors) do
-    colors
-    |> Enum.map(fn {key, value} ->
+    Enum.map_join(colors, "\n  ", fn {key, value} ->
       css_var = key_to_css_var(key)
       "#{css_var}: #{value};"
     end)
-    |> Enum.join("\n  ")
   end
 
   defp colors_to_css(_), do: ""
 
   defp radius_to_css(radius) when is_map(radius) and map_size(radius) > 0 do
-    radius
-    |> Enum.map(fn {key, value} ->
+    Enum.map_join(radius, "\n  ", fn {key, value} ->
       "--radius-#{key}: #{value};"
     end)
-    |> Enum.join("\n  ")
   end
 
   defp radius_to_css(_), do: ""

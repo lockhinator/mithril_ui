@@ -160,8 +160,7 @@ defmodule MithrilUI.Components.Breadcrumb do
     segment
     |> String.replace(~r/[-_]/, " ")
     |> String.split()
-    |> Enum.map(&String.capitalize/1)
-    |> Enum.join(" ")
+    |> Enum.map_join(" ", &String.capitalize/1)
   end
 
   defp humanize_segment(segment), do: to_string(segment)

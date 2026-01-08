@@ -230,22 +230,8 @@ defmodule MithrilUI.AI.ComponentSelector do
         {:error, :not_found}
 
       component ->
-        related =
-          (component[:related] || [])
-          |> Enum.map(fn name ->
-            case ComponentRegistry.get_component(name) do
-              nil -> nil
-              c -> %{name: c.name, description: c.description}
-            end
-          end)
-          |> Enum.reject(&is_nil/1)
-
-        alternatives =
-          (component[:alternatives] || %{})
-          |> Enum.map(fn {name, reason} ->
-            %{name: name, reason: reason}
-          end)
-
+        related = build_related_list(component[:related] || [])
+        alternatives = build_alternatives_list(component[:alternatives] || %{})
         {:ok, %{related: related, alternatives: alternatives}}
     end
   end
@@ -432,13 +418,26 @@ defmodule MithrilUI.AI.ComponentSelector do
     end
   end
 
-  defp generate_reason(component, keywords) do
-    cond do
-      component.name in keywords ->
-        "#{component.description}"
+  defp build_related_list(related_names) do
+    Enum.flat_map(related_names, fn name ->
+      case ComponentRegistry.get_component(name) do
+        nil -> []
+        c -> [%{name: c.name, description: c.description}]
+      end
+    end)
+  end
 
-      true ->
-        Enum.at(component.use_when, 0) || component.description
+  defp build_alternatives_list(alternatives) do
+    Enum.map(alternatives, fn {name, reason} ->
+      %{name: name, reason: reason}
+    end)
+  end
+
+  defp generate_reason(component, keywords) do
+    if component.name in keywords do
+      component.description
+    else
+      Enum.at(component.use_when, 0) || component.description
     end
   end
 
@@ -480,11 +479,9 @@ defmodule MithrilUI.AI.ComponentSelector do
             %{
               name: "Size variants",
               code:
-                sizes
-                |> Enum.map(
-                  &~s(<.#{name} size="#{&1}">#{String.upcase(to_string(&1))}</.#{name}>)
-                )
-                |> Enum.join("\n"),
+                Enum.map_join(sizes, "\n", fn size ->
+                  ~s(<.#{name} size="#{size}">#{String.upcase(to_string(size))}</.#{name}>)
+                end),
               description: "Available size options"
             }
           ]

@@ -1,4 +1,11 @@
 defmodule MithrilUiWeb.Storybook do
+  @moduledoc """
+  Phoenix Storybook configuration for Mithril UI component library.
+
+  Provides interactive documentation and visual testing for all components
+  with support for all DaisyUI themes.
+  """
+
   use PhoenixStorybook,
     otp_app: :mithril_ui,
     content_path: Path.expand("../../storybook", __DIR__),

@@ -3,6 +3,8 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
   import ExUnit.CaptureIO
 
+  alias Mix.Tasks.MithrilUi.Install
+
   @test_dir "test/tmp/install_test"
 
   setup do
@@ -31,7 +33,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
     test "shows installer banner" do
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run(["--dry-run"])
+          Install.run(["--dry-run"])
         end)
 
       assert output =~ "Mithril UI Installer"
@@ -39,7 +41,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
     test "dry run does not create files" do
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run(["--dry-run"])
+        Install.run(["--dry-run"])
       end)
 
       refute File.exists?("config/mithril_ui.exs")
@@ -52,7 +54,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
       """)
 
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run([])
+        Install.run([])
       end)
 
       assert File.exists?("config/mithril_ui.exs")
@@ -68,7 +70,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
       """)
 
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run([])
+        Install.run([])
       end)
 
       config_content = File.read!("config/config.exs")
@@ -80,7 +82,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run(["--no-config"])
+          Install.run(["--no-config"])
         end)
 
       refute File.exists?("config/mithril_ui.exs")
@@ -96,7 +98,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
       """)
 
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run([])
+        Install.run([])
       end)
 
       content = File.read!("assets/tailwind.config.js")
@@ -110,7 +112,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run(["--no-tailwind"])
+          Install.run(["--no-tailwind"])
         end)
 
       content = File.read!("assets/tailwind.config.js")
@@ -125,7 +127,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
       """)
 
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run([])
+        Install.run([])
       end)
 
       content = File.read!("assets/css/app.css")
@@ -139,7 +141,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
       """)
 
       capture_io(fn ->
-        Mix.Tasks.MithrilUi.Install.run([])
+        Install.run([])
       end)
 
       content = File.read!("assets/js/app.js")
@@ -153,7 +155,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run(["--no-js"])
+          Install.run(["--no-js"])
         end)
 
       content = File.read!("assets/js/app.js")
@@ -164,7 +166,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
     test "prints next steps" do
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run(["--dry-run"])
+          Install.run(["--dry-run"])
         end)
 
       assert output =~ "Next Steps"
@@ -180,7 +182,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
 
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run([])
+          Install.run([])
         end)
 
       assert output =~ "already configured"
@@ -189,7 +191,7 @@ defmodule Mix.Tasks.MithrilUi.InstallTest do
     test "handles missing tailwind config gracefully" do
       output =
         capture_io(fn ->
-          Mix.Tasks.MithrilUi.Install.run([])
+          Install.run([])
         end)
 
       assert output =~ "not found"

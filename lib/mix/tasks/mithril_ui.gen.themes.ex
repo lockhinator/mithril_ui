@@ -17,6 +17,8 @@ defmodule Mix.Tasks.MithrilUi.Gen.Themes do
 
   use Mix.Task
 
+  alias MithrilUI.Theme.Generator
+
   @shortdoc "Generates CSS from custom theme definitions"
 
   @impl true
@@ -27,7 +29,7 @@ defmodule Mix.Tasks.MithrilUi.Gen.Themes do
         aliases: [o: :output, q: :quiet]
       )
 
-    output_path = opts[:output] || MithrilUI.Theme.Generator.default_output_path()
+    output_path = opts[:output] || Generator.default_output_path()
     quiet = opts[:quiet] || false
 
     # Ensure the directory exists
@@ -35,7 +37,7 @@ defmodule Mix.Tasks.MithrilUi.Gen.Themes do
     |> Path.dirname()
     |> File.mkdir_p!()
 
-    css = MithrilUI.Theme.Generator.generate_css()
+    css = Generator.generate_css()
 
     if css == "" do
       unless quiet do

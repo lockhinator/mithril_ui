@@ -5,6 +5,7 @@ defmodule MithrilUI.Components.PopoverTest do
   import Phoenix.LiveViewTest
 
   alias MithrilUI.Components.Popover
+  alias Phoenix.LiveView.JS
 
   describe "popover/1" do
     test "renders basic popover with trigger and content" do
@@ -273,7 +274,7 @@ defmodule MithrilUI.Components.PopoverTest do
     end
 
     test "returns JS struct with existing JS and id" do
-      js = Phoenix.LiveView.JS.push("event")
+      js = JS.push("event")
       result = Popover.hide_popover(js, "test-id")
       assert %Phoenix.LiveView.JS{} = result
     end

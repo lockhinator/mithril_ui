@@ -23,6 +23,8 @@ defmodule MithrilUI.Components.Toggle do
   """
 
   use Phoenix.Component
+
+  alias Phoenix.HTML.Form, as: HtmlForm
   import MithrilUI.Helpers, only: [translate_error: 1]
 
   @doc """
@@ -60,7 +62,7 @@ defmodule MithrilUI.Components.Toggle do
     assigns
     |> assign(:id, assigns.id || field.id)
     |> assign(:name, field.name)
-    |> assign(:checked, Phoenix.HTML.Form.normalize_value("checkbox", field.value))
+    |> assign(:checked, HtmlForm.normalize_value("checkbox", field.value))
     |> assign(:errors, Enum.map(field.errors, &translate_error/1))
     |> assign(:field, nil)
     |> toggle()

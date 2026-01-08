@@ -33,7 +33,7 @@ defmodule MithrilUI.ThemeTest do
       options = Theme.theme_options()
 
       assert is_list(options)
-      assert length(options) > 0
+      assert options != []
 
       first = hd(options)
       assert Map.has_key?(first, :name)

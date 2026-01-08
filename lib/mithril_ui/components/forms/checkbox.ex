@@ -20,6 +20,8 @@ defmodule MithrilUI.Components.Checkbox do
   use Phoenix.Component
   import MithrilUI.Helpers, only: [translate_error: 1]
 
+  alias Phoenix.HTML.Form, as: HtmlForm
+
   @doc """
   Renders a checkbox input with label.
 
@@ -57,7 +59,7 @@ defmodule MithrilUI.Components.Checkbox do
     assigns
     |> assign(:id, assigns.id || field.id)
     |> assign(:name, field.name)
-    |> assign(:checked, Phoenix.HTML.Form.normalize_value("checkbox", field.value))
+    |> assign(:checked, HtmlForm.normalize_value("checkbox", field.value))
     |> assign(:errors, Enum.map(field.errors, &translate_error/1))
     |> assign(:field, nil)
     |> checkbox()

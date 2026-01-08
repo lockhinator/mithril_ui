@@ -83,7 +83,7 @@ defmodule MithrilUI.AI.ComponentSelectorTest do
     test "suggests button for form submission" do
       suggestions = ComponentSelector.suggest_components("submit form")
 
-      assert length(suggestions) > 0
+      assert suggestions != []
       names = Enum.map(suggestions, & &1.name)
       assert :button in names
     end
@@ -137,7 +137,7 @@ defmodule MithrilUI.AI.ComponentSelectorTest do
       {:ok, examples} = ComponentSelector.get_usage_examples(:button)
 
       assert is_list(examples)
-      assert length(examples) > 0
+      assert examples != []
 
       first = hd(examples)
       assert is_binary(first.name)
@@ -175,7 +175,7 @@ defmodule MithrilUI.AI.ComponentSelectorTest do
         assert is_atom(category.name)
         assert is_binary(category.description)
         assert is_list(category.components)
-        assert length(category.components) > 0
+        assert category.components != []
       end
     end
   end

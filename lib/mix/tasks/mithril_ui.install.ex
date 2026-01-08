@@ -148,104 +148,118 @@ defmodule Mix.Tasks.MithrilUi.Install do
       themes: []
     """
 
-    if File.exists?(config_path) do
-      {:exists, "Config file", config_path}
-    else
-      unless dry_run do
+    cond do
+      File.exists?(config_path) ->
+        {:exists, "Config file", config_path}
+
+      dry_run ->
+        {:created, "Config file", config_path}
+
+      true ->
         File.write!(config_path, config_content)
+        inject_config_import()
+        {:created, "Config file", config_path}
+    end
+  end
 
-        # Inject import into config.exs
-        config_exs_path = "config/config.exs"
+  defp inject_config_import do
+    config_exs_path = "config/config.exs"
 
-        if File.exists?(config_exs_path) do
-          content = File.read!(config_exs_path)
+    with true <- File.exists?(config_exs_path),
+         content <- File.read!(config_exs_path),
+         false <- String.contains?(content, "mithril_ui.exs") do
+      updated =
+        String.replace(
+          content,
+          ~r/(import_config "\#{config_env\(\)}\.exs")/,
+          ~s(import_config "mithril_ui.exs"\n\n\\1)
+        )
 
-          unless String.contains?(content, "mithril_ui.exs") do
-            # Insert before the environment import line
-            updated =
-              String.replace(
-                content,
-                ~r/(import_config "\#{config_env\(\)}\.exs")/,
-                ~s(import_config "mithril_ui.exs"\n\n\\1)
-              )
-
-            File.write!(config_exs_path, updated)
-          end
-        end
-      end
-
-      {:created, "Config file", config_path}
+      File.write!(config_exs_path, updated)
     end
   end
 
   defp install_tailwind(dry_run) do
-    results = []
+    tailwind_result = update_tailwind_config(dry_run)
+    css_result = update_app_css(dry_run)
+    [tailwind_result, css_result]
+  end
 
-    # Update tailwind.config.js
+  defp update_tailwind_config(dry_run) do
     tailwind_config_path = "assets/tailwind.config.js"
 
-    results =
-      if File.exists?(tailwind_config_path) do
+    cond do
+      not File.exists?(tailwind_config_path) ->
+        {:missing, "Tailwind config", "assets/tailwind.config.js not found"}
+
+      tailwind_has_daisyui?(tailwind_config_path) ->
+        {:exists, "Tailwind config", "DaisyUI already configured"}
+
+      dry_run ->
+        {:updated, "Tailwind config", tailwind_config_path}
+
+      true ->
         content = File.read!(tailwind_config_path)
 
-        if String.contains?(content, "daisyui") do
-          results ++ [{:exists, "Tailwind config", "DaisyUI already configured"}]
-        else
-          unless dry_run do
-            updated =
-              content
-              |> inject_daisyui_require()
-              |> inject_daisyui_plugin()
+        updated =
+          content
+          |> inject_daisyui_require()
+          |> inject_daisyui_plugin()
 
-            File.write!(tailwind_config_path, updated)
-          end
+        File.write!(tailwind_config_path, updated)
+        {:updated, "Tailwind config", tailwind_config_path}
+    end
+  end
 
-          results ++ [{:updated, "Tailwind config", tailwind_config_path}]
-        end
-      else
-        results ++ [{:missing, "Tailwind config", "assets/tailwind.config.js not found"}]
-      end
+  defp tailwind_has_daisyui?(path) do
+    path |> File.read!() |> String.contains?("daisyui")
+  end
 
-    # Add @source directive to app.css
+  defp update_app_css(dry_run) do
     app_css_path = "assets/css/app.css"
 
-    results =
-      if File.exists?(app_css_path) do
-        content = File.read!(app_css_path)
+    cond do
+      not File.exists?(app_css_path) ->
+        {:missing, "CSS file", "assets/css/app.css not found"}
 
-        if String.contains?(content, "mithril_ui") do
-          results ++ [{:exists, "CSS @source", "already configured"}]
-        else
-          unless dry_run do
-            source_directive = """
+      app_css_has_mithril?(app_css_path) ->
+        {:exists, "CSS @source", "already configured"}
 
-            /* Mithril UI - Include component classes in Tailwind scan */
-            @source "../../deps/mithril_ui/lib/**/*.ex";
-            """
+      dry_run ->
+        {:updated, "CSS @source", app_css_path}
 
-            # Insert after @import "tailwindcss" or at the beginning
-            updated =
-              if String.contains?(content, "@import") do
-                String.replace(
-                  content,
-                  ~r/(@import\s+["'][^"']+["'];?\n)/,
-                  "\\1#{source_directive}",
-                  global: false
-                )
-              else
-                source_directive <> "\n" <> content
-              end
+      true ->
+        inject_mithril_source_directive(app_css_path)
+        {:updated, "CSS @source", app_css_path}
+    end
+  end
 
-            File.write!(app_css_path, updated)
-          end
+  defp app_css_has_mithril?(path) do
+    path |> File.read!() |> String.contains?("mithril_ui")
+  end
 
-          results ++ [{:updated, "CSS @source", app_css_path}]
-        end
+  defp inject_mithril_source_directive(path) do
+    content = File.read!(path)
+
+    source_directive = """
+
+    /* Mithril UI - Include component classes in Tailwind scan */
+    @source "../../deps/mithril_ui/lib/**/*.ex";
+    """
+
+    updated =
+      if String.contains?(content, "@import") do
+        String.replace(
+          content,
+          ~r/(@import\s+["'][^"']+["'];?\n)/,
+          "\\1#{source_directive}",
+          global: false
+        )
       else
-        results ++ [{:missing, "CSS file", "assets/css/app.css not found"}]
+        source_directive <> "\n" <> content
       end
 
-    results
+    File.write!(path, updated)
   end
 
   defp inject_daisyui_require(content) do
@@ -345,48 +359,61 @@ defmodule Mix.Tasks.MithrilUi.Install do
     // const Hooks = { ...MithrilHooks, ...YourOtherHooks }
     """
 
-    if File.exists?(app_js_path) do
-      content = File.read!(app_js_path)
+    cond do
+      not File.exists?(app_js_path) ->
+        {:missing, "JavaScript file", "assets/js/app.js not found"}
 
-      if String.contains?(content, "MithrilTheme") do
+      app_js_has_mithril_hooks?(app_js_path) ->
         {:exists, "JavaScript hooks", "already installed"}
-      else
-        unless dry_run do
-          File.write!(app_js_path, content <> hook_content)
-        end
 
+      dry_run ->
         {:updated, "JavaScript hooks", app_js_path}
-      end
-    else
-      {:missing, "JavaScript file", "assets/js/app.js not found"}
+
+      true ->
+        content = File.read!(app_js_path)
+        File.write!(app_js_path, content <> hook_content)
+        {:updated, "JavaScript hooks", app_js_path}
     end
+  end
+
+  defp app_js_has_mithril_hooks?(path) do
+    path |> File.read!() |> String.contains?("MithrilTheme")
   end
 
   defp update_root_layout(dry_run) do
     root_path = find_root_layout()
 
-    if root_path do
-      content = File.read!(root_path)
+    cond do
+      is_nil(root_path) ->
+        {:missing, "Root layout", "Could not find root.html.heex"}
 
-      if String.contains?(content, "data-theme") do
+      layout_has_theme?(root_path) ->
         {:exists, "Root layout", "data-theme already present"}
-      else
-        unless dry_run do
-          updated =
-            String.replace(
-              content,
-              ~r/<html([^>]*)lang="en"([^>]*)>/,
-              ~s(<html\\1lang="en"\\2 data-theme="light">)
-            )
 
-          File.write!(root_path, updated)
-        end
-
+      dry_run ->
         {:updated, "Root layout", root_path}
-      end
-    else
-      {:missing, "Root layout", "Could not find root.html.heex"}
+
+      true ->
+        inject_theme_attribute(root_path)
+        {:updated, "Root layout", root_path}
     end
+  end
+
+  defp layout_has_theme?(path) do
+    path |> File.read!() |> String.contains?("data-theme")
+  end
+
+  defp inject_theme_attribute(path) do
+    content = File.read!(path)
+
+    updated =
+      String.replace(
+        content,
+        ~r/<html([^>]*)lang="en"([^>]*)>/,
+        ~s(<html\\1lang="en"\\2 data-theme="light">)
+      )
+
+    File.write!(path, updated)
   end
 
   defp find_root_layout do

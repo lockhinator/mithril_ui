@@ -110,17 +110,17 @@ defmodule MithrilUI.Components.Button do
       type={@type}
       disabled={@disabled || @loading}
       class={
-        button_classes(
-          @variant,
-          @size,
-          @disabled,
-          @loading,
-          @block,
-          @circle,
-          @square,
-          @outline,
-          @class
-        )
+        button_classes(%{
+          variant: @variant,
+          size: @size,
+          disabled: @disabled,
+          loading: @loading,
+          block: @block,
+          circle: @circle,
+          square: @square,
+          outline: @outline,
+          class: @class
+        })
       }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
@@ -170,17 +170,17 @@ defmodule MithrilUI.Components.Button do
     ~H"""
     <.link
       class={
-        button_classes(
-          @variant,
-          @size,
-          @disabled,
-          @loading,
-          @block,
-          @circle,
-          @square,
-          @outline,
-          @class
-        )
+        button_classes(%{
+          variant: @variant,
+          size: @size,
+          disabled: @disabled,
+          loading: @loading,
+          block: @block,
+          circle: @circle,
+          square: @square,
+          outline: @outline,
+          class: @class
+        })
       }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
@@ -236,17 +236,17 @@ defmodule MithrilUI.Components.Button do
       type={@type}
       disabled={@disabled || @loading}
       class={
-        button_classes(
-          @variant,
-          @size,
-          @disabled,
-          @loading,
-          false,
-          @circle,
-          @square,
-          @outline,
-          @class
-        )
+        button_classes(%{
+          variant: @variant,
+          size: @size,
+          disabled: @disabled,
+          loading: @loading,
+          block: false,
+          circle: @circle,
+          square: @square,
+          outline: @outline,
+          class: @class
+        })
       }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
@@ -262,26 +262,16 @@ defmodule MithrilUI.Components.Button do
     """
   end
 
-  defp button_classes(
-         variant,
-         size,
-         disabled,
-         loading,
-         block,
-         circle,
-         square,
-         outline,
-         extra_class
-       ) do
+  defp button_classes(opts) do
     [
       "btn",
-      variant_class(variant, outline),
-      size && "btn-#{size}",
-      (disabled || loading) && "btn-disabled",
-      block && "btn-block",
-      circle && "btn-circle",
-      square && !circle && "btn-square",
-      extra_class
+      variant_class(opts.variant, opts.outline),
+      opts.size && "btn-#{opts.size}",
+      (opts.disabled || opts.loading) && "btn-disabled",
+      opts.block && "btn-block",
+      opts.circle && "btn-circle",
+      opts.square && !opts.circle && "btn-square",
+      opts.class
     ]
   end
 

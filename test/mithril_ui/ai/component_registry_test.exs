@@ -115,7 +115,7 @@ defmodule MithrilUI.AI.ComponentRegistryTest do
     test "use_when is a non-empty list of strings" do
       for component <- ComponentRegistry.all_components() do
         assert is_list(component.use_when)
-        assert length(component.use_when) > 0
+        assert component.use_when != []
         assert Enum.all?(component.use_when, &is_binary/1)
       end
     end
@@ -123,7 +123,7 @@ defmodule MithrilUI.AI.ComponentRegistryTest do
     test "do_not_use_when is a non-empty list of strings" do
       for component <- ComponentRegistry.all_components() do
         assert is_list(component.do_not_use_when)
-        assert length(component.do_not_use_when) > 0
+        assert component.do_not_use_when != []
         assert Enum.all?(component.do_not_use_when, &is_binary/1)
       end
     end
