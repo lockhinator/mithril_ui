@@ -47,9 +47,8 @@ defmodule Mix.Tasks.MithrilUi.Mcp do
 
   @impl true
   def run(_args) do
-    # Just compile - we don't need to start the full application
-    # The MCP server only needs access to the compiled modules
-    Mix.Task.run("compile")
+    # Ensure the application is started so we can access component metadata
+    Mix.Task.run("app.start")
 
     # Start the MCP server
     Server.start()
