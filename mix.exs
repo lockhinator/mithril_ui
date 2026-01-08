@@ -71,7 +71,8 @@ defmodule MithrilUi.MixProject do
        sparse: "optimized",
        app: false,
        compile: false,
-       depth: 1},
+       depth: 1,
+       only: :dev},
 
       # Phoenix Storybook for component documentation
       {:phoenix_storybook, "~> 0.9.3"},
