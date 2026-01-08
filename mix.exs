@@ -54,16 +54,17 @@ defmodule MithrilUi.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      # Phoenix & LiveView
-      {:phoenix, "~> 1.8.0"},
+      # Core dependencies - required for component library
+      {:phoenix, "~> 1.7"},
       {:phoenix_html, "~> 4.1"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 1.1.0"},
-      {:lazy_html, ">= 0.1.0", only: :test},
+      {:phoenix_live_view, "~> 1.0"},
+      {:jason, "~> 1.2"},
 
-      # Assets
-      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
-      {:tailwind, "~> 0.3", runtime: Mix.env() == :dev},
+      # Storybook & Dev Server - not needed by library users
+      {:phoenix_storybook, "~> 0.9.3", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:esbuild, "~> 0.10", only: :dev, runtime: false},
+      {:tailwind, "~> 0.3", only: :dev, runtime: false},
       {:heroicons,
        github: "tailwindlabs/heroicons",
        tag: "v2.2.0",
@@ -72,21 +73,14 @@ defmodule MithrilUi.MixProject do
        compile: false,
        depth: 1,
        only: :dev},
+      {:telemetry_metrics, "~> 1.0", only: :dev},
+      {:telemetry_poller, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.26", only: :dev},
+      {:dns_cluster, "~> 0.2.0", only: :dev},
+      {:bandit, "~> 1.5", only: :dev},
 
-      # Phoenix Storybook for component documentation
-      {:phoenix_storybook, "~> 0.9.3"},
-
-      # Telemetry
-      {:telemetry_metrics, "~> 1.0"},
-      {:telemetry_poller, "~> 1.0"},
-
-      # Utilities
-      {:gettext, "~> 0.26"},
-      {:jason, "~> 1.2"},
-      {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"},
-
-      # Development & Testing
+      # Testing
+      {:lazy_html, ">= 0.1.0", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false}
