@@ -1,0 +1,180 @@
+/*
+ * Mithril UI - Base Component Styles
+ *
+ * This file contains base styles for Mithril UI components that work
+ * alongside DaisyUI's component classes.
+ */
+
+/* ==========================================================================
+   Component Base Styles
+   ========================================================================== */
+
+/* Form Control Wrapper */
+.mithril-form-control {
+  width: 100%;
+}
+
+/* Input with icon support */
+.mithril-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.mithril-input-icon {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.mithril-input-icon-left {
+  left: 0.75rem;
+}
+
+.mithril-input-icon-right {
+  right: 0.75rem;
+}
+
+.mithril-input-with-icon-left {
+  padding-left: 2.5rem;
+}
+
+.mithril-input-with-icon-right {
+  padding-right: 2.5rem;
+}
+
+/* ==========================================================================
+   LiveView Integration Styles
+   ========================================================================== */
+
+/* Loading states for LiveView */
+.phx-click-loading,
+.phx-submit-loading {
+  cursor: wait;
+}
+
+.phx-click-loading *,
+.phx-submit-loading * {
+  pointer-events: none;
+}
+
+/* Spinner for loading states */
+.mithril-loading-spinner {
+  animation: mithril-spin 1s linear infinite;
+}
+
+@keyframes mithril-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   Overlay Components (Modal, Drawer, Toast)
+   ========================================================================== */
+
+/* Modal/Drawer backdrop */
+.mithril-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Toast container positioning */
+.mithril-toast-container {
+  position: fixed;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.mithril-toast-container > * {
+  pointer-events: auto;
+}
+
+.mithril-toast-container-top-right {
+  top: 1rem;
+  right: 1rem;
+}
+
+.mithril-toast-container-top-left {
+  top: 1rem;
+  left: 1rem;
+}
+
+.mithril-toast-container-bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.mithril-toast-container-bottom-left {
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.mithril-toast-container-top-center {
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mithril-toast-container-bottom-center {
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ==========================================================================
+   Focus Visible Styles
+   ========================================================================== */
+
+/* Custom focus ring for accessibility */
+.mithril-focus-ring:focus-visible {
+  outline: 2px solid oklch(var(--p));
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Utility Classes
+   ========================================================================== */
+
+/* Visually hidden but accessible to screen readers */
+.mithril-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reset button styles */
+.mithril-btn-reset {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .mithril-no-print {
+    display: none !important;
+  }
+}

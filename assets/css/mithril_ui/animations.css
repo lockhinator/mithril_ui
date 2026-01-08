@@ -1,0 +1,384 @@
+/*
+ * Mithril UI - Animation Presets
+ *
+ * CSS animations that complement the MithrilUI.Animations Elixir module.
+ * These animations work with Phoenix LiveView's JS commands.
+ */
+
+/* ==========================================================================
+   Fade Animations
+   ========================================================================== */
+
+.animate-fade-in {
+  animation: mithril-fade-in 200ms ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: mithril-fade-out 200ms ease-in forwards;
+}
+
+@keyframes mithril-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mithril-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Scale Animations
+   ========================================================================== */
+
+.animate-scale-in {
+  animation: mithril-scale-in 200ms ease-out forwards;
+}
+
+.animate-scale-out {
+  animation: mithril-scale-out 150ms ease-in forwards;
+}
+
+@keyframes mithril-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mithril-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* ==========================================================================
+   Slide Animations
+   ========================================================================== */
+
+/* Slide from bottom */
+.animate-slide-in-bottom {
+  animation: mithril-slide-in-bottom 300ms ease-out forwards;
+}
+
+.animate-slide-out-bottom {
+  animation: mithril-slide-out-bottom 200ms ease-in forwards;
+}
+
+@keyframes mithril-slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mithril-slide-out-bottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Slide from top */
+.animate-slide-in-top {
+  animation: mithril-slide-in-top 300ms ease-out forwards;
+}
+
+.animate-slide-out-top {
+  animation: mithril-slide-out-top 200ms ease-in forwards;
+}
+
+@keyframes mithril-slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mithril-slide-out-top {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Slide from right */
+.animate-slide-in-right {
+  animation: mithril-slide-in-right 300ms ease-out forwards;
+}
+
+.animate-slide-out-right {
+  animation: mithril-slide-out-right 200ms ease-in forwards;
+}
+
+@keyframes mithril-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mithril-slide-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Slide from left */
+.animate-slide-in-left {
+  animation: mithril-slide-in-left 300ms ease-out forwards;
+}
+
+.animate-slide-out-left {
+  animation: mithril-slide-out-left 200ms ease-in forwards;
+}
+
+@keyframes mithril-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mithril-slide-out-left {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* ==========================================================================
+   Drawer Animations (Full width slide)
+   ========================================================================== */
+
+.animate-drawer-in-left {
+  animation: mithril-drawer-in-left 300ms ease-out forwards;
+}
+
+.animate-drawer-out-left {
+  animation: mithril-drawer-out-left 200ms ease-in forwards;
+}
+
+@keyframes mithril-drawer-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes mithril-drawer-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-drawer-in-right {
+  animation: mithril-drawer-in-right 300ms ease-out forwards;
+}
+
+.animate-drawer-out-right {
+  animation: mithril-drawer-out-right 200ms ease-in forwards;
+}
+
+@keyframes mithril-drawer-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes mithril-drawer-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+   Backdrop Animations
+   ========================================================================== */
+
+.animate-backdrop-in {
+  animation: mithril-backdrop-in 300ms ease-out forwards;
+}
+
+.animate-backdrop-out {
+  animation: mithril-backdrop-out 200ms ease-in forwards;
+}
+
+@keyframes mithril-backdrop-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+}
+
+@keyframes mithril-backdrop-out {
+  from {
+    opacity: 1;
+    backdrop-filter: blur(4px);
+  }
+  to {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+}
+
+/* ==========================================================================
+   Loading Animations
+   ========================================================================== */
+
+.animate-pulse {
+  animation: mithril-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes mithril-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-spin {
+  animation: mithril-spin 1s linear infinite;
+}
+
+@keyframes mithril-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-bounce {
+  animation: mithril-bounce 1s infinite;
+}
+
+@keyframes mithril-bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* ==========================================================================
+   Accordion Animation
+   ========================================================================== */
+
+.animate-accordion-down {
+  animation: mithril-accordion-down 200ms ease-out forwards;
+}
+
+.animate-accordion-up {
+  animation: mithril-accordion-up 200ms ease-in forwards;
+}
+
+@keyframes mithril-accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--mithril-accordion-height, auto);
+    opacity: 1;
+  }
+}
+
+@keyframes mithril-accordion-up {
+  from {
+    height: var(--mithril-accordion-height, auto);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion - Accessibility
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
