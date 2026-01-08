@@ -61,11 +61,16 @@ defmodule MithrilUI.Components.Code do
 
   def code(assigns) do
     ~H"""
-    <code class={[
-      "px-1.5 py-0.5 rounded text-sm font-mono",
-      color_class(@color),
-      @class
-    ]} {@rest}>{render_slot(@inner_block)}</code>
+    <code
+      class={[
+        "px-1.5 py-0.5 rounded text-sm font-mono",
+        color_class(@color),
+        @class
+      ]}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </code>
     """
   end
 

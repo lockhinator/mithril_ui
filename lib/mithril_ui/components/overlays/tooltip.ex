@@ -153,15 +153,13 @@ defmodule MithrilUI.Components.Tooltip do
 
   def tooltip_content(assigns) do
     ~H"""
-    <div
-      class={[
-        "tooltip",
-        position_class(@position),
-        color_class(@color),
-        @open && "tooltip-open",
-        @class
-      ]}
-    >
+    <div class={[
+      "tooltip",
+      position_class(@position),
+      color_class(@color),
+      @open && "tooltip-open",
+      @class
+    ]}>
       <div class="tooltip-content">
         {render_slot(@content)}
       </div>

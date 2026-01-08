@@ -71,7 +71,7 @@ defmodule MithrilUI.Components.FileInput do
     <div class={["form-control w-full", @class]}>
       <label :if={@label} for={@id} class="label">
         <span class="label-text">
-          <%= @label %>
+          {@label}
           <span :if={@required} class="text-error">*</span>
         </span>
       </label>
@@ -94,12 +94,12 @@ defmodule MithrilUI.Components.FileInput do
       />
 
       <div :if={@help_text && @errors == []} class="label">
-        <span class="label-text-alt text-base-content/70"><%= @help_text %></span>
+        <span class="label-text-alt text-base-content/70">{@help_text}</span>
       </div>
 
       <div :if={@errors != []} id={"#{@id}-error"} class="label">
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

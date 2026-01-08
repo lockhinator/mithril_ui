@@ -87,12 +87,12 @@ defmodule MithrilUI.Components.Toggle do
           aria-describedby={@errors != [] && "#{@id}-error"}
           {@rest}
         />
-        <span :if={@label} class="label-text"><%= @label %></span>
+        <span :if={@label} class="label-text">{@label}</span>
       </label>
 
       <div :if={@errors != []} id={"#{@id}-error"} class="label pt-0">
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

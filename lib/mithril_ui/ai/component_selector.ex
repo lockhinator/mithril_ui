@@ -417,7 +417,7 @@ defmodule MithrilUI.AI.ComponentSelector do
     use_when_score =
       component.use_when
       |> Enum.map(&String.downcase/1)
-      |> Enum.count(&String.contains?(&1, context) or String.contains?(context, &1))
+      |> Enum.count(&(String.contains?(&1, context) or String.contains?(context, &1)))
       |> Kernel.*(20)
 
     base_score + name_score + keyword_score + desc_score + use_when_score
@@ -481,7 +481,9 @@ defmodule MithrilUI.AI.ComponentSelector do
               name: "Size variants",
               code:
                 sizes
-                |> Enum.map(&~s(<.#{name} size="#{&1}">#{String.upcase(to_string(&1))}</.#{name}>))
+                |> Enum.map(
+                  &~s(<.#{name} size="#{&1}">#{String.upcase(to_string(&1))}</.#{name}>)
+                )
                 |> Enum.join("\n"),
               description: "Available size options"
             }

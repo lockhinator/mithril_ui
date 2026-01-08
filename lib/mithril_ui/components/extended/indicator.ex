@@ -116,11 +116,13 @@ defmodule MithrilUI.Components.Indicator do
   attr :rest, :global
 
   def status_dot(assigns) do
-    size_class = case assigns.size do
-      "xs" -> "w-2 h-2"
-      "sm" -> "w-2.5 h-2.5"
-      "md" -> "w-3 h-3"
-    end
+    size_class =
+      case assigns.size do
+        "xs" -> "w-2 h-2"
+        "sm" -> "w-2.5 h-2.5"
+        "md" -> "w-3 h-3"
+      end
+
     assigns = assign(assigns, :size_class, size_class)
 
     ~H"""
@@ -163,7 +165,7 @@ defmodule MithrilUI.Components.Indicator do
     ~H"""
     <span class={["flex items-center text-sm", @class]} {@rest}>
       <span class={["flex w-2.5 h-2.5 rounded-full mr-1.5 shrink-0", "bg-#{@color}"]} />
-      <%= @label %>
+      {@label}
     </span>
     """
   end
@@ -223,7 +225,7 @@ defmodule MithrilUI.Components.Indicator do
           @vertical != "top" && "indicator-#{@vertical}"
         ]}
       >
-        <%= @display %>
+        {@display}
       </span>
       {render_slot(@inner_block)}
     </div>

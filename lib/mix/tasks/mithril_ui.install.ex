@@ -54,7 +54,9 @@ defmodule Mix.Tasks.MithrilUi.Install do
     """)
 
     if dry_run do
-      Mix.shell().info("#{IO.ANSI.yellow()}[DRY RUN] No files will be modified#{IO.ANSI.reset()}\n")
+      Mix.shell().info(
+        "#{IO.ANSI.yellow()}[DRY RUN] No files will be modified#{IO.ANSI.reset()}\n"
+      )
     end
 
     results = []

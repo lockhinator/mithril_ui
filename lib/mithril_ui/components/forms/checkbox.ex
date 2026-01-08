@@ -84,12 +84,12 @@ defmodule MithrilUI.Components.Checkbox do
           aria-describedby={@errors != [] && "#{@id}-error"}
           {@rest}
         />
-        <span class="label-text"><%= @label %></span>
+        <span class="label-text">{@label}</span>
       </label>
 
       <div :if={@errors != []} id={"#{@id}-error"} class="label pt-0">
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

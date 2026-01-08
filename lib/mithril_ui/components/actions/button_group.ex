@@ -100,7 +100,16 @@ defmodule MithrilUI.Components.ButtonGroup do
       <button
         :for={btn <- @button}
         type={Map.get(btn, :type, "button")}
-        class={item_button_classes(@variant, @size, @outline, btn[:active], @disabled || btn[:disabled], btn[:class])}
+        class={
+          item_button_classes(
+            @variant,
+            @size,
+            @outline,
+            btn[:active],
+            @disabled || btn[:disabled],
+            btn[:class]
+          )
+        }
         disabled={@disabled || btn[:disabled]}
         {assigns_to_attributes(btn, [:active, :disabled, :class, :type, :inner_block])}
       >

@@ -173,14 +173,14 @@ defmodule MithrilUI.Components.ChatBubble do
         </div>
       </div>
       <div :if={@sender || @time} class="chat-header">
-        <span :if={@sender}><%= @sender %></span>
-        <time :if={@time} class="text-xs opacity-50"><%= @time %></time>
+        <span :if={@sender}>{@sender}</span>
+        <time :if={@time} class="text-xs opacity-50">{@time}</time>
       </div>
       <div class={["chat-bubble", @color && "chat-bubble-#{@color}"]}>
         {render_slot(@inner_block)}
       </div>
       <div :if={@status} class="chat-footer opacity-50">
-        <%= @status %>
+        {@status}
       </div>
     </div>
     """
@@ -231,12 +231,12 @@ defmodule MithrilUI.Components.ChatBubble do
         </div>
       </div>
       <div :if={@sender || @time} class="chat-header">
-        <span :if={@sender}><%= @sender %></span>
-        <time :if={@time} class="text-xs opacity-50"><%= @time %></time>
+        <span :if={@sender}>{@sender}</span>
+        <time :if={@time} class="text-xs opacity-50">{@time}</time>
       </div>
       <div class="chat-bubble p-1">
         <img src={@image_src} alt={@image_alt} class="rounded-lg max-w-xs" />
-        <p :if={@caption} class="text-sm mt-1 px-2"><%= @caption %></p>
+        <p :if={@caption} class="text-sm mt-1 px-2">{@caption}</p>
       </div>
     </div>
     """
@@ -290,8 +290,8 @@ defmodule MithrilUI.Components.ChatBubble do
         </div>
       </div>
       <div :if={@sender || @time} class="chat-header">
-        <span :if={@sender}><%= @sender %></span>
-        <time :if={@time} class="text-xs opacity-50"><%= @time %></time>
+        <span :if={@sender}>{@sender}</span>
+        <time :if={@time} class="text-xs opacity-50">{@time}</time>
       </div>
       <div class="chat-bubble">
         <div class="flex items-center gap-3 p-2 bg-base-100/20 rounded-lg">
@@ -304,9 +304,9 @@ defmodule MithrilUI.Components.ChatBubble do
             />
           </svg>
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium truncate"><%= @file_name %></p>
+            <p class="text-sm font-medium truncate">{@file_name}</p>
             <p :if={@file_size || @file_type} class="text-xs opacity-70">
-              <%= [@file_type, @file_size] |> Enum.filter(& &1) |> Enum.join(" • ") %>
+              {[@file_type, @file_size] |> Enum.filter(& &1) |> Enum.join(" • ")}
             </p>
           </div>
           <a :if={@download_url} href={@download_url} class="btn btn-ghost btn-sm btn-circle" download>

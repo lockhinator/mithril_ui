@@ -86,7 +86,7 @@ defmodule MithrilUI.Components.Textarea do
     <div class="form-control w-full">
       <label :if={@label} for={@id} class="label">
         <span class="label-text">
-          <%= @label %><%= if @required, do: " *" %>
+          {@label}{if @required, do: " *"}
         </span>
       </label>
 
@@ -110,12 +110,12 @@ defmodule MithrilUI.Components.Textarea do
       ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
 
       <div :if={@help_text && @errors == []} id={"#{@id}-help"} class="label">
-        <span class="label-text-alt text-base-content/70"><%= @help_text %></span>
+        <span class="label-text-alt text-base-content/70">{@help_text}</span>
       </div>
 
       <div :if={@errors != []} id={"#{@id}-errors"} class="label" role="alert">
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

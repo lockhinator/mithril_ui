@@ -26,7 +26,7 @@ defmodule MithrilUiWeb.Router do
     get "/", PageController, :home
 
     # Phoenix Storybook
-    live_storybook "/storybook", backend_module: MithrilUiWeb.Storybook
+    live_storybook("/storybook", backend_module: MithrilUiWeb.Storybook)
   end
 
   # Other scopes may use custom stacks.

@@ -123,7 +123,7 @@ defmodule MithrilUI.Components.ListGroup do
     ~H"""
     <ul class={list_classes(@bordered, @rounded, false, false, @class)}>
       <li :for={item <- @items}>
-        <a class={@item_class}><%= item %></a>
+        <a class={@item_class}>{item}</a>
       </li>
     </ul>
     """

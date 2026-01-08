@@ -58,7 +58,11 @@ defmodule MithrilUI.Components.ThemeSwitcher do
       <.theme_switcher label="Theme" />
   """
   attr :id, :string, default: "theme-switcher"
-  attr :themes, :list, default: nil, doc: "List of theme names to show. Defaults to all DaisyUI themes."
+
+  attr :themes, :list,
+    default: nil,
+    doc: "List of theme names to show. Defaults to all DaisyUI themes."
+
   attr :label, :string, default: nil, doc: "Optional label text"
   attr :class, :string, default: nil
   attr :rest, :global
@@ -84,7 +88,12 @@ defmodule MithrilUI.Components.ThemeSwitcher do
           />
         </svg>
         <span :if={@label}>{@label}</span>
-        <svg class="w-2 h-2 opacity-60" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <svg
+          class="w-2 h-2 opacity-60"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
           <path stroke="currentColor" stroke-width="3" d="M6 9l6 6 6-6" />
         </svg>
       </div>

@@ -242,7 +242,8 @@ defmodule MithrilUI.Components.SkeletonTest do
         """)
 
       # Count tbody rows
-      count = length(String.split(html, "<tr>")) - 2  # subtract header row and empty split
+      # subtract header row and empty split
+      count = length(String.split(html, "<tr>")) - 2
       assert count == 5
     end
 

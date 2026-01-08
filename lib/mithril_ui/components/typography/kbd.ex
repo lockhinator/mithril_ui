@@ -60,12 +60,17 @@ defmodule MithrilUI.Components.Kbd do
 
   def kbd(assigns) do
     ~H"""
-    <kbd class={[
-      "kbd",
-      size_class(@size),
-      variant_class(@variant),
-      @class
-    ]} {@rest}>{render_slot(@inner_block)}</kbd>
+    <kbd
+      class={[
+        "kbd",
+        size_class(@size),
+        variant_class(@variant),
+        @class
+      ]}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </kbd>
     """
   end
 

@@ -139,8 +139,8 @@ defmodule MithrilUI.Components.Card do
         <img src={@image} alt={@image_alt} />
       </figure>
       <div class="card-body">
-        <h2 :if={@title} class="card-title"><%= @title %></h2>
-        <p :if={@description}><%= @description %></p>
+        <h2 :if={@title} class="card-title">{@title}</h2>
+        <p :if={@description}>{@description}</p>
         {render_slot(@inner_block)}
         <div :if={@actions != []} class="card-actions justify-end">
           {render_slot(@actions)}

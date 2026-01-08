@@ -202,7 +202,9 @@ defmodule MithrilUI.Components.TabsTest do
     end
 
     test "renders disabled tabs" do
-      assigns = %{tabs: [%{id: "tab1", label: "Normal"}, %{id: "tab2", label: "Disabled", disabled: true}]}
+      assigns = %{
+        tabs: [%{id: "tab1", label: "Normal"}, %{id: "tab2", label: "Disabled", disabled: true}]
+      }
 
       html =
         rendered_to_string(~H"""

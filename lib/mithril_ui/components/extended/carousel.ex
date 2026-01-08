@@ -128,7 +128,10 @@ defmodule MithrilUI.Components.Carousel do
       {@rest}
     >
       <img src={@src} alt={@alt} class="w-full" />
-      <div :if={@prev || @next} class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <div
+        :if={@prev || @next}
+        class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+      >
         <a :if={@prev} href={"##{@prev}"} class="btn btn-circle">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -188,7 +191,10 @@ defmodule MithrilUI.Components.Carousel do
       {@rest}
     >
       {render_slot(@inner_block)}
-      <div :if={@prev || @next} class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <div
+        :if={@prev || @next}
+        class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+      >
         <a :if={@prev} href={"##{@prev}"} class="btn btn-circle">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -239,7 +245,7 @@ defmodule MithrilUI.Components.Carousel do
             if(i == @active, do: "btn-primary", else: "btn-ghost")
           ]}
         >
-          <%= i + 1 %>
+          {i + 1}
         </a>
       <% end %>
     </div>
@@ -285,15 +291,28 @@ defmodule MithrilUI.Components.Carousel do
           <% next_index = rem(index + 1, @item_count) %>
           <div id={id} class="carousel-item relative w-full">
             <img src={src} class="w-full" alt={"Slide #{index + 1}"} />
-            <div :if={@show_navigation} class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <div
+              :if={@show_navigation}
+              class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2"
+            >
               <a href={"##{@id_prefix}#{prev_index}"} class="btn btn-circle">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
               </a>
               <a href={"##{@id_prefix}#{next_index}"} class="btn btn-circle">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </a>
             </div>
@@ -341,12 +360,22 @@ defmodule MithrilUI.Components.Carousel do
             <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
               <a href={"##{@id_prefix}#{prev_index}"} class="btn btn-circle btn-sm opacity-70">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
               </a>
               <a href={"##{@id_prefix}#{next_index}"} class="btn btn-circle btn-sm opacity-70">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </a>
             </div>
@@ -356,7 +385,11 @@ defmodule MithrilUI.Components.Carousel do
       <div class="flex justify-center w-full py-2 gap-2 overflow-x-auto">
         <%= for {src, index} <- Enum.with_index(@items) do %>
           <a href={"##{@id_prefix}#{index}"} class="flex-shrink-0">
-            <img src={src} class="w-16 h-12 object-cover rounded cursor-pointer hover:opacity-80" alt={"Thumbnail #{index + 1}"} />
+            <img
+              src={src}
+              class="w-16 h-12 object-cover rounded cursor-pointer hover:opacity-80"
+              alt={"Thumbnail #{index + 1}"}
+            />
           </a>
         <% end %>
       </div>

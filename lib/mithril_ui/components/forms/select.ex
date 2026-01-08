@@ -100,7 +100,7 @@ defmodule MithrilUI.Components.Select do
     <div class={["form-control w-full", @class]}>
       <label :if={@label} for={@id} class="label">
         <span class="label-text">
-          <%= @label %>
+          {@label}
           <span :if={@required} class="text-error" aria-hidden="true">*</span>
         </span>
       </label>
@@ -121,12 +121,12 @@ defmodule MithrilUI.Components.Select do
         {@rest}
       >
         <option :if={@prompt} value="" disabled selected={@value == nil || @value == ""}>
-          <%= @prompt %>
+          {@prompt}
         </option>
         <%= for option <- @options do %>
           <% {label, value} = normalize_option(option) %>
           <option value={value} selected={selected?(@value, value)}>
-            <%= label %>
+            {label}
           </option>
         <% end %>
       </select>
@@ -137,10 +137,10 @@ defmodule MithrilUI.Components.Select do
         class="label"
       >
         <span :if={@help_text && @errors == []} class="label-text-alt">
-          <%= @help_text %>
+          {@help_text}
         </span>
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

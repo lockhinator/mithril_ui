@@ -13,7 +13,7 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="test-table" rows={@rows}>
-          <:col :let={row} label="Name"><%= row.name %></:col>
+          <:col :let={row} label="Name">{row.name}</:col>
         </Table.table>
         """)
 
@@ -44,7 +44,7 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="empty" rows={@rows}>
-          <:col :let={row} label="Name"><%= row.name %></:col>
+          <:col :let={row} label="Name">{row.name}</:col>
         </Table.table>
         """)
 
@@ -60,7 +60,7 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="zebra" rows={@rows} zebra>
-          <:col :let={row} label="Name"><%= row.name %></:col>
+          <:col :let={row} label="Name">{row.name}</:col>
         </Table.table>
         """)
 
@@ -114,7 +114,7 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="col-class" rows={@rows}>
-          <:col :let={row} label="Price" class="text-right"><%= row.price %></:col>
+          <:col :let={row} label="Price" class="text-right">{row.price}</:col>
         </Table.table>
         """)
 
@@ -129,9 +129,9 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="actions" rows={@rows}>
-          <:col :let={row} label="Name"><%= row.name %></:col>
+          <:col :let={row} label="Name">{row.name}</:col>
           <:action :let={row}>
-            <button>Edit <%= row.id %></button>
+            <button>Edit {row.id}</button>
           </:action>
         </Table.table>
         """)
@@ -149,7 +149,7 @@ defmodule MithrilUI.Components.TableTest do
       html =
         rendered_to_string(~H"""
         <Table.table id="row-id" rows={@rows} row_id={fn row -> "row-#{row.id}" end}>
-          <:col :let={row} label="Name"><%= row.name %></:col>
+          <:col :let={row} label="Name">{row.name}</:col>
         </Table.table>
         """)
 

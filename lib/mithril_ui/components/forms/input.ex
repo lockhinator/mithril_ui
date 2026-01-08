@@ -101,7 +101,8 @@ defmodule MithrilUI.Components.Input do
   attr :class, :string, default: nil, doc: "Additional CSS classes for the input"
 
   attr :rest, :global,
-    include: ~w(autocomplete autofocus min max minlength maxlength pattern step inputmode list form)
+    include:
+      ~w(autocomplete autofocus min max minlength maxlength pattern step inputmode list form)
 
   def input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
@@ -128,23 +129,25 @@ defmodule MithrilUI.Components.Input do
   end
 
   def input(assigns) do
-    assigns = assign_new(assigns, :error_id, fn ->
-      if assigns.errors != [] and assigns.id do
-        "#{assigns.id}-error"
-      end
-    end)
+    assigns =
+      assign_new(assigns, :error_id, fn ->
+        if assigns.errors != [] and assigns.id do
+          "#{assigns.id}-error"
+        end
+      end)
 
-    assigns = assign_new(assigns, :help_id, fn ->
-      if assigns.help_text && assigns.id do
-        "#{assigns.id}-help"
-      end
-    end)
+    assigns =
+      assign_new(assigns, :help_id, fn ->
+        if assigns.help_text && assigns.id do
+          "#{assigns.id}-help"
+        end
+      end)
 
     ~H"""
     <div class="form-control w-full">
       <label :if={@label} for={@id} class="label">
         <span class="label-text">
-          <%= @label %>
+          {@label}
           <span :if={@required} class="text-error ml-1" aria-hidden="true">*</span>
         </span>
       </label>
@@ -166,12 +169,12 @@ defmodule MithrilUI.Components.Input do
       />
 
       <div :if={@help_text && @errors == []} class="label" id={@help_id}>
-        <span class="label-text-alt text-base-content/70"><%= @help_text %></span>
+        <span class="label-text-alt text-base-content/70">{@help_text}</span>
       </div>
 
       <div :if={@errors != []} class="label" id={@error_id}>
         <span :for={error <- @errors} class="label-text-alt text-error text-sm">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

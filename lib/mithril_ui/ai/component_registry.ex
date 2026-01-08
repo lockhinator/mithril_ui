@@ -41,7 +41,18 @@ defmodule MithrilUI.AI.ComponentRegistry do
         toggle: "For boolean on/off states",
         speed_dial: "For floating action button menus"
       },
-      variants: ["primary", "secondary", "accent", "info", "success", "warning", "error", "ghost", "link", "outline"],
+      variants: [
+        "primary",
+        "secondary",
+        "accent",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "ghost",
+        "link",
+        "outline"
+      ],
       sizes: ["xs", "sm", "md", "lg"],
       a11y: %{
         role: "button",
@@ -120,9 +131,23 @@ defmodule MithrilUI.AI.ComponentRegistry do
         textarea: "For multi-line text input",
         select: "For selection from predefined options"
       },
-      variants: ["bordered", "ghost", "primary", "secondary", "accent", "info", "success", "warning", "error"],
+      variants: [
+        "bordered",
+        "ghost",
+        "primary",
+        "secondary",
+        "accent",
+        "info",
+        "success",
+        "warning",
+        "error"
+      ],
       sizes: ["xs", "sm", "md", "lg"],
-      a11y: %{role: "textbox", keyboard: ["all"], aria_attributes: ["aria-invalid", "aria-describedby"]}
+      a11y: %{
+        role: "textbox",
+        keyboard: ["all"],
+        aria_attributes: ["aria-invalid", "aria-describedby"]
+      }
     },
     %{
       name: :textarea,
@@ -321,7 +346,14 @@ defmodule MithrilUI.AI.ComponentRegistry do
         modal: "For messages requiring user action"
       },
       variants: ["info", "success", "warning", "error"],
-      positions: ["top-start", "top-center", "top-end", "bottom-start", "bottom-center", "bottom-end"],
+      positions: [
+        "top-start",
+        "top-center",
+        "top-end",
+        "bottom-start",
+        "bottom-center",
+        "bottom-end"
+      ],
       a11y: %{role: "status", aria_live: "polite"}
     },
     %{
@@ -389,7 +421,10 @@ defmodule MithrilUI.AI.ComponentRegistry do
         stepper: "For discrete step progress"
       },
       variants: ["primary", "secondary", "accent", "info", "success", "warning", "error"],
-      a11y: %{role: "progressbar", aria_attributes: ["aria-valuenow", "aria-valuemin", "aria-valuemax"]}
+      a11y: %{
+        role: "progressbar",
+        aria_attributes: ["aria-valuenow", "aria-valuemin", "aria-valuemax"]
+      }
     },
     %{
       name: :spinner,
@@ -521,7 +556,18 @@ defmodule MithrilUI.AI.ComponentRegistry do
         indicator: "For positional status dots",
         alert: "For longer messages"
       },
-      variants: ["neutral", "primary", "secondary", "accent", "info", "success", "warning", "error", "ghost", "outline"],
+      variants: [
+        "neutral",
+        "primary",
+        "secondary",
+        "accent",
+        "info",
+        "success",
+        "warning",
+        "error",
+        "ghost",
+        "outline"
+      ],
       sizes: ["xs", "sm", "md", "lg"],
       a11y: %{role: "status"}
     },

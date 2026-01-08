@@ -60,7 +60,9 @@ defmodule MithrilUI.Helpers do
   defp normalize_class(class) when is_binary(class), do: [class]
   defp normalize_class({class, true}) when is_binary(class), do: [class]
   defp normalize_class({_class, false}), do: []
-  defp normalize_class(classes) when is_list(classes), do: Enum.flat_map(classes, &normalize_class/1)
+
+  defp normalize_class(classes) when is_list(classes),
+    do: Enum.flat_map(classes, &normalize_class/1)
 
   @doc """
   Generates a unique ID for DOM elements.

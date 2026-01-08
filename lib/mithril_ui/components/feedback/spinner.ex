@@ -72,7 +72,7 @@ defmodule MithrilUI.Components.Spinner do
       role="status"
       aria-label={@label}
     >
-      <span class="sr-only"><%= @label %></span>
+      <span class="sr-only">{@label}</span>
     </span>
     """
   end
@@ -109,7 +109,7 @@ defmodule MithrilUI.Components.Spinner do
         class={spinner_classes(@type, @size, @variant, nil)}
         aria-hidden="true"
       />
-      <span><%= @text %></span>
+      <span>{@text}</span>
       <span
         :if={@position in ["left", "top"]}
         class={spinner_classes(@type, @size, @variant, nil)}

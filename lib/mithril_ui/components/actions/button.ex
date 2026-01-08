@@ -99,7 +99,8 @@ defmodule MithrilUI.Components.Button do
   attr :class, :string, default: nil
 
   attr :rest, :global,
-    include: ~w(navigate patch href download hreflang referrerpolicy rel target type form name value phx-click phx-target phx-disable-with phx-page-loading)
+    include:
+      ~w(navigate patch href download hreflang referrerpolicy rel target type form name value phx-click phx-target phx-disable-with phx-page-loading)
 
   slot :inner_block, required: true
 
@@ -108,7 +109,19 @@ defmodule MithrilUI.Components.Button do
     <button
       type={@type}
       disabled={@disabled || @loading}
-      class={button_classes(@variant, @size, @disabled, @loading, @block, @circle, @square, @outline, @class)}
+      class={
+        button_classes(
+          @variant,
+          @size,
+          @disabled,
+          @loading,
+          @block,
+          @circle,
+          @square,
+          @outline,
+          @class
+        )
+      }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
       {@rest}
@@ -156,7 +169,19 @@ defmodule MithrilUI.Components.Button do
   def link_button(assigns) do
     ~H"""
     <.link
-      class={button_classes(@variant, @size, @disabled, @loading, @block, @circle, @square, @outline, @class)}
+      class={
+        button_classes(
+          @variant,
+          @size,
+          @disabled,
+          @loading,
+          @block,
+          @circle,
+          @square,
+          @outline,
+          @class
+        )
+      }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
       {@rest}
@@ -200,7 +225,8 @@ defmodule MithrilUI.Components.Button do
   attr :class, :string, default: nil
 
   attr :rest, :global,
-    include: ~w(navigate patch href download hreflang referrerpolicy rel target type form name value phx-click phx-target phx-disable-with phx-page-loading)
+    include:
+      ~w(navigate patch href download hreflang referrerpolicy rel target type form name value phx-click phx-target phx-disable-with phx-page-loading)
 
   slot :inner_block, required: true
 
@@ -209,7 +235,19 @@ defmodule MithrilUI.Components.Button do
     <button
       type={@type}
       disabled={@disabled || @loading}
-      class={button_classes(@variant, @size, @disabled, @loading, false, @circle, @square, @outline, @class)}
+      class={
+        button_classes(
+          @variant,
+          @size,
+          @disabled,
+          @loading,
+          false,
+          @circle,
+          @square,
+          @outline,
+          @class
+        )
+      }
       aria-disabled={@disabled || @loading}
       aria-busy={@loading}
       aria-label={@label}
@@ -224,7 +262,17 @@ defmodule MithrilUI.Components.Button do
     """
   end
 
-  defp button_classes(variant, size, disabled, loading, block, circle, square, outline, extra_class) do
+  defp button_classes(
+         variant,
+         size,
+         disabled,
+         loading,
+         block,
+         circle,
+         square,
+         outline,
+         extra_class
+       ) do
     [
       "btn",
       variant_class(variant, outline),

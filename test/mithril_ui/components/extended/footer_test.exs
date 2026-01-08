@@ -201,7 +201,11 @@ defmodule MithrilUI.Components.FooterTest do
 
       html =
         rendered_to_string(~H"""
-        <Footer.footer_with_social twitter="https://twitter.com/ex" github="https://github.com/ex" linkedin="https://linkedin.com/in/ex" />
+        <Footer.footer_with_social
+          twitter="https://twitter.com/ex"
+          github="https://github.com/ex"
+          linkedin="https://linkedin.com/in/ex"
+        />
         """)
 
       assert html =~ "twitter.com"

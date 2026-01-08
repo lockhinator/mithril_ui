@@ -70,8 +70,8 @@ defmodule MithrilUI.Components.Range do
     ~H"""
     <div class={["form-control w-full", @class]}>
       <label :if={@label || @show_value} for={@id} class="label">
-        <span :if={@label} class="label-text"><%= @label %></span>
-        <span :if={@show_value} class="label-text-alt"><%= @value || @min %></span>
+        <span :if={@label} class="label-text">{@label}</span>
+        <span :if={@show_value} class="label-text-alt">{@value || @min}</span>
       </label>
 
       <input
@@ -93,7 +93,7 @@ defmodule MithrilUI.Components.Range do
 
       <div :if={@errors != []} class="label">
         <span :for={error <- @errors} class="label-text-alt text-error">
-          <%= error %>
+          {error}
         </span>
       </div>
     </div>

@@ -353,7 +353,7 @@ defmodule MithrilUI.Components.Gallery do
             phx-click="filter_gallery"
             phx-value-category={category}
           >
-            <%= String.capitalize(category) %>
+            {String.capitalize(category)}
           </button>
         <% end %>
       </div>

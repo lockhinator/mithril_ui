@@ -76,9 +76,9 @@ defmodule MithrilUI.Components.Progress do
     ~H"""
     <div class="w-full">
       <div :if={@label || @show_percentage} class="flex justify-between mb-1">
-        <span :if={@label} class="text-sm font-medium"><%= @label %></span>
+        <span :if={@label} class="text-sm font-medium">{@label}</span>
         <span :if={@show_percentage && @percentage} class="text-sm font-medium">
-          <%= @percentage %>%
+          {@percentage}%
         </span>
       </div>
       <progress
@@ -132,7 +132,7 @@ defmodule MithrilUI.Components.Progress do
       aria-valuemax="100"
     >
       <%= if @inner_block == [] do %>
-        <%= @value %>%
+        {@value}%
       <% else %>
         {render_slot(@inner_block)}
       <% end %>

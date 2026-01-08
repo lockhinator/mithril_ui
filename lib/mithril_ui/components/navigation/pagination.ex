@@ -84,7 +84,11 @@ defmodule MithrilUI.Components.Pagination do
     ~H"""
     <nav class={["flex items-center gap-4", @class]} aria-label="Pagination" {@rest}>
       <div :if={@show_info && @total_entries && @page_size} class="text-sm text-base-content/70">
-        Showing {entry_start(@current_page, @page_size)} to {entry_end(@current_page, @page_size, @total_entries)} of {@total_entries} entries
+        Showing {entry_start(@current_page, @page_size)} to {entry_end(
+          @current_page,
+          @page_size,
+          @total_entries
+        )} of {@total_entries} entries
       </div>
       <div class="join">
         <button
@@ -269,7 +273,12 @@ defmodule MithrilUI.Components.Pagination do
     """
   end
 
-  defp build_page_range(%{total_pages: total, current_page: current, sibling_count: siblings, boundary_count: boundary}) do
+  defp build_page_range(%{
+         total_pages: total,
+         current_page: current,
+         sibling_count: siblings,
+         boundary_count: boundary
+       }) do
     # Calculate ranges
     left_boundary = 1..min(boundary, total) |> Enum.to_list()
     right_boundary = max(total - boundary + 1, 1)..total |> Enum.to_list()

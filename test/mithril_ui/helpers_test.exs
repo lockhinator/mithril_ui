@@ -98,7 +98,15 @@ defmodule MithrilUI.HelpersTest do
     end
 
     test "returns empty list for field with no errors" do
-      field = %Phoenix.HTML.FormField{errors: [], id: "test", name: "test", value: nil, field: :test, form: nil}
+      field = %Phoenix.HTML.FormField{
+        errors: [],
+        id: "test",
+        name: "test",
+        value: nil,
+        field: :test,
+        form: nil
+      }
+
       assert Helpers.field_errors(field) == []
     end
 
@@ -138,7 +146,15 @@ defmodule MithrilUI.HelpersTest do
     end
 
     test "returns false for field with no errors" do
-      field = %Phoenix.HTML.FormField{errors: [], id: "test", name: "test", value: nil, field: :test, form: nil}
+      field = %Phoenix.HTML.FormField{
+        errors: [],
+        id: "test",
+        name: "test",
+        value: nil,
+        field: :test,
+        form: nil
+      }
+
       refute Helpers.has_errors?(field)
     end
 

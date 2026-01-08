@@ -70,7 +70,7 @@ defmodule MithrilUI.Components.Avatar do
     <div class={avatar_classes(@status, @class)}>
       <div class={inner_classes(@size, @shape, @ring, @ring_color, @placeholder)}>
         <img :if={@src} src={@src} alt={@alt} />
-        <span :if={!@src && @placeholder}><%= @placeholder %></span>
+        <span :if={!@src && @placeholder}>{@placeholder}</span>
       </div>
     </div>
     """

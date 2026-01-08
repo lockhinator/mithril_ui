@@ -88,7 +88,7 @@ defmodule MithrilUI.Components.Table do
       <table class={table_classes(@zebra, @pin_rows, @pin_cols, @compact, @class)}>
         <thead>
           <tr>
-            <th :for={col <- @col}><%= col[:label] %></th>
+            <th :for={col <- @col}>{col[:label]}</th>
             <th :if={@action != []}><span class="sr-only">Actions</span></th>
           </tr>
         </thead>

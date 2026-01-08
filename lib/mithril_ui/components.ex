@@ -171,7 +171,7 @@ defmodule MithrilUI.Components do
       end
 
     quote do
-      unquote_splicing(imports)
+      (unquote_splicing(imports))
     end
   end
 end

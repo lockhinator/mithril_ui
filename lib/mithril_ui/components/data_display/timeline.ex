@@ -85,7 +85,7 @@ defmodule MithrilUI.Components.Timeline do
       <li :for={{item, idx} <- @items_with_index}>
         <hr :if={idx > 0} class={status_line_class(Enum.at(@item, idx - 1)[:status])} />
         <div :if={item[:time]} class={time_class(item[:position], idx)}>
-          <%= item[:time] %>
+          {item[:time]}
         </div>
         <div class="timeline-middle">
           <%= if item[:icon] do %>
@@ -95,7 +95,7 @@ defmodule MithrilUI.Components.Timeline do
           <% end %>
         </div>
         <div class={content_class(item[:position], idx)}>
-          <div :if={item[:title]} class="font-bold"><%= item[:title] %></div>
+          <div :if={item[:title]} class="font-bold">{item[:title]}</div>
           {render_slot(item)}
         </div>
         <hr :if={idx < length(@item) - 1} class={status_line_class(item[:status])} />
@@ -160,14 +160,14 @@ defmodule MithrilUI.Components.Timeline do
       <li :for={{event, idx} <- Enum.with_index(@events)}>
         <hr :if={idx > 0} class={status_line_class(Enum.at(@events, idx - 1)[:status])} />
         <div :if={event[:time]} class="timeline-start">
-          <%= event[:time] %>
+          {event[:time]}
         </div>
         <div class="timeline-middle">
           <.status_icon status={event[:status]} />
         </div>
         <div class="timeline-end timeline-box">
-          <div :if={event[:title]} class="font-bold"><%= event[:title] %></div>
-          <div :if={event[:description]}><%= event[:description] %></div>
+          <div :if={event[:title]} class="font-bold">{event[:title]}</div>
+          <div :if={event[:description]}>{event[:description]}</div>
         </div>
         <hr :if={idx < length(@events) - 1} class={status_line_class(event[:status])} />
       </li>
@@ -190,7 +190,9 @@ defmodule MithrilUI.Components.Timeline do
   defp time_class("start", _idx), do: "timeline-start"
   defp time_class("end", _idx), do: "timeline-end"
 
-  defp content_class(nil, idx), do: if(rem(idx, 2) == 0, do: "timeline-end timeline-box", else: "timeline-start timeline-box")
+  defp content_class(nil, idx),
+    do: if(rem(idx, 2) == 0, do: "timeline-end timeline-box", else: "timeline-start timeline-box")
+
   defp content_class("start", _idx), do: "timeline-start timeline-box"
   defp content_class("end", _idx), do: "timeline-end timeline-box"
 

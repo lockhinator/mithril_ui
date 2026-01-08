@@ -83,7 +83,7 @@ defmodule MithrilUI.Components.Radio do
           aria-invalid={@errors != []}
           {@rest}
         />
-        <span class="label-text"><%= @label %></span>
+        <span class="label-text">{@label}</span>
       </label>
     </div>
     """

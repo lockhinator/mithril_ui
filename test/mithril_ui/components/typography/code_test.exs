@@ -63,7 +63,7 @@ defmodule MithrilUI.Components.CodeTest do
         rendered_to_string(~H"""
         <Code.code_block>
           def hello do
-            :world
+          :world
           end
         </Code.code_block>
         """)

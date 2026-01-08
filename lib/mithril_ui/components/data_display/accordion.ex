@@ -82,7 +82,7 @@ defmodule MithrilUI.Components.Accordion do
       >
         <input type="radio" name={@group_name} checked={item[:open]} />
         <div class="collapse-title text-lg font-medium">
-          <%= item.title %>
+          {item.title}
         </div>
         <div class="collapse-content">
           {render_slot(item)}
@@ -122,7 +122,7 @@ defmodule MithrilUI.Components.Accordion do
     <div class={collapse_classes(@icon, false, @class)}>
       <input type="checkbox" checked={@open} />
       <div class="collapse-title text-lg font-medium">
-        <%= @title %>
+        {@title}
       </div>
       <div class="collapse-content">
         {render_slot(@inner_block)}

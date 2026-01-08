@@ -217,9 +217,9 @@ defmodule MithrilUI.Components.Rating do
       <.rating_display value={@value} max={@max} size={@size} shape={@shape} color={@color} />
       <span class="text-sm font-medium">
         <%= if @show_max do %>
-          <%= @value %> out of <%= @max %>
+          {@value} out of {@max}
         <% else %>
-          <%= @value %>
+          {@value}
         <% end %>
       </span>
     </div>
@@ -257,14 +257,14 @@ defmodule MithrilUI.Components.Rating do
         <% count = Map.get(@ratings, stars, 0) %>
         <% percentage = if @calculated_total > 0, do: count / @calculated_total * 100, else: 0 %>
         <div class="flex items-center gap-2">
-          <span class="text-sm font-medium w-8"><%= stars %> star</span>
+          <span class="text-sm font-medium w-8">{stars} star</span>
           <div class="flex-1 h-2 bg-base-300 rounded-full overflow-hidden">
             <div
               class="h-full bg-yellow-400 rounded-full transition-all"
               style={"width: #{percentage}%"}
             />
           </div>
-          <span class="text-sm text-base-content/70 w-12 text-right"><%= count %></span>
+          <span class="text-sm text-base-content/70 w-12 text-right">{count}</span>
         </div>
       <% end %>
     </div>

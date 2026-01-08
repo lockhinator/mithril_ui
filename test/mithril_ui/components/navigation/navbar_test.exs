@@ -166,7 +166,9 @@ defmodule MithrilUI.Components.NavbarTest do
         rendered_to_string(~H"""
         <Navbar.navbar_dropdown class="dropdown-end">
           <:trigger>Menu</:trigger>
-          <:content><li>Item</li></:content>
+          <:content>
+            <li>Item</li>
+          </:content>
         </Navbar.navbar_dropdown>
         """)
 
@@ -180,7 +182,9 @@ defmodule MithrilUI.Components.NavbarTest do
         rendered_to_string(~H"""
         <Navbar.navbar_dropdown>
           <:trigger>Menu</:trigger>
-          <:content><li>Item</li></:content>
+          <:content>
+            <li>Item</li>
+          </:content>
         </Navbar.navbar_dropdown>
         """)
 

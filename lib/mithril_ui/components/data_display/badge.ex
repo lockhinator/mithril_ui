@@ -144,7 +144,7 @@ defmodule MithrilUI.Components.Badge do
       :if={@count > 0 || @show_zero}
       class={badge_classes(@variant, @size, false, @class)}
     >
-      <%= @display %>
+      {@display}
     </span>
     """
   end
