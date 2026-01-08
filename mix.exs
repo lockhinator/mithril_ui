@@ -14,7 +14,6 @@ defmodule MithrilUi.MixProject do
       aliases: aliases(),
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
-      listeners: [Phoenix.CodeReloader],
 
       # Hex.pm package metadata
       name: "Mithril UI",
@@ -28,6 +27,16 @@ defmodule MithrilUi.MixProject do
         plt_file: {:no_warn, "priv/plts/project.plt"}
       ]
     ]
+    |> maybe_add_listeners()
+  end
+
+  # Only add listeners in dev (Phoenix.CodeReloader requires phoenix_live_reload)
+  defp maybe_add_listeners(config) do
+    if Mix.env() == :dev do
+      Keyword.put(config, :listeners, [Phoenix.CodeReloader])
+    else
+      config
+    end
   end
 
   # Configuration for the OTP application.
