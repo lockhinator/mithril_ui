@@ -30,9 +30,9 @@ defmodule MithrilUi.MixProject do
     |> maybe_add_listeners()
   end
 
-  # Only add listeners in dev (Phoenix.CodeReloader requires phoenix_live_reload)
+  # Only add listeners if Phoenix.CodeReloader is available (dev with deps compiled)
   defp maybe_add_listeners(config) do
-    if Mix.env() == :dev do
+    if Code.ensure_loaded?(Phoenix.CodeReloader) do
       Keyword.put(config, :listeners, [Phoenix.CodeReloader])
     else
       config
