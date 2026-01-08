@@ -101,7 +101,8 @@ defmodule MithrilUi.MixProject do
       links: %{
         "GitHub" => @source_url
       },
-      files: ~w(lib/mithril_ui lib/mithril_ui.ex lib/mix .formatter.exs mix.exs README.md LICENSE CHANGELOG.md)
+      files:
+        ~w(lib/mithril_ui lib/mithril_ui.ex lib/mix .formatter.exs mix.exs README.md LICENSE CHANGELOG.md)
     ]
   end
 

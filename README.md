@@ -195,6 +195,26 @@ MithrilUI.AI.ComponentSelector.export_json()
 
 - `mix mithril_ui.install` - Install Mithril UI in your project
 - `mix mithril_ui.gen.themes` - Generate CSS from custom themes
+- `mix mithril_ui.mcp` - Start MCP server for AI integration
+
+## AI Integration (MCP)
+
+Mithril UI includes an MCP server for AI assistants like Claude Code.
+
+**Setup** - Add to `.mcp.json` in your project:
+
+```json
+{
+  "mcpServers": {
+    "mithril-ui": {
+      "command": "mix",
+      "args": ["mithril_ui.mcp"]
+    }
+  }
+}
+```
+
+**Available tools:** `list_components`, `get_component`, `suggest_components`, `get_examples`, `list_categories`, `list_themes`, `get_related`
 
 ## Documentation
 
