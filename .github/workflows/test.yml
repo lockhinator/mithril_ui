@@ -53,5 +53,8 @@ jobs:
       - name: Compile project
         run: mix compile --warnings-as-errors
 
-      - name: Run tests
+      - name: Run library tests
         run: mix test
+
+      - name: Run web tests
+        run: mix test --include web

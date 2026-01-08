@@ -68,11 +68,11 @@ defmodule MithrilUI.Components.Table do
   attr :pin_rows, :boolean, default: false
   attr :pin_cols, :boolean, default: false
   attr :compact, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :col, required: true do
     attr :label, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :action, doc: "Action column slot"

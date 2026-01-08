@@ -64,7 +64,7 @@ defmodule MithrilUI.Components.Banner do
   attr :variant, :string, default: "default", values: @variants
   attr :fixed, :boolean, default: false
   attr :dismissible, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :icon
@@ -154,7 +154,7 @@ defmodule MithrilUI.Components.Banner do
   attr :position, :string, default: "top", values: @positions
   attr :fixed, :boolean, default: false
   attr :dismissible, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :title
@@ -242,7 +242,7 @@ defmodule MithrilUI.Components.Banner do
   attr :dismissible, :boolean, default: false
   attr :placeholder, :string, default: "Enter your email"
   attr :button_text, :string, default: "Subscribe"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :title
@@ -338,7 +338,7 @@ defmodule MithrilUI.Components.Banner do
   attr :position, :string, default: "top", values: @positions
   attr :fixed, :boolean, default: false
   attr :dismissible, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :icon

@@ -67,7 +67,7 @@ defmodule MithrilUI.Components.Rating do
   attr :readonly, :boolean, default: false
   attr :half, :boolean, default: false
   attr :clearable, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def rating(assigns) do
@@ -155,7 +155,7 @@ defmodule MithrilUI.Components.Rating do
   attr :shape, :string, default: "star", values: @shapes
   attr :color, :string, default: "bg-yellow-400"
   attr :empty_color, :string, default: "bg-gray-300"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def rating_display(assigns) do
@@ -208,7 +208,7 @@ defmodule MithrilUI.Components.Rating do
   attr :shape, :string, default: "star", values: @shapes
   attr :color, :string, default: "bg-yellow-400"
   attr :show_max, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def rating_with_text(assigns) do
@@ -244,7 +244,7 @@ defmodule MithrilUI.Components.Rating do
 
   attr :ratings, :map, required: true
   attr :total, :integer, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def rating_breakdown(assigns) do

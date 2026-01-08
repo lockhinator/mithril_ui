@@ -75,7 +75,7 @@ defmodule MithrilUI.Components.Card do
   attr :image_full, :boolean, default: false
   attr :horizontal, :boolean, default: false
   attr :glass, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :figure
   slot :body, required: true
@@ -127,7 +127,7 @@ defmodule MithrilUI.Components.Card do
   attr :image_alt, :string, default: ""
   attr :bordered, :boolean, default: false
   attr :compact, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block
   slot :actions

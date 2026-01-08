@@ -82,7 +82,7 @@ defmodule MithrilUI.Components.Tooltip do
     doc: "Color variant"
 
   attr :open, :boolean, default: false, doc: "Force tooltip to always be visible"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
 
   slot :inner_block, required: true, doc: "Trigger element"
 
@@ -146,7 +146,7 @@ defmodule MithrilUI.Components.Tooltip do
     doc: "Color variant"
 
   attr :open, :boolean, default: false, doc: "Force tooltip to always be visible"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
 
   slot :content, required: true, doc: "Rich tooltip content"
   slot :inner_block, required: true, doc: "Trigger element"

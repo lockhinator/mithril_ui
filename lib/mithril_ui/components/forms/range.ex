@@ -53,7 +53,7 @@ defmodule MithrilUI.Components.Range do
   attr :errors, :list, default: []
   attr :show_value, :boolean, default: false, doc: "Display current value"
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def range(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do

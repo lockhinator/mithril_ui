@@ -98,7 +98,7 @@ defmodule MithrilUI.Components.Input do
   attr :disabled, :boolean, default: false, doc: "Whether the input is disabled"
   attr :readonly, :boolean, default: false, doc: "Whether the input is read-only"
   attr :placeholder, :string, default: nil, doc: "Placeholder text"
-  attr :class, :string, default: nil, doc: "Additional CSS classes for the input"
+  attr :class, :any, default: nil, doc: "Additional CSS classes for the input"
 
   attr :rest, :global,
     include:

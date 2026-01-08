@@ -67,7 +67,7 @@ defmodule MithrilUI.Components.Modal do
   attr :id, :string, required: true
   attr :show, :boolean, default: false
   attr :on_cancel, JS, default: %JS{}
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :title
   slot :inner_block, required: true

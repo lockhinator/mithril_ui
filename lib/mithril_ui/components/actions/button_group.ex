@@ -79,12 +79,12 @@ defmodule MithrilUI.Components.ButtonGroup do
   attr :orientation, :string, default: "horizontal", values: ~w(horizontal vertical)
   attr :outline, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :button, required: true do
     attr :active, :boolean
     attr :disabled, :boolean
-    attr :class, :string
+    attr :class, :any
     attr :type, :string
     attr :"phx-click", :any
     attr :"phx-target", :any
@@ -153,7 +153,7 @@ defmodule MithrilUI.Components.ButtonGroup do
   attr :orientation, :string, default: "horizontal", values: ~w(horizontal vertical)
   attr :outline, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global, include: ~w(phx-change form)
 

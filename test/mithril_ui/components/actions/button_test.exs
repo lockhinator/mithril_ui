@@ -342,6 +342,182 @@ defmodule MithrilUI.Components.ButtonTest do
     end
   end
 
+  describe "list-based class attribute" do
+    test "accepts class as a list of strings" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={["custom-1", "custom-2"]}>List Classes</Button.button>
+        """)
+
+      assert html =~ "custom-1"
+      assert html =~ "custom-2"
+      assert html =~ "btn"
+    end
+
+    test "accepts class list with nil values filtered out" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={["custom-class", nil, "another-class"]}>Filtered</Button.button>
+        """)
+
+      assert html =~ "custom-class"
+      assert html =~ "another-class"
+      assert html =~ "btn"
+    end
+
+    test "accepts class list with conditional if/else" do
+      assigns = %{selected: true}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[
+          "base-class",
+          if(@selected, do: "selected-style", else: "unselected-style")
+        ]}>
+          Conditional
+        </Button.button>
+        """)
+
+      assert html =~ "base-class"
+      assert html =~ "selected-style"
+      refute html =~ "unselected-style"
+    end
+
+    test "accepts class list with conditional if/else - false condition" do
+      assigns = %{selected: false}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[
+          "base-class",
+          if(@selected, do: "is-selected-style", else: "not-selected-style")
+        ]}>
+          Conditional
+        </Button.button>
+        """)
+
+      assert html =~ "base-class"
+      refute html =~ "is-selected-style"
+      assert html =~ "not-selected-style"
+    end
+
+    test "accepts class list with boolean && operator" do
+      assigns = %{is_active: true}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[
+          "always-present",
+          @is_active && "active-class"
+        ]}>
+          Boolean
+        </Button.button>
+        """)
+
+      assert html =~ "always-present"
+      assert html =~ "active-class"
+    end
+
+    test "accepts class list with false && operator result" do
+      assigns = %{is_active: false}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[
+          "always-present",
+          @is_active && "active-class"
+        ]}>
+          Boolean
+        </Button.button>
+        """)
+
+      assert html =~ "always-present"
+      refute html =~ "active-class"
+    end
+
+    test "accepts complex conditional class patterns" do
+      assigns = %{selected: true, highlighted: false, size: "large"}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[
+          "w-12 h-12 p-0 rounded-lg overflow-hidden",
+          if(@selected, do: "ring-2 ring-white scale-110", else: "opacity-60"),
+          @highlighted && "border-2 border-yellow-400",
+          @size == "large" && "text-lg"
+        ]}>
+          Complex
+        </Button.button>
+        """)
+
+      assert html =~ "w-12"
+      assert html =~ "h-12"
+      assert html =~ "ring-2"
+      assert html =~ "ring-white"
+      assert html =~ "scale-110"
+      refute html =~ "opacity-60"
+      refute html =~ "border-yellow-400"
+      assert html =~ "text-lg"
+    end
+
+    test "list class works with link_button" do
+      assigns = %{active: true}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.link_button href="/" class={["nav-link", @active && "active"]}>
+          Link
+        </Button.link_button>
+        """)
+
+      assert html =~ "nav-link"
+      assert html =~ "active"
+    end
+
+    test "list class works with icon_button" do
+      assigns = %{danger: true}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.icon_button label="Delete" class={["icon-btn", @danger && "danger-icon"]}>
+          X
+        </Button.icon_button>
+        """)
+
+      assert html =~ "icon-btn"
+      assert html =~ "danger-icon"
+    end
+
+    test "empty list class is handled correctly" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={[]}>Empty List</Button.button>
+        """)
+
+      assert html =~ "btn"
+      assert html =~ "Empty List"
+    end
+
+    test "nested list classes are flattened" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Button.button class={["outer", ["inner-1", "inner-2"]]}>Nested</Button.button>
+        """)
+
+      assert html =~ "outer"
+      assert html =~ "inner-1"
+      assert html =~ "inner-2"
+    end
+  end
+
   describe "accessibility" do
     test "sets aria-disabled when disabled" do
       assigns = %{}

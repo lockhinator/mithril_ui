@@ -69,7 +69,7 @@ defmodule MithrilUI.Components.Link do
     doc: "Font weight"
 
   attr :external, :boolean, default: false, doc: "Open in new tab"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, include: ~w(download hreflang ping referrerpolicy rel type)
 
   slot :inner_block, required: true, doc: "Link content"
@@ -126,7 +126,7 @@ defmodule MithrilUI.Components.Link do
 
   attr :href, :string, required: true, doc: "Link destination"
   attr :active, :boolean, default: false, doc: "Active state"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Link content"
@@ -179,7 +179,7 @@ defmodule MithrilUI.Components.Link do
     doc: "Button size"
 
   attr :external, :boolean, default: false, doc: "Open in new tab"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Link content"

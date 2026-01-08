@@ -67,26 +67,26 @@ defmodule MithrilUI.Components.ChatBubble do
   @spec chat(map()) :: Phoenix.LiveView.Rendered.t()
 
   attr :position, :string, required: true, values: @positions
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :avatar do
     attr :src, :string
     attr :alt, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :header do
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :bubble do
     attr :color, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :footer do
-    attr :class, :string
+    attr :class, :any
   end
 
   def chat(assigns) do
@@ -159,7 +159,7 @@ defmodule MithrilUI.Components.ChatBubble do
   attr :sender, :string, default: nil
   attr :time, :string, default: nil
   attr :status, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -219,7 +219,7 @@ defmodule MithrilUI.Components.ChatBubble do
   attr :avatar_src, :string, default: nil
   attr :sender, :string, default: nil
   attr :time, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def chat_image(assigns) do
@@ -278,7 +278,7 @@ defmodule MithrilUI.Components.ChatBubble do
   attr :avatar_src, :string, default: nil
   attr :sender, :string, default: nil
   attr :time, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def chat_file(assigns) do
@@ -345,7 +345,7 @@ defmodule MithrilUI.Components.ChatBubble do
   """
   @spec chat_conversation(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true

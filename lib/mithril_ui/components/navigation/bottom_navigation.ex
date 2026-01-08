@@ -82,7 +82,7 @@ defmodule MithrilUI.Components.BottomNavigation do
   """
   @spec bottom_nav(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, default: nil, values: @sizes ++ [nil]
   attr :fixed, :boolean, default: true
   attr :on_select, :string, default: nil
@@ -175,7 +175,7 @@ defmodule MithrilUI.Components.BottomNavigation do
   """
   @spec icon_bottom_nav(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, default: nil, values: @sizes ++ [nil]
   attr :fixed, :boolean, default: true
   attr :on_select, :string, default: nil
@@ -241,7 +241,7 @@ defmodule MithrilUI.Components.BottomNavigation do
   """
   @spec app_bar(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :on_select, :string, default: nil
   attr :on_action, :string, default: nil
 

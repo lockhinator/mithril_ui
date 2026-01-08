@@ -25,7 +25,7 @@ defmodule MithrilUI.Components.Clipboard do
   attr :readonly, :boolean, default: true
   attr :button_text, :string, default: "Copy"
   attr :success_text, :string, default: "Copied!"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def clipboard_input(assigns) do
@@ -86,7 +86,7 @@ defmodule MithrilUI.Components.Clipboard do
   attr :value, :string, required: true
   attr :label, :string, default: nil
   attr :readonly, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def clipboard_inline(assigns) do
@@ -154,7 +154,7 @@ defmodule MithrilUI.Components.Clipboard do
   """
   attr :target_id, :string, required: true, doc: "ID of the element to copy from"
   attr :tooltip, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def clipboard_icon_button(assigns) do
@@ -206,7 +206,7 @@ defmodule MithrilUI.Components.Clipboard do
   attr :id, :string, required: true
   attr :code, :string, required: true
   attr :language, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def clipboard_code(assigns) do
@@ -252,7 +252,7 @@ defmodule MithrilUI.Components.Clipboard do
   attr :value, :string, required: true
   attr :prefix, :string, required: true
   attr :readonly, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def clipboard_input_group(assigns) do

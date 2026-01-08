@@ -65,7 +65,7 @@ defmodule MithrilUI.Components.Timeline do
   attr :horizontal, :boolean, default: false
   attr :compact, :boolean, default: false
   attr :snap_icon, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :item, required: true do
     attr :time, :string
@@ -152,7 +152,7 @@ defmodule MithrilUI.Components.Timeline do
 
   attr :events, :list, required: true
   attr :horizontal, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def simple_timeline(assigns) do
     ~H"""

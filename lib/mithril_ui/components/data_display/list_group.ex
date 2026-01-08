@@ -62,14 +62,14 @@ defmodule MithrilUI.Components.ListGroup do
   attr :rounded, :boolean, default: true
   attr :horizontal, :boolean, default: false
   attr :compact, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :item do
     attr :active, :boolean
     attr :disabled, :boolean
     attr :href, :string
     attr :navigate, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :title
@@ -117,7 +117,7 @@ defmodule MithrilUI.Components.ListGroup do
   attr :bordered, :boolean, default: true
   attr :rounded, :boolean, default: true
   attr :item_class, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def simple_list(assigns) do
     ~H"""

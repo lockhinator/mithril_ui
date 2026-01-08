@@ -96,7 +96,7 @@ defmodule MithrilUI.Components.Button do
   attr :circle, :boolean, default: false
   attr :square, :boolean, default: false
   attr :outline, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global,
     include:
@@ -159,7 +159,7 @@ defmodule MithrilUI.Components.Button do
   attr :circle, :boolean, default: false
   attr :square, :boolean, default: false
   attr :outline, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global,
     include: ~w(navigate patch href download hreflang referrerpolicy rel target)
@@ -222,7 +222,7 @@ defmodule MithrilUI.Components.Button do
   attr :circle, :boolean, default: false
   attr :square, :boolean, default: true
   attr :outline, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global,
     include:

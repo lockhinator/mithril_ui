@@ -54,7 +54,7 @@ defmodule MithrilUI.Components.FileInput do
   attr :multiple, :boolean, default: false, doc: "Allow multiple files"
   attr :disabled, :boolean, default: false
   attr :required, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def file_input(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do

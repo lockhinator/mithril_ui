@@ -63,7 +63,7 @@ defmodule MithrilUI.Components.Spinner do
   attr :size, :string, default: "md", values: @sizes
   attr :variant, :string, default: nil, values: @variants ++ [nil]
   attr :label, :string, default: "Loading"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def spinner(assigns) do
     ~H"""
@@ -99,7 +99,7 @@ defmodule MithrilUI.Components.Spinner do
   attr :variant, :string, default: nil, values: @variants ++ [nil]
   attr :text, :string, required: true
   attr :position, :string, default: "right", values: ~w(left right top bottom)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def spinner_with_text(assigns) do
     ~H"""

@@ -74,7 +74,7 @@ defmodule MithrilUI.Components.Pagination do
   attr :page_size, :integer, default: nil
   attr :sibling_count, :integer, default: 1
   attr :boundary_count, :integer, default: 1
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 
@@ -160,7 +160,7 @@ defmodule MithrilUI.Components.Pagination do
   attr :on_page_change, :string, default: nil
   attr :size, :string, default: "sm", values: @sizes
   attr :show_current, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 
@@ -215,7 +215,7 @@ defmodule MithrilUI.Components.Pagination do
   attr :total_pages, :integer, required: true
   attr :on_page_change, :string, default: nil
   attr :size, :string, default: "sm", values: @sizes
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :sibling_count, :integer, default: 1
   attr :boundary_count, :integer, default: 1
 

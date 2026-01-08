@@ -58,7 +58,7 @@ defmodule MithrilUI.Components.Breadcrumb do
   """
   @spec breadcrumb(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, default: "sm", values: ~w(xs sm base lg)
   attr :max_width, :string, default: nil
 
@@ -118,7 +118,7 @@ defmodule MithrilUI.Components.Breadcrumb do
   attr :base_path, :string, default: "/"
   attr :home, :boolean, default: true
   attr :home_label, :string, default: "Home"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def breadcrumb_from_segments(assigns) do
     assigns = assign(assigns, :items, build_breadcrumb_items(assigns))

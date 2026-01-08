@@ -68,7 +68,7 @@ defmodule MithrilUI.Components.Tabs do
 
   attr :variant, :string, default: "bordered", values: @variants
   attr :size, :string, default: nil, values: @sizes ++ [nil]
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 
@@ -140,7 +140,7 @@ defmodule MithrilUI.Components.Tabs do
   attr :on_change, :string, default: nil
   attr :variant, :string, default: "bordered", values: @variants
   attr :size, :string, default: nil, values: @sizes ++ [nil]
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 
@@ -195,7 +195,7 @@ defmodule MithrilUI.Components.Tabs do
   attr :name, :string, required: true
   attr :variant, :string, default: "lifted", values: @variants
   attr :size, :string, default: nil, values: @sizes ++ [nil]
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 

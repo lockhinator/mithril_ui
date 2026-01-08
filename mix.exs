@@ -61,7 +61,7 @@ defmodule MithrilUi.MixProject do
       {:jason, "~> 1.2"},
 
       # Storybook & Dev Server - not needed by library users
-      {:phoenix_storybook, "~> 0.9.3", only: :dev},
+      {:phoenix_storybook, "~> 0.9.3", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:esbuild, "~> 0.10", only: :dev, runtime: false},
       {:tailwind, "~> 0.3", only: :dev, runtime: false},
@@ -73,9 +73,9 @@ defmodule MithrilUi.MixProject do
        compile: false,
        depth: 1,
        only: :dev},
-      {:telemetry_metrics, "~> 1.0", only: :dev},
-      {:telemetry_poller, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.26", only: :dev},
+      {:telemetry_metrics, "~> 1.0", only: [:dev, :test]},
+      {:telemetry_poller, "~> 1.0", only: [:dev, :test]},
+      {:gettext, "~> 0.26", only: [:dev, :test]},
       {:dns_cluster, "~> 0.2.0", only: :dev},
       {:bandit, "~> 1.5", only: :dev},
 

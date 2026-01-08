@@ -83,7 +83,7 @@ defmodule MithrilUI.Components.Navbar do
   """
   @spec navbar(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :sticky, :boolean, default: false
   attr :shadow, :boolean, default: true
   attr :bordered, :boolean, default: false
@@ -143,7 +143,7 @@ defmodule MithrilUI.Components.Navbar do
   """
   @spec navbar_dropdown(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :trigger, required: true
   slot :content, required: true
@@ -182,7 +182,7 @@ defmodule MithrilUI.Components.Navbar do
 
   attr :title, :string, required: true
   attr :href, :string, default: "/"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   attr :rest, :global
 

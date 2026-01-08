@@ -28,7 +28,7 @@ defmodule MithrilUI.Components.SpeedDial do
   attr :trigger, :string, default: "hover", values: ["hover", "click"]
   attr :icon, :string, default: "plus", values: ["plus", "menu", "dots"]
   attr :color, :string, default: "primary"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :action, required: true do
@@ -37,7 +37,7 @@ defmodule MithrilUI.Components.SpeedDial do
     attr :href, :string
     attr :click, :string
     attr :color, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   def speed_dial(assigns) do
@@ -97,7 +97,7 @@ defmodule MithrilUI.Components.SpeedDial do
   """
   attr :id, :string, required: true
   attr :position, :string, default: "bottom-right", values: @positions
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :trigger, required: true
@@ -137,7 +137,7 @@ defmodule MithrilUI.Components.SpeedDial do
   attr :id, :string, required: true
   attr :position, :string, default: "bottom-right", values: @positions
   attr :color, :string, default: "primary"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :action, required: true do
@@ -193,7 +193,7 @@ defmodule MithrilUI.Components.SpeedDial do
   attr :id, :string, required: true
   attr :position, :string, default: "bottom-right", values: @positions
   attr :color, :string, default: "primary"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :action, required: true do

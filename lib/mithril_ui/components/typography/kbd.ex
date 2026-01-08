@@ -53,7 +53,7 @@ defmodule MithrilUI.Components.Kbd do
     values: [:default, :outline],
     doc: "Visual style"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Key text"
@@ -100,7 +100,7 @@ defmodule MithrilUI.Components.Kbd do
     values: [:xs, :sm, :md, :lg],
     doc: "Key size"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   def kbd_combo(assigns) do
@@ -141,7 +141,7 @@ defmodule MithrilUI.Components.Kbd do
     values: [:xs, :sm, :md, :lg],
     doc: "Key size"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   def kbd_shortcut(assigns) do
@@ -177,7 +177,7 @@ defmodule MithrilUI.Components.Kbd do
 
   attr :shortcuts, :list, required: true, doc: "List of shortcut maps"
   attr :title, :string, default: nil, doc: "Table title"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   def kbd_table(assigns) do
@@ -219,7 +219,7 @@ defmodule MithrilUI.Components.Kbd do
     values: [:xs, :sm, :md, :lg],
     doc: "Key size"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   def kbd_arrow(assigns) do

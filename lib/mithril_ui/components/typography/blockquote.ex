@@ -76,7 +76,7 @@ defmodule MithrilUI.Components.Blockquote do
     values: [:left, :center, :right],
     doc: "Text alignment"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Quote content"
@@ -147,7 +147,7 @@ defmodule MithrilUI.Components.Blockquote do
   attr :title, :string, default: nil, doc: "Author title/role"
   attr :avatar, :string, default: nil, doc: "Avatar image URL"
   attr :rating, :integer, default: nil, values: [nil, 1, 2, 3, 4, 5], doc: "Star rating"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Testimonial content"

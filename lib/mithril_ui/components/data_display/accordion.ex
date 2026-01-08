@@ -62,12 +62,12 @@ defmodule MithrilUI.Components.Accordion do
   attr :name, :string, default: nil
   attr :icon, :string, default: "arrow", values: ~w(arrow plus none)
   attr :join, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :item, required: true do
     attr :title, :string, required: true
     attr :open, :boolean
-    attr :class, :string
+    attr :class, :any
   end
 
   def accordion(assigns) do
@@ -113,7 +113,7 @@ defmodule MithrilUI.Components.Accordion do
   attr :title, :string, required: true
   attr :open, :boolean, default: false
   attr :icon, :string, default: "arrow", values: ~w(arrow plus none)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 

@@ -47,7 +47,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :columns, :string, default: "3", values: @columns
   attr :gap, :string, default: "4", values: ~w(2 4 6)
   attr :rounded, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def gallery(assigns) do
@@ -103,7 +103,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :columns, :string, default: "4", values: ~w(2 3 4)
   attr :gap, :string, default: "4", values: ~w(2 4 6)
   attr :rounded, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def gallery_masonry(assigns) do
@@ -173,7 +173,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :items, :list, required: true
   attr :gap, :string, default: "4", values: ~w(2 4 6)
   attr :rounded, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def gallery_featured(assigns) do
@@ -226,7 +226,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :items, :list, required: true
   attr :gap, :string, default: "2", values: ~w(2 4 6)
   attr :rounded, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def gallery_quad(assigns) do
@@ -275,7 +275,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :src, :string, required: true
   attr :alt, :string, default: ""
   attr :rounded, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :overlay
@@ -336,7 +336,7 @@ defmodule MithrilUI.Components.Gallery do
   attr :gap, :string, default: "4", values: ~w(2 4 6)
   attr :rounded, :boolean, default: true
   attr :active_category, :string, default: "all"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def gallery_filtered(assigns) do

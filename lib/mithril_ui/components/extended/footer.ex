@@ -59,7 +59,7 @@ defmodule MithrilUI.Components.Footer do
   attr :bg, :string, default: "bg-base-200"
   attr :text, :string, default: "text-base-content"
   attr :padding, :string, default: "p-10"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -106,7 +106,7 @@ defmodule MithrilUI.Components.Footer do
   @spec footer_nav(map()) :: Phoenix.LiveView.Rendered.t()
 
   attr :title, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -143,7 +143,7 @@ defmodule MithrilUI.Components.Footer do
   """
   @spec footer_aside(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :logo
@@ -181,7 +181,7 @@ defmodule MithrilUI.Components.Footer do
   """
   @spec footer_social(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -232,7 +232,7 @@ defmodule MithrilUI.Components.Footer do
   attr :instagram, :string, default: nil
   attr :bg, :string, default: "bg-neutral"
   attr :text, :string, default: "text-neutral-content"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block
@@ -373,7 +373,7 @@ defmodule MithrilUI.Components.Footer do
   attr :copyright, :string, default: nil
   attr :bg_top, :string, default: "bg-base-200"
   attr :bg_bottom, :string, default: "bg-base-300"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :nav

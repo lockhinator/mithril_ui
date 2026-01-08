@@ -86,7 +86,7 @@ defmodule MithrilUI.Components.Text do
   attr :underline, :boolean, default: false, doc: "Add underline"
   attr :strikethrough, :boolean, default: false, doc: "Add strikethrough"
   attr :uppercase, :boolean, default: false, doc: "Transform to uppercase"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, doc: "Additional HTML attributes"
 
   slot :inner_block, required: true, doc: "Text content"
@@ -131,7 +131,7 @@ defmodule MithrilUI.Components.Text do
   """
   @spec lead(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, doc: "Additional HTML attributes"
 
   slot :inner_block, required: true, doc: "Lead content"
@@ -153,7 +153,7 @@ defmodule MithrilUI.Components.Text do
   """
   @spec small(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, doc: "Additional HTML attributes"
 
   slot :inner_block, required: true, doc: "Small text content"
@@ -185,7 +185,7 @@ defmodule MithrilUI.Components.Text do
     values: [:default, :primary, :secondary, :accent],
     doc: "Highlight color"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, doc: "Additional HTML attributes"
 
   slot :inner_block, required: true, doc: "Marked content"

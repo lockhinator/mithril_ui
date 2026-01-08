@@ -66,6 +66,65 @@ defmodule MithrilUI.HelpersTest do
 
       assert result == "btn btn-primary extra classes"
     end
+
+    test "handles false values in list" do
+      result = Helpers.class_names(["btn", false, "btn-primary"])
+      assert result == "btn btn-primary"
+    end
+
+    test "handles nil condition in tuple" do
+      result = Helpers.class_names(["btn", {"btn-disabled", nil}])
+      assert result == "btn"
+    end
+
+    test "handles deeply nested lists" do
+      result = Helpers.class_names(["a", ["b", ["c", ["d"]]]])
+      assert result == "a b c d"
+    end
+
+    test "handles if/else conditional pattern" do
+      selected = true
+
+      result =
+        Helpers.class_names([
+          "base-class",
+          if(selected, do: "selected-class", else: "unselected-class")
+        ])
+
+      assert result == "base-class selected-class"
+    end
+
+    test "handles if/else conditional pattern with false condition" do
+      selected = false
+
+      result =
+        Helpers.class_names([
+          "base-class",
+          if(selected, do: "selected-class", else: "unselected-class")
+        ])
+
+      assert result == "base-class unselected-class"
+    end
+  end
+
+  describe "normalize_class_attr/1" do
+    test "returns nil for nil input" do
+      assert Helpers.normalize_class_attr(nil) == nil
+    end
+
+    test "returns string unchanged" do
+      assert Helpers.normalize_class_attr("btn btn-primary") == "btn btn-primary"
+    end
+
+    test "returns list unchanged" do
+      input = ["btn", "btn-primary"]
+      assert Helpers.normalize_class_attr(input) == input
+    end
+
+    test "returns list with conditionals unchanged" do
+      input = ["btn", {"active", true}]
+      assert Helpers.normalize_class_attr(input) == input
+    end
   end
 
   describe "unique_id/1" do

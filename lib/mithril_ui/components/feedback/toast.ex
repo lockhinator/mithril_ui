@@ -67,7 +67,7 @@ defmodule MithrilUI.Components.Toast do
     doc: "Auto-dismiss after N milliseconds (0 = disabled)"
 
   attr :dismissible, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 
@@ -125,7 +125,7 @@ defmodule MithrilUI.Components.Toast do
   @spec toast_container(map()) :: Phoenix.LiveView.Rendered.t()
 
   attr :position, :string, default: "bottom-end", values: @positions
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 

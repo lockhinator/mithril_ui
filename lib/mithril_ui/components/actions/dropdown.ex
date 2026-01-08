@@ -108,14 +108,14 @@ defmodule MithrilUI.Components.Dropdown do
   attr :position, :string, default: nil, values: @positions ++ [nil]
   attr :hover, :boolean, default: false
   attr :open, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :menu_class, :string, default: nil
 
   slot :trigger, required: true
 
   slot :item do
     attr :disabled, :boolean
-    attr :class, :string
+    attr :class, :any
     attr :"phx-click", :any
     attr :"phx-target", :any
     attr :"phx-value-item", :any
@@ -199,14 +199,14 @@ defmodule MithrilUI.Components.Dropdown do
 
   attr :id, :string, required: true
   attr :position, :string, default: nil, values: @positions ++ [nil]
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :menu_class, :string, default: nil
 
   slot :trigger, required: true
 
   slot :item do
     attr :disabled, :boolean
-    attr :class, :string
+    attr :class, :any
     attr :"phx-click", :any
     attr :"phx-target", :any
     attr :"phx-value-item", :any

@@ -82,7 +82,7 @@ defmodule MithrilUI.Components.Select do
   attr :required, :boolean, default: false
   attr :disabled, :boolean, default: false
   attr :multiple, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def select(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do

@@ -39,6 +39,13 @@ defmodule MithrilUI.Helpers do
   @doc """
   Merges CSS classes, filtering out nil and empty values.
 
+  Supports multiple input formats for flexible class composition:
+  - Strings: `"btn btn-primary"`
+  - Lists: `["btn", "btn-primary"]`
+  - Conditional tuples: `{"btn-disabled", false}` (included only if true)
+  - Nested lists: `["btn", ["btn-primary", "btn-lg"]]`
+  - Mixed: `["btn", {"btn-disabled", @disabled}, @extra_class]`
+
   ## Examples
 
       iex> MithrilUI.Helpers.class_names(["btn", "btn-primary", nil, ""])
@@ -46,6 +53,34 @@ defmodule MithrilUI.Helpers do
 
       iex> MithrilUI.Helpers.class_names(["btn", {"btn-primary", true}, {"btn-disabled", false}])
       "btn btn-primary"
+
+      iex> MithrilUI.Helpers.class_names(["base", ["nested", "classes"]])
+      "base nested classes"
+
+  ## Usage in Components
+
+  All MithrilUI components accept the `:class` attribute as either a string or list,
+  enabling flexible conditional class composition:
+
+      # Simple string
+      <.button class="my-custom-class">Click</.button>
+
+      # List with conditionals
+      <.button class={[
+        "w-12 h-12 p-0 rounded-lg",
+        if(@selected, do: "ring-2 ring-white", else: "opacity-60")
+      ]}>
+        Click
+      </.button>
+
+      # Using conditional tuples
+      <.card class={[
+        "custom-card",
+        {"shadow-xl", @elevated},
+        {"border-primary", @highlighted}
+      ]}>
+        Content
+      </.card>
   """
   @spec class_names(list()) :: String.t()
   def class_names(classes) when is_list(classes) do
@@ -55,11 +90,38 @@ defmodule MithrilUI.Helpers do
     |> Enum.join(" ")
   end
 
+  @doc """
+  Normalizes a class value that may be a string, list, or nil.
+
+  This is useful when you need to programmatically work with class values
+  that could be in different formats.
+
+  ## Examples
+
+      iex> MithrilUI.Helpers.normalize_class_attr(nil)
+      nil
+
+      iex> MithrilUI.Helpers.normalize_class_attr("btn btn-primary")
+      "btn btn-primary"
+
+      iex> MithrilUI.Helpers.normalize_class_attr(["btn", "btn-primary"])
+      ["btn", "btn-primary"]
+
+      iex> MithrilUI.Helpers.normalize_class_attr(["btn", nil, {"active", true}])
+      ["btn", nil, {"active", true}]
+  """
+  @spec normalize_class_attr(String.t() | list() | nil) :: String.t() | list() | nil
+  def normalize_class_attr(nil), do: nil
+  def normalize_class_attr(class) when is_binary(class), do: class
+  def normalize_class_attr(class) when is_list(class), do: class
+
   defp normalize_class(nil), do: []
   defp normalize_class(""), do: []
+  defp normalize_class(false), do: []
   defp normalize_class(class) when is_binary(class), do: [class]
   defp normalize_class({class, true}) when is_binary(class), do: [class]
   defp normalize_class({_class, false}), do: []
+  defp normalize_class({_class, nil}), do: []
 
   defp normalize_class(classes) when is_list(classes),
     do: Enum.flat_map(classes, &normalize_class/1)

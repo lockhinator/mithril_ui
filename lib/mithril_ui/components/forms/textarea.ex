@@ -66,7 +66,7 @@ defmodule MithrilUI.Components.Textarea do
   attr :disabled, :boolean, default: false
   attr :readonly, :boolean, default: false
   attr :rows, :integer, default: 3
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global, include: ~w(autocomplete autofocus minlength maxlength form wrap)
 
   def textarea(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do

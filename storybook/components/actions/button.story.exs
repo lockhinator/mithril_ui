@@ -254,6 +254,60 @@ defmodule Storybook.Components.Actions.Button do
             slots: ["Confirm"]
           }
         ]
+      },
+
+      # List-based class examples
+      %VariationGroup{
+        id: :list_classes,
+        description: """
+        Class attribute accepts lists for flexible conditional styling.
+        In your code, use: class={["base", @active && "active", @size == "lg" && "text-lg"]}
+        """,
+        variations: [
+          %Variation{
+            id: :list_simple,
+            description: "Simple list of classes",
+            attributes: %{
+              variant: "primary",
+              class: ["shadow-lg", "hover:shadow-xl", "transition-shadow"]
+            },
+            slots: ["Shadow Effect"]
+          },
+          %Variation{
+            id: :list_custom_sizing,
+            description: "Custom size with list classes",
+            attributes: %{
+              variant: "accent",
+              class: ["w-48", "h-16", "text-xl", "font-bold"]
+            },
+            slots: ["Custom Sized"]
+          },
+          %Variation{
+            id: :list_animation,
+            description: "Animation classes via list",
+            attributes: %{
+              variant: "secondary",
+              class: ["animate-pulse", "hover:animate-none", "transition-all"]
+            },
+            slots: ["Animated"]
+          },
+          %Variation{
+            id: :list_complex_styling,
+            description: "Complex styling with list - demonstrates multiple utility classes",
+            attributes: %{
+              variant: "neutral",
+              class: [
+                "rounded-full",
+                "px-8",
+                "shadow-md",
+                "hover:scale-105",
+                "transition-transform",
+                "duration-200"
+              ]
+            },
+            slots: ["Fully Styled"]
+          }
+        ]
       }
     ]
   end

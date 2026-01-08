@@ -82,7 +82,7 @@ defmodule MithrilUI.Components.Sidebar do
   """
   @spec sidebar(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, default: nil, values: @sizes ++ [nil]
   attr :rounded, :boolean, default: true
   attr :width, :string, default: "w-64"
@@ -100,7 +100,7 @@ defmodule MithrilUI.Components.Sidebar do
     attr :icon, :string
     attr :badge, :string
     attr :badge_variant, :string
-    attr :class, :string
+    attr :class, :any
   end
 
   slot :divider
@@ -180,7 +180,7 @@ defmodule MithrilUI.Components.Sidebar do
   """
   @spec menu(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, default: nil, values: @sizes ++ [nil]
   attr :horizontal, :boolean, default: false
 
@@ -190,7 +190,7 @@ defmodule MithrilUI.Components.Sidebar do
     attr :href, :string
     attr :active, :boolean
     attr :disabled, :boolean
-    attr :class, :string
+    attr :class, :any
   end
 
   def menu(assigns) do
@@ -236,7 +236,7 @@ defmodule MithrilUI.Components.Sidebar do
   attr :href, :string, default: nil
   attr :active, :boolean, default: false
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 

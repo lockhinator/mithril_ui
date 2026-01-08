@@ -52,7 +52,7 @@ defmodule MithrilUI.Components.Checkbox do
   attr :field, Phoenix.HTML.FormField, doc: "Form field struct"
   attr :errors, :list, default: []
   attr :disabled, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def checkbox(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do

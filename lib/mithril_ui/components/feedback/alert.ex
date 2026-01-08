@@ -71,7 +71,7 @@ defmodule MithrilUI.Components.Alert do
   attr :title, :string, default: nil
   attr :dismissible, :boolean, default: false
   attr :icon, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
   slot :actions

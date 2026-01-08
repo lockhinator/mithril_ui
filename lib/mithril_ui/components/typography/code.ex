@@ -54,7 +54,7 @@ defmodule MithrilUI.Components.Code do
     values: [:default, :primary, :secondary, :accent],
     doc: "Background color"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Code content"
@@ -104,7 +104,7 @@ defmodule MithrilUI.Components.Code do
   attr :filename, :string, default: nil, doc: "Filename to display"
   attr :line_numbers, :boolean, default: false, doc: "Show line numbers"
   attr :copyable, :boolean, default: true, doc: "Show copy button"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Code content"
@@ -178,7 +178,7 @@ defmodule MithrilUI.Components.Code do
   @spec code_diff(map()) :: Phoenix.LiveView.Rendered.t()
 
   attr :language, :string, default: nil, doc: "Programming language"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Diff content"

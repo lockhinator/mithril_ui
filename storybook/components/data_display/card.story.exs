@@ -80,6 +80,62 @@ defmodule Storybook.Components.DataDisplay.Card do
             slots: ["<:body>Glass effect card</:body>"]
           }
         ]
+      },
+
+      # List-based class examples
+      %VariationGroup{
+        id: :list_classes,
+        description: """
+        Class attribute accepts lists for flexible conditional styling.
+        Use: class={["base", @elevated && "shadow-xl", @theme == "dark" && "bg-gray-800"]}
+        """,
+        variations: [
+          %Variation{
+            id: :elevated_card,
+            description: "Card with elevated shadow styling via list classes",
+            attributes: %{
+              class: ["shadow-2xl", "hover:shadow-3xl", "transition-shadow", "duration-300"]
+            },
+            slots: [
+              "<:title>Elevated Card</:title>",
+              "<:body>This card uses list-based class styling for enhanced shadows.</:body>"
+            ]
+          },
+          %Variation{
+            id: :gradient_card,
+            description: "Card with gradient background via list classes",
+            attributes: %{
+              class: [
+                "bg-gradient-to-br",
+                "from-primary/10",
+                "to-secondary/10",
+                "border-none"
+              ]
+            },
+            slots: [
+              "<:title>Gradient Card</:title>",
+              "<:body>Custom gradient applied through list classes.</:body>"
+            ]
+          },
+          %Variation{
+            id: :interactive_card,
+            description: "Highly interactive card with multiple effects",
+            attributes: %{
+              class: [
+                "cursor-pointer",
+                "hover:scale-[1.02]",
+                "hover:shadow-xl",
+                "transition-all",
+                "duration-200",
+                "active:scale-[0.98]"
+              ]
+            },
+            slots: [
+              "<:title>Interactive Card</:title>",
+              "<:body>Click me! This card has multiple hover and active states.</:body>"
+            ]
+          }
+        ]
       }
     ]
   end

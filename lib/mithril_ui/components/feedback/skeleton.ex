@@ -48,7 +48,7 @@ defmodule MithrilUI.Components.Skeleton do
   """
   @spec skeleton(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rounded, :string, default: "md", values: ~w(none sm md lg full)
 
   def skeleton(assigns) do
@@ -74,7 +74,7 @@ defmodule MithrilUI.Components.Skeleton do
   @spec skeleton_text(map()) :: Phoenix.LiveView.Rendered.t()
 
   attr :lines, :integer, default: 3
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def skeleton_text(assigns) do
     ~H"""
@@ -103,7 +103,7 @@ defmodule MithrilUI.Components.Skeleton do
 
   attr :size, :string, default: "md", values: ~w(xs sm md lg xl)
   attr :shape, :string, default: "circle", values: ~w(circle square)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def skeleton_avatar(assigns) do
     ~H"""
@@ -133,7 +133,7 @@ defmodule MithrilUI.Components.Skeleton do
 
   attr :with_image, :boolean, default: true
   attr :lines, :integer, default: 3
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def skeleton_card(assigns) do
     ~H"""
@@ -168,7 +168,7 @@ defmodule MithrilUI.Components.Skeleton do
 
   attr :rows, :integer, default: 5
   attr :columns, :integer, default: 4
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def skeleton_table(assigns) do
     ~H"""
@@ -212,7 +212,7 @@ defmodule MithrilUI.Components.Skeleton do
 
   attr :items, :integer, default: 5
   attr :with_avatar, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def skeleton_list(assigns) do
     ~H"""

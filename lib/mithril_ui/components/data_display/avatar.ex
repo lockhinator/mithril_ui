@@ -63,7 +63,7 @@ defmodule MithrilUI.Components.Avatar do
   attr :status, :string, default: nil, values: [nil, "online", "offline"]
   attr :ring, :boolean, default: false
   attr :ring_color, :string, default: "primary"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def avatar(assigns) do
     ~H"""
@@ -98,7 +98,7 @@ defmodule MithrilUI.Components.Avatar do
   """
   @spec avatar_group(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 

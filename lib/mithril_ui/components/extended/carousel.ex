@@ -64,7 +64,7 @@ defmodule MithrilUI.Components.Carousel do
   attr :snap, :string, default: "start", values: @snap_positions
   attr :vertical, :boolean, default: false
   attr :full_width, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -113,7 +113,7 @@ defmodule MithrilUI.Components.Carousel do
   attr :prev, :string, default: nil
   attr :next, :string, default: nil
   attr :full_width, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def carousel_item(assigns) do
@@ -174,7 +174,7 @@ defmodule MithrilUI.Components.Carousel do
   attr :prev, :string, default: nil
   attr :next, :string, default: nil
   attr :full_width, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -231,7 +231,7 @@ defmodule MithrilUI.Components.Carousel do
   attr :count, :integer, required: true
   attr :prefix, :string, default: "slide"
   attr :active, :integer, default: 0
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def carousel_indicators(assigns) do
@@ -275,7 +275,7 @@ defmodule MithrilUI.Components.Carousel do
   attr :snap, :string, default: "start", values: @snap_positions
   attr :show_indicators, :boolean, default: true
   attr :show_navigation, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def carousel_full(assigns) do
@@ -341,7 +341,7 @@ defmodule MithrilUI.Components.Carousel do
 
   attr :items, :list, required: true
   attr :id_prefix, :string, default: "thumb"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def carousel_thumbnails(assigns) do

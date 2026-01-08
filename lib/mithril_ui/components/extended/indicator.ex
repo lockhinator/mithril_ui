@@ -66,7 +66,7 @@ defmodule MithrilUI.Components.Indicator do
 
   attr :horizontal, :string, default: "end", values: @horizontal_positions
   attr :vertical, :string, default: "top", values: @vertical_positions
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :badge
@@ -112,7 +112,7 @@ defmodule MithrilUI.Components.Indicator do
   attr :color, :string, default: "primary", values: @colors
   attr :size, :string, default: "sm", values: ~w(xs sm md)
   attr :pulse, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def status_dot(assigns) do
@@ -158,7 +158,7 @@ defmodule MithrilUI.Components.Indicator do
 
   attr :color, :string, default: "primary", values: @colors
   attr :label, :string, required: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def legend_indicator(assigns) do
@@ -205,7 +205,7 @@ defmodule MithrilUI.Components.Indicator do
   attr :show_zero, :boolean, default: false
   attr :horizontal, :string, default: "end", values: @horizontal_positions
   attr :vertical, :string, default: "top", values: @vertical_positions
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -259,7 +259,7 @@ defmodule MithrilUI.Components.Indicator do
 
   attr :status, :string, default: "online", values: ~w(online offline away busy)
   attr :position, :string, default: "bottom-right", values: ~w(top-right bottom-right bottom-left)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true

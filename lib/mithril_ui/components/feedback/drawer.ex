@@ -76,7 +76,7 @@ defmodule MithrilUI.Components.Drawer do
   attr :side, :string, default: "left", values: ~w(left right)
   attr :open, :boolean, default: false
   attr :overlay, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :trigger
   slot :inner_block, required: true
@@ -138,7 +138,7 @@ defmodule MithrilUI.Components.Drawer do
   attr :id, :string, required: true
   attr :side, :string, default: "left", values: ~w(left right)
   attr :overlay, :boolean, default: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 

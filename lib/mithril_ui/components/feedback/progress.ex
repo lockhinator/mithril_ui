@@ -67,7 +67,7 @@ defmodule MithrilUI.Components.Progress do
   attr :label, :string, default: nil
   attr :show_percentage, :boolean, default: false
   attr :size, :string, default: "md", values: ~w(xs sm md lg)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def progress(assigns) do
     percentage = if assigns.value, do: round(assigns.value / assigns.max * 100), else: nil
@@ -117,7 +117,7 @@ defmodule MithrilUI.Components.Progress do
   attr :size, :string, default: "4rem"
   attr :thickness, :string, default: "4px"
   attr :variant, :string, default: nil, values: @variants ++ [nil]
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block
 

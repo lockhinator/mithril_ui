@@ -64,7 +64,7 @@ defmodule MithrilUI.Components.ThemeSwitcher do
     doc: "List of theme names to show. Defaults to all DaisyUI themes."
 
   attr :label, :string, default: nil, doc: "Optional label text"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def theme_switcher(assigns) do
@@ -147,7 +147,7 @@ defmodule MithrilUI.Components.ThemeSwitcher do
   attr :id, :string, default: "theme-toggle"
   attr :light_theme, :string, default: "light", doc: "Theme name for light mode"
   attr :dark_theme, :string, default: "dark", doc: "Theme name for dark mode"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def theme_toggle(assigns) do
@@ -189,7 +189,7 @@ defmodule MithrilUI.Components.ThemeSwitcher do
   attr :id, :string, default: "theme-preview-selector"
   attr :themes, :list, default: nil
   attr :columns, :integer, default: 3
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def theme_preview_selector(assigns) do
@@ -243,7 +243,7 @@ defmodule MithrilUI.Components.ThemeSwitcher do
   attr :name, :string, required: true
   attr :themes, :list, default: nil
   attr :selected, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def theme_radio_group(assigns) do

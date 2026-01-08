@@ -54,7 +54,7 @@ defmodule MithrilUI.Components.Badge do
   attr :variant, :string, default: nil, values: @variants ++ [nil]
   attr :size, :string, default: "md", values: @sizes
   attr :outline, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :inner_block, required: true
 
@@ -92,7 +92,7 @@ defmodule MithrilUI.Components.Badge do
   attr :size, :string, default: "md", values: @sizes
   attr :outline, :boolean, default: false
   attr :icon_position, :string, default: "left", values: ~w(left right)
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :icon
   slot :inner_block, required: true
@@ -133,7 +133,7 @@ defmodule MithrilUI.Components.Badge do
   attr :show_zero, :boolean, default: false
   attr :variant, :string, default: "primary", values: @variants
   attr :size, :string, default: "sm", values: @sizes
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   def indicator_badge(assigns) do
     display = if assigns.count > assigns.max, do: "#{assigns.max}+", else: "#{assigns.count}"

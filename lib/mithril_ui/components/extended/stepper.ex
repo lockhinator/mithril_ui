@@ -62,7 +62,7 @@ defmodule MithrilUI.Components.Stepper do
 
   attr :vertical, :boolean, default: false
   attr :responsive, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -111,7 +111,7 @@ defmodule MithrilUI.Components.Stepper do
   attr :status, :string, default: "pending", values: @statuses
   attr :color, :string, default: nil, values: @colors ++ [nil]
   attr :data_content, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :icon
@@ -170,7 +170,7 @@ defmodule MithrilUI.Components.Stepper do
   attr :steps, :list, required: true
   attr :current, :integer, default: 0
   attr :vertical, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def detailed_steps(assigns) do
@@ -248,7 +248,7 @@ defmodule MithrilUI.Components.Stepper do
 
   attr :steps, :list, required: true
   attr :current, :integer, default: 0
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def breadcrumb_steps(assigns) do

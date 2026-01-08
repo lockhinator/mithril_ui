@@ -81,7 +81,7 @@ defmodule MithrilUI.Components.Popover do
     values: [:top, :bottom, :left, :right],
     doc: "Position relative to trigger"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes for popover"
+  attr :class, :any, default: nil, doc: "Additional CSS classes for popover"
   attr :content_class, :string, default: nil, doc: "Additional CSS classes for content area"
 
   slot :trigger, required: true, doc: "Trigger element"
@@ -178,7 +178,7 @@ defmodule MithrilUI.Components.Popover do
     values: [:start, :center, :end],
     doc: "Horizontal alignment"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :content_class, :string, default: nil, doc: "Additional CSS classes for content"
 
   slot :trigger, required: true, doc: "Trigger element"
@@ -256,7 +256,7 @@ defmodule MithrilUI.Components.Popover do
 
   attr :show, :boolean, default: false, doc: "Initial visibility"
   attr :on_cancel, JS, default: %JS{}, doc: "JS command on dismiss"
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
 
   slot :trigger, required: true, doc: "Trigger element"
   slot :title, doc: "Popover title"

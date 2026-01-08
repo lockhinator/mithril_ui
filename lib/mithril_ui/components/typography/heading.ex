@@ -74,7 +74,7 @@ defmodule MithrilUI.Components.Heading do
     values: [:tighter, :tight, :normal, :wide],
     doc: "Letter spacing"
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes"
+  attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global, doc: "Additional HTML attributes"
 
   slot :inner_block, required: true, doc: "Heading content"
