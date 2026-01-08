@@ -25,6 +25,9 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 mithril_ui-*.tar
 
+# Ignore extracted hex build directories (from mix hex.build --unpack)
+mithril_ui-*/
+
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
 
