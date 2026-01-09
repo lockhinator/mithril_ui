@@ -7,250 +7,284 @@ defmodule MithrilUI.Components.CarouselTest do
   alias MithrilUI.Components.Carousel
 
   describe "carousel/1" do
-    test "renders carousel container" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel>
-          <span>Items</span>
-        </Carousel.carousel>
-        """)
-
-      assert html =~ "carousel"
-    end
-
-    test "applies snap position" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel snap="center">
-          <span>Items</span>
-        </Carousel.carousel>
-        """)
-
-      assert html =~ "carousel-center"
-    end
-
-    test "applies vertical layout" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel vertical>
-          <span>Items</span>
-        </Carousel.carousel>
-        """)
-
-      assert html =~ "carousel-vertical"
-    end
-
-    test "applies full width" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel full_width>
-          <span>Items</span>
-        </Carousel.carousel>
-        """)
-
-      assert html =~ "w-full"
-    end
-  end
-
-  describe "carousel_item/1" do
-    test "renders carousel item with image" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_item id="slide1" src="/image.jpg" />
-        """)
-
-      assert html =~ "carousel-item"
-      assert html =~ ~s(id="slide1")
-      assert html =~ ~s(src="/image.jpg")
-    end
-
-    test "renders navigation buttons" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_item id="slide2" src="/img.jpg" prev="slide1" next="slide3" />
-        """)
-
-      assert html =~ ~s(href="#slide1")
-      assert html =~ ~s(href="#slide3")
-    end
-
-    test "applies full width" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_item id="s1" src="/img.jpg" full_width />
-        """)
-
-      assert html =~ "w-full"
-    end
-
-    test "applies alt text" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_item id="s1" src="/img.jpg" alt="Beautiful landscape" />
-        """)
-
-      assert html =~ ~s(alt="Beautiful landscape")
-    end
-  end
-
-  describe "carousel_content/1" do
-    test "renders carousel item with custom content" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_content id="card1">
-          Custom content
-        </Carousel.carousel_content>
-        """)
-
-      assert html =~ "carousel-item"
-      assert html =~ ~s(id="card1")
-      assert html =~ "Custom content"
-    end
-
-    test "renders navigation buttons" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_content id="c2" prev="c1" next="c3">
-          Content
-        </Carousel.carousel_content>
-        """)
-
-      assert html =~ ~s(href="#c1")
-      assert html =~ ~s(href="#c3")
-    end
-  end
-
-  describe "carousel_indicators/1" do
-    test "renders indicator buttons" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_indicators count={5} />
-        """)
-
-      assert html =~ ~s(href="#slide0")
-      assert html =~ ~s(href="#slide4")
-    end
-
-    test "uses custom prefix" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_indicators count={3} prefix="item" />
-        """)
-
-      assert html =~ ~s(href="#item0")
-      assert html =~ ~s(href="#item1")
-      assert html =~ ~s(href="#item2")
-    end
-
-    test "highlights active indicator" do
-      assigns = %{}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_indicators count={3} active={1} />
-        """)
-
-      assert html =~ "btn-primary"
-    end
-  end
-
-  describe "carousel_full/1" do
-    test "renders full carousel with items" do
+    test "renders carousel with images" do
       assigns = %{items: ["/a.jpg", "/b.jpg", "/c.jpg"]}
 
       html =
         rendered_to_string(~H"""
-        <Carousel.carousel_full items={@items} />
+        <Carousel.carousel id="test-carousel" items={@items} />
         """)
 
-      assert html =~ "carousel"
+      assert html =~ ~s(id="test-carousel")
       assert html =~ ~s(src="/a.jpg")
       assert html =~ ~s(src="/b.jpg")
       assert html =~ ~s(src="/c.jpg")
     end
 
-    test "renders with navigation" do
+    test "renders with controls by default" do
       assigns = %{items: ["/a.jpg", "/b.jpg"]}
 
       html =
         rendered_to_string(~H"""
-        <Carousel.carousel_full items={@items} show_navigation />
+        <Carousel.carousel id="with-controls" items={@items} />
         """)
 
-      assert html =~ "btn-circle"
+      # Previous button
+      assert html =~ "Previous"
+      # Next button
+      assert html =~ "Next"
     end
 
-    test "renders with indicators" do
+    test "renders with indicators by default" do
       assigns = %{items: ["/a.jpg", "/b.jpg", "/c.jpg"]}
 
       html =
         rendered_to_string(~H"""
-        <Carousel.carousel_full items={@items} show_indicators />
+        <Carousel.carousel id="with-indicators" items={@items} />
         """)
 
-      assert html =~ "btn-xs"
+      assert html =~ ~s(data-carousel-indicator="0")
+      assert html =~ ~s(data-carousel-indicator="1")
+      assert html =~ ~s(data-carousel-indicator="2")
     end
 
-    test "uses custom prefix" do
+    test "can hide controls" do
+      assigns = %{items: ["/a.jpg", "/b.jpg"]}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel id="no-controls" items={@items} show_controls={false} />
+        """)
+
+      refute html =~ "Previous"
+      refute html =~ "Next"
+    end
+
+    test "can hide indicators" do
+      assigns = %{items: ["/a.jpg", "/b.jpg"]}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel id="no-indicators" items={@items} show_indicators={false} />
+        """)
+
+      refute html =~ "data-carousel-indicator"
+    end
+
+    test "applies custom class" do
       assigns = %{items: ["/a.jpg"]}
 
       html =
         rendered_to_string(~H"""
-        <Carousel.carousel_full items={@items} id_prefix="gallery" />
+        <Carousel.carousel id="styled" items={@items} class="rounded-xl shadow-2xl" />
         """)
 
-      assert html =~ ~s(id="gallery0")
-    end
-  end
-
-  describe "carousel_thumbnails/1" do
-    test "renders carousel with thumbnail navigation" do
-      assigns = %{items: ["/a.jpg", "/b.jpg", "/c.jpg"]}
-
-      html =
-        rendered_to_string(~H"""
-        <Carousel.carousel_thumbnails items={@items} />
-        """)
-
-      assert html =~ "carousel"
-      # Thumbnails
-      assert html =~ "w-16"
+      assert html =~ "rounded-xl"
+      assert html =~ "shadow-2xl"
     end
 
-    test "thumbnails link to correct slides" do
+    test "first slide is visible by default" do
       assigns = %{items: ["/a.jpg", "/b.jpg"]}
 
       html =
         rendered_to_string(~H"""
-        <Carousel.carousel_thumbnails items={@items} id_prefix="slide" />
+        <Carousel.carousel id="first-visible" items={@items} />
         """)
 
-      assert html =~ ~s(href="#slide0")
-      assert html =~ ~s(href="#slide1")
+      # First slide should have opacity-100
+      assert html =~ ~s(id="first-visible-slide-0")
+      assert html =~ "opacity-100"
+    end
+
+    test "generates correct slide IDs" do
+      assigns = %{items: ["/a.jpg", "/b.jpg", "/c.jpg"]}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel id="my-carousel" items={@items} />
+        """)
+
+      assert html =~ ~s(id="my-carousel-slide-0")
+      assert html =~ ~s(id="my-carousel-slide-1")
+      assert html =~ ~s(id="my-carousel-slide-2")
+    end
+
+    test "single item carousel hides controls" do
+      assigns = %{items: ["/a.jpg"]}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel id="single" items={@items} />
+        """)
+
+      # Controls should not appear for single item
+      refute html =~ "Previous"
+      refute html =~ "Next"
+    end
+  end
+
+  describe "carousel_container/1" do
+    test "renders container for custom content" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_container id="custom-carousel">
+          <div>Custom content</div>
+        </Carousel.carousel_container>
+        """)
+
+      assert html =~ ~s(id="custom-carousel")
+      assert html =~ "Custom content"
+      assert html =~ ~s(data-carousel-active="0")
+    end
+
+    test "applies custom class" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_container id="styled-container" class="my-class">
+          <div>Content</div>
+        </Carousel.carousel_container>
+        """)
+
+      assert html =~ "my-class"
+    end
+  end
+
+  describe "carousel_slide/1" do
+    test "renders slide with content" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_slide index={0} total={3}>
+          <img src="/image.jpg" />
+        </Carousel.carousel_slide>
+        """)
+
+      assert html =~ ~s(src="/image.jpg")
+      assert html =~ "transition-opacity"
+    end
+
+    test "first slide is visible" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_slide index={0} total={3}>
+          Content
+        </Carousel.carousel_slide>
+        """)
+
+      assert html =~ "opacity-100"
+      refute html =~ "opacity-0"
+    end
+
+    test "other slides are hidden" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_slide index={1} total={3}>
+          Content
+        </Carousel.carousel_slide>
+        """)
+
+      assert html =~ "opacity-0"
+      assert html =~ "pointer-events-none"
+    end
+
+    test "applies custom class" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_slide index={0} total={2} class="custom-slide">
+          Content
+        </Carousel.carousel_slide>
+        """)
+
+      assert html =~ "custom-slide"
+    end
+  end
+
+  describe "carousel_controls/1" do
+    test "renders prev and next buttons" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_controls id="my-carousel" total={3} />
+        """)
+
+      assert html =~ "Previous"
+      assert html =~ "Next"
+    end
+
+    test "buttons trigger carousel events" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_controls id="event-carousel" total={3} />
+        """)
+
+      assert html =~ "carousel:prev"
+      assert html =~ "carousel:next"
+    end
+  end
+
+  describe "carousel_indicators/1" do
+    test "renders indicator dots" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_indicators id="ind-carousel" total={4} />
+        """)
+
+      assert html =~ ~s(data-carousel-indicator="0")
+      assert html =~ ~s(data-carousel-indicator="1")
+      assert html =~ ~s(data-carousel-indicator="2")
+      assert html =~ ~s(data-carousel-indicator="3")
+    end
+
+    test "first indicator is active" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_indicators id="active-carousel" total={3} />
+        """)
+
+      # First indicator should have bg-white (active state)
+      assert html =~ ~s(aria-current="true")
+    end
+
+    test "has correct aria labels" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Carousel.carousel_indicators id="aria-carousel" total={3} />
+        """)
+
+      assert html =~ ~s(aria-label="Slide 1")
+      assert html =~ ~s(aria-label="Slide 2")
+      assert html =~ ~s(aria-label="Slide 3")
+    end
+  end
+
+  describe "carousel_js/0" do
+    test "returns JavaScript code" do
+      js = Carousel.carousel_js()
+
+      assert is_binary(js)
+      assert js =~ "carousel:next"
+      assert js =~ "carousel:prev"
+      assert js =~ "carouselGoTo"
     end
   end
 end

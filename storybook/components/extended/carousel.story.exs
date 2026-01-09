@@ -6,8 +6,11 @@ defmodule Storybook.Components.Extended.Carousel do
   def description do
     """
     Carousel component for image sliders and content carousels.
-    Supports horizontal/vertical scrolling, snap positions,
-    navigation controls, and indicator dots.
+    Uses Phoenix.LiveView.JS for smooth client-side slide transitions.
+    Supports navigation controls, indicator dots, and various styling options.
+
+    **Note:** For prev/next navigation to work, include the carousel JavaScript
+    in your app.js or use a script tag with `MithrilUI.Components.Carousel.carousel_js()`.
     """
   end
 
@@ -15,38 +18,56 @@ defmodule Storybook.Components.Extended.Carousel do
     [
       %Variation{
         id: :default,
-        description: "Basic carousel",
-        slots: [
-          """
-          <MithrilUI.Components.Carousel.carousel_item id="slide1" src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp" />
-          <MithrilUI.Components.Carousel.carousel_item id="slide2" src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp" />
-          <MithrilUI.Components.Carousel.carousel_item id="slide3" src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp" />
-          """
-        ]
+        description: "Basic carousel with controls and indicators",
+        attributes: %{
+          id: "default-carousel",
+          items: [
+            "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
+            "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
+            "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp",
+            "https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp",
+            "https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp"
+          ]
+        }
       },
       %Variation{
-        id: :with_nav,
-        description: "With navigation buttons",
-        attributes: %{full_width: true},
-        slots: [
-          """
-          <MithrilUI.Components.Carousel.carousel_item id="nav1" src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp" prev="nav3" next="nav2" full_width />
-          <MithrilUI.Components.Carousel.carousel_item id="nav2" src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp" prev="nav1" next="nav3" full_width />
-          <MithrilUI.Components.Carousel.carousel_item id="nav3" src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp" prev="nav2" next="nav1" full_width />
-          """
-        ]
+        id: :no_indicators,
+        description: "Carousel without indicator dots",
+        attributes: %{
+          id: "no-indicators-carousel",
+          show_indicators: false,
+          items: [
+            "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
+            "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
+            "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
+          ]
+        }
       },
       %Variation{
-        id: :center_snap,
-        description: "Center snap",
-        attributes: %{snap: "center"},
-        slots: [
-          """
-          <MithrilUI.Components.Carousel.carousel_item id="center1" src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp" />
-          <MithrilUI.Components.Carousel.carousel_item id="center2" src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp" />
-          <MithrilUI.Components.Carousel.carousel_item id="center3" src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp" />
-          """
-        ]
+        id: :no_controls,
+        description: "Carousel without navigation controls (indicators only)",
+        attributes: %{
+          id: "no-controls-carousel",
+          show_controls: false,
+          items: [
+            "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
+            "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
+            "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
+          ]
+        }
+      },
+      %Variation{
+        id: :styled,
+        description: "Carousel with custom styling",
+        attributes: %{
+          id: "styled-carousel",
+          class: "rounded-xl shadow-2xl",
+          items: [
+            "https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp",
+            "https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp",
+            "https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
+          ]
+        }
       }
     ]
   end

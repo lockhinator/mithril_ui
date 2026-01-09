@@ -73,6 +73,60 @@
   }
 })();
 
+// MithrilUI Carousel Navigation
+// Handles prev/next button clicks for carousel components
+document.addEventListener("carousel:next", (e) => {
+  const carousel = e.target;
+  const total = e.detail.total;
+  const current = parseInt(carousel.dataset.carouselActive || "0");
+  const next = (current + 1) % total;
+  window.carouselGoTo(carousel, next, total);
+});
+
+document.addEventListener("carousel:prev", (e) => {
+  const carousel = e.target;
+  const total = e.detail.total;
+  const current = parseInt(carousel.dataset.carouselActive || "0");
+  const prev = (current - 1 + total) % total;
+  window.carouselGoTo(carousel, prev, total);
+});
+
+window.carouselGoTo = function(carousel, targetIndex, total) {
+  const carouselId = carousel.id;
+
+  // Hide all slides
+  for (let i = 0; i < total; i++) {
+    const slide = document.getElementById(`${carouselId}-slide-${i}`);
+    const indicator = carousel.querySelector(`[data-carousel-indicator="${i}"]`);
+
+    if (slide) {
+      slide.classList.remove("opacity-100");
+      slide.classList.add("opacity-0", "pointer-events-none");
+    }
+    if (indicator) {
+      indicator.classList.remove("bg-white");
+      indicator.classList.add("bg-white/50");
+      indicator.setAttribute("aria-current", "false");
+    }
+  }
+
+  // Show target slide
+  const targetSlide = document.getElementById(`${carouselId}-slide-${targetIndex}`);
+  const targetIndicator = carousel.querySelector(`[data-carousel-indicator="${targetIndex}"]`);
+
+  if (targetSlide) {
+    targetSlide.classList.remove("opacity-0", "pointer-events-none");
+    targetSlide.classList.add("opacity-100");
+  }
+  if (targetIndicator) {
+    targetIndicator.classList.remove("bg-white/50");
+    targetIndicator.classList.add("bg-white");
+    targetIndicator.setAttribute("aria-current", "true");
+  }
+
+  carousel.dataset.carouselActive = targetIndex.toString();
+};
+
 // If your components require any hooks or custom uploaders, or if your pages
 // require connect parameters, uncomment the following lines and declare them as
 // such:
