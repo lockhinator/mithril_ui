@@ -16,6 +16,8 @@ defmodule MithrilUI.MCP.ServerTest do
     end
 
     test "start function is exported" do
+      # Ensure module is loaded before checking function exports
+      Code.ensure_loaded!(Server)
       assert function_exported?(Server, :start, 0)
     end
   end
