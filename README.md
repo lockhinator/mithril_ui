@@ -33,6 +33,34 @@ mix deps.get
 mix mithril_ui.install
 ```
 
+### Configure Tailwind CSS
+
+For Tailwind CSS to properly compile the DaisyUI classes used by Mithril UI components, you must add the library to your Tailwind source paths.
+
+**For Tailwind CSS v4 (with `@source` directive):**
+
+Add the following to your `assets/css/app.css`:
+
+```css
+@source "../../deps/mithril_ui";
+```
+
+**For Tailwind CSS v3 (with `tailwind.config.js`):**
+
+Add the path to the `content` array in your `tailwind.config.js`:
+
+```js
+module.exports = {
+  content: [
+    // ... your existing paths
+    "../deps/mithril_ui/**/*.ex",
+  ],
+  // ...
+}
+```
+
+> **Important:** Without this configuration, DaisyUI utility classes used by Mithril UI components (like `modal-box`, `card-body`, etc.) will not be generated, resulting in missing styles.
+
 ## Quick Start
 
 ### 1. Import Components
