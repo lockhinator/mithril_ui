@@ -21,10 +21,15 @@ defmodule MithrilUI.MCP.Server do
 
   alias MithrilUI.MCP.Tools
 
-  @server_info %{
-    name: "mithril-ui",
-    version: Mix.Project.config()[:version] || "0.1.0"
-  }
+  @doc """
+  Returns server info for the MCP protocol.
+  """
+  def server_info do
+    %{
+      name: "mithril-ui",
+      version: Application.spec(:mithril_ui, :vsn) |> to_string() || "0.1.0"
+    }
+  end
 
   @capabilities %{
     tools: %{}
@@ -99,7 +104,7 @@ defmodule MithrilUI.MCP.Server do
     {:ok,
      %{
        protocolVersion: "2024-11-05",
-       serverInfo: @server_info,
+       serverInfo: server_info(),
        capabilities: @capabilities
      }}
   end
