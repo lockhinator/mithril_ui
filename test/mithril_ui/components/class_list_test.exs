@@ -24,19 +24,19 @@ defmodule MithrilUI.Components.ClassListTest do
   import Phoenix.Component
 
   alias MithrilUI.Components.{
+    Accordion,
+    Alert,
     Avatar,
     Badge,
     Button,
     Card,
-    Alert,
+    Heading,
+    Link,
+    Modal,
     Progress,
     Spinner,
-    Accordion,
     Tabs,
-    Modal,
-    Text,
-    Heading,
-    Link
+    Text
   }
 
   describe "actions components" do
