@@ -6,12 +6,16 @@ run_web_tests? =
     idx -> Enum.at(System.argv(), idx + 1) == "web"
   end
 
-# Start the endpoint for web tests (the app doesn't auto-start its supervisor
-# since it's designed as a library without a `mod:` config)
+# Start the endpoint for web tests if not already started
+# (the application supervisor may have already started it)
 if run_web_tests? do
   {:ok, _} = Application.ensure_all_started(:phoenix)
   {:ok, _} = Application.ensure_all_started(:phoenix_live_view)
-  {:ok, _} = MithrilUiWeb.Endpoint.start_link()
+
+  case MithrilUiWeb.Endpoint.start_link() do
+    {:ok, _} -> :ok
+    {:error, {:already_started, _}} -> :ok
+  end
 end
 
 # Exclude web tests by default since they require the endpoint.

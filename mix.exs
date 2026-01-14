@@ -30,9 +30,9 @@ defmodule MithrilUi.MixProject do
     |> maybe_add_listeners()
   end
 
-  # Only add listeners if Phoenix.CodeReloader is available (dev with deps compiled)
+  # Add Phoenix.CodeReloader listener in dev for storybook hot-reloading
   defp maybe_add_listeners(config) do
-    if Code.ensure_loaded?(Phoenix.CodeReloader) do
+    if Mix.env() == :dev do
       Keyword.put(config, :listeners, [Phoenix.CodeReloader])
     else
       config
@@ -44,6 +44,7 @@ defmodule MithrilUi.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
+      mod: {MithrilUi.Application, []},
       extra_applications: [:logger]
     ]
   end
@@ -55,8 +56,10 @@ defmodule MithrilUi.MixProject do
   end
 
   # Specifies which paths to compile per environment.
+  # Only compile the web/storybook parts in dev/test where dependencies are available
   defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
+  defp elixirc_paths(:dev), do: ["lib"]
+  defp elixirc_paths(_), do: ["lib/mithril_ui", "lib/mix"]
 
   # Specifies your project dependencies.
   #
