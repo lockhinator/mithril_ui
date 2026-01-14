@@ -263,7 +263,7 @@ defmodule MithrilUI.Components.Link do
 
   attr :variant, :atom,
     default: :primary,
-    values: [:primary, :secondary, :accent, :ghost, :outline],
+    values: [:primary, :secondary, :accent, :ghost, :link, :outline, :neutral, :info, :success, :warning, :error],
     doc: "Button variant"
 
   attr :size, :atom,
@@ -361,7 +361,13 @@ defmodule MithrilUI.Components.Link do
       :secondary -> "btn-secondary"
       :accent -> "btn-accent"
       :ghost -> "btn-ghost"
+      :link -> "btn-link"
       :outline -> "btn-outline"
+      :neutral -> "btn-neutral"
+      :info -> "btn-info"
+      :success -> "btn-success"
+      :warning -> "btn-warning"
+      :error -> "btn-error"
     end
   end
 
