@@ -263,7 +263,12 @@ defmodule MithrilUI.Components.Link do
 
   attr :variant, :any,
     default: :primary,
-    values: [:primary, :secondary, :accent, :ghost, :link, :outline, :neutral, :info, :success, :warning, :error, "primary", "secondary", "accent", "ghost", "link", "outline", "neutral", "info", "success", "warning", "error"],
+    values: [
+      :primary, :secondary, :accent, :ghost, :link, :outline,
+      :neutral, :info, :success, :warning, :error,
+      "primary", "secondary", "accent", "ghost", "link", "outline",
+      "neutral", "info", "success", "warning", "error"
+    ],
     doc: "Button variant (atom or string)"
 
   attr :size, :any,
@@ -355,21 +360,21 @@ defmodule MithrilUI.Components.Link do
   end
 
   # Button variant classes
-  defp variant_class(variant) do
-    case to_atom(variant) do
-      :primary -> "btn-primary"
-      :secondary -> "btn-secondary"
-      :accent -> "btn-accent"
-      :ghost -> "btn-ghost"
-      :link -> "btn-link"
-      :outline -> "btn-outline"
-      :neutral -> "btn-neutral"
-      :info -> "btn-info"
-      :success -> "btn-success"
-      :warning -> "btn-warning"
-      :error -> "btn-error"
-    end
-  end
+  @variant_classes %{
+    primary: "btn-primary",
+    secondary: "btn-secondary",
+    accent: "btn-accent",
+    ghost: "btn-ghost",
+    link: "btn-link",
+    outline: "btn-outline",
+    neutral: "btn-neutral",
+    info: "btn-info",
+    success: "btn-success",
+    warning: "btn-warning",
+    error: "btn-error"
+  }
+
+  defp variant_class(variant), do: Map.fetch!(@variant_classes, to_atom(variant))
 
   # Button size classes
   defp size_class(size) do

@@ -117,103 +117,107 @@ defmodule MithrilUI.Components do
   end
 
   defp import_components(categories) when is_list(categories) do
-    imports =
-      for category <- categories do
-        case category do
-          :actions ->
-            quote do
-              import MithrilUI.Components.Button
-              import MithrilUI.Components.ButtonGroup
-              import MithrilUI.Components.Dropdown
-            end
-
-          :navigation ->
-            quote do
-              import MithrilUI.Components.Navbar
-              import MithrilUI.Components.Sidebar
-              import MithrilUI.Components.Breadcrumb
-              import MithrilUI.Components.Pagination
-              import MithrilUI.Components.Tabs
-              import MithrilUI.Components.BottomNavigation
-            end
-
-          :data_display ->
-            quote do
-              import MithrilUI.Components.Card
-              import MithrilUI.Components.Table
-              import MithrilUI.Components.Avatar
-              import MithrilUI.Components.Badge
-              import MithrilUI.Components.Accordion
-              import MithrilUI.Components.ListGroup
-              import MithrilUI.Components.Timeline
-            end
-
-          :feedback ->
-            quote do
-              import MithrilUI.Components.Alert
-              import MithrilUI.Components.Toast
-              import MithrilUI.Components.Modal
-              import MithrilUI.Components.Drawer
-              import MithrilUI.Components.Progress
-              import MithrilUI.Components.Spinner
-              import MithrilUI.Components.Skeleton
-            end
-
-          :forms ->
-            quote do
-              import MithrilUI.Components.Input
-              import MithrilUI.Components.Textarea
-              import MithrilUI.Components.Select
-              import MithrilUI.Components.Checkbox
-              import MithrilUI.Components.Radio
-              import MithrilUI.Components.Toggle
-              import MithrilUI.Components.Range
-              import MithrilUI.Components.FileInput
-            end
-
-          :typography ->
-            quote do
-              import MithrilUI.Components.Heading
-              import MithrilUI.Components.Text
-              import MithrilUI.Components.Link
-              import MithrilUI.Components.Blockquote
-              import MithrilUI.Components.Code
-              import MithrilUI.Components.Kbd
-            end
-
-          :overlays ->
-            quote do
-              import MithrilUI.Components.Tooltip
-              import MithrilUI.Components.Popover
-            end
-
-          :extended ->
-            quote do
-              import MithrilUI.Components.Rating
-              import MithrilUI.Components.Indicator
-              import MithrilUI.Components.Stepper
-              import MithrilUI.Components.Gallery
-              import MithrilUI.Components.Banner
-              import MithrilUI.Components.ChatBubble
-              import MithrilUI.Components.Footer
-              import MithrilUI.Components.Carousel
-            end
-
-          :utility ->
-            quote do
-              import MithrilUI.Components.ThemeSwitcher
-              import MithrilUI.Components.Clipboard
-              import MithrilUI.Components.SpeedDial
-            end
-
-          _ ->
-            quote do
-            end
-        end
-      end
+    imports = for category <- categories, do: import_category(category)
 
     quote do
       (unquote_splicing(imports))
     end
   end
+
+  defp import_category(:actions) do
+    quote do
+      import MithrilUI.Components.Button
+      import MithrilUI.Components.ButtonGroup
+      import MithrilUI.Components.Dropdown
+    end
+  end
+
+  defp import_category(:navigation) do
+    quote do
+      import MithrilUI.Components.Navbar
+      import MithrilUI.Components.Sidebar
+      import MithrilUI.Components.Breadcrumb
+      import MithrilUI.Components.Pagination
+      import MithrilUI.Components.Tabs
+      import MithrilUI.Components.BottomNavigation
+    end
+  end
+
+  defp import_category(:data_display) do
+    quote do
+      import MithrilUI.Components.Card
+      import MithrilUI.Components.Table
+      import MithrilUI.Components.Avatar
+      import MithrilUI.Components.Badge
+      import MithrilUI.Components.Accordion
+      import MithrilUI.Components.ListGroup
+      import MithrilUI.Components.Timeline
+    end
+  end
+
+  defp import_category(:feedback) do
+    quote do
+      import MithrilUI.Components.Alert
+      import MithrilUI.Components.Toast
+      import MithrilUI.Components.Modal
+      import MithrilUI.Components.Drawer
+      import MithrilUI.Components.Progress
+      import MithrilUI.Components.Spinner
+      import MithrilUI.Components.Skeleton
+    end
+  end
+
+  defp import_category(:forms) do
+    quote do
+      import MithrilUI.Components.Input
+      import MithrilUI.Components.Textarea
+      import MithrilUI.Components.Select
+      import MithrilUI.Components.Checkbox
+      import MithrilUI.Components.Radio
+      import MithrilUI.Components.Toggle
+      import MithrilUI.Components.Range
+      import MithrilUI.Components.FileInput
+    end
+  end
+
+  defp import_category(:typography) do
+    quote do
+      import MithrilUI.Components.Heading
+      import MithrilUI.Components.Text
+      import MithrilUI.Components.Link
+      import MithrilUI.Components.Blockquote
+      import MithrilUI.Components.Code
+      import MithrilUI.Components.Kbd
+    end
+  end
+
+  defp import_category(:overlays) do
+    quote do
+      import MithrilUI.Components.Tooltip
+      import MithrilUI.Components.Popover
+    end
+  end
+
+  defp import_category(:extended) do
+    quote do
+      import MithrilUI.Components.Rating
+      import MithrilUI.Components.Indicator
+      import MithrilUI.Components.Stepper
+      import MithrilUI.Components.Gallery
+      import MithrilUI.Components.Banner
+      import MithrilUI.Components.ChatBubble
+      import MithrilUI.Components.Footer
+      import MithrilUI.Components.Carousel
+    end
+  end
+
+  defp import_category(:utility) do
+    quote do
+      import MithrilUI.Components.ThemeSwitcher
+      import MithrilUI.Components.Clipboard
+      import MithrilUI.Components.SpeedDial
+    end
+  end
+
+  defp import_category(_), do: quote(do: nil)
 end
