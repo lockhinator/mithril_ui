@@ -70,20 +70,20 @@ defmodule MithrilUI.Components.Link do
   attr :navigate, :string, default: nil, doc: "LiveView navigate path"
   attr :patch, :string, default: nil, doc: "LiveView patch path"
 
-  attr :variant, :atom,
+  attr :variant, :any,
     default: :primary,
-    values: [:default, :primary, :secondary, :accent, :muted, :neutral],
-    doc: "Link variant"
+    values: [:default, :primary, :secondary, :accent, :muted, :neutral, "default", "primary", "secondary", "accent", "muted", "neutral"],
+    doc: "Link variant (atom or string)"
 
-  attr :underline, :atom,
+  attr :underline, :any,
     default: :hover,
-    values: [:always, :hover, :none],
-    doc: "Underline behavior"
+    values: [:always, :hover, :none, "always", "hover", "none"],
+    doc: "Underline behavior (atom or string)"
 
-  attr :weight, :atom,
+  attr :weight, :any,
     default: :medium,
-    values: [:normal, :medium, :semibold, :bold],
-    doc: "Font weight"
+    values: [:normal, :medium, :semibold, :bold, "normal", "medium", "semibold", "bold"],
+    doc: "Font weight (atom or string)"
 
   attr :external, :boolean, default: false, doc: "Open in new tab (href only)"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
@@ -261,15 +261,15 @@ defmodule MithrilUI.Components.Link do
   attr :navigate, :string, default: nil, doc: "LiveView navigate path"
   attr :patch, :string, default: nil, doc: "LiveView patch path"
 
-  attr :variant, :atom,
+  attr :variant, :any,
     default: :primary,
-    values: [:primary, :secondary, :accent, :ghost, :link, :outline, :neutral, :info, :success, :warning, :error],
-    doc: "Button variant"
+    values: [:primary, :secondary, :accent, :ghost, :link, :outline, :neutral, :info, :success, :warning, :error, "primary", "secondary", "accent", "ghost", "link", "outline", "neutral", "info", "success", "warning", "error"],
+    doc: "Button variant (atom or string)"
 
-  attr :size, :atom,
+  attr :size, :any,
     default: :md,
-    values: [:xs, :sm, :md, :lg],
-    doc: "Button size"
+    values: [:xs, :sm, :md, :lg, "xs", "sm", "md", "lg"],
+    doc: "Button size (atom or string)"
 
   attr :external, :boolean, default: false, doc: "Open in new tab (href only)"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
