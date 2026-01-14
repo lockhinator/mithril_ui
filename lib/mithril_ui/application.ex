@@ -20,7 +20,9 @@ defmodule MithrilUi.Application do
   defp build_children do
     []
     |> maybe_add_child(MithrilUiWeb.Telemetry)
-    |> maybe_add_child({DNSCluster, query: Application.get_env(:mithril_ui, :dns_cluster_query) || :ignore})
+    |> maybe_add_child(
+      {DNSCluster, query: Application.get_env(:mithril_ui, :dns_cluster_query) || :ignore}
+    )
     |> maybe_add_child({Phoenix.PubSub, name: MithrilUi.PubSub})
     |> maybe_add_child(MithrilUiWeb.Endpoint)
   end

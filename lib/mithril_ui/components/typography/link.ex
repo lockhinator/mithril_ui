@@ -72,7 +72,20 @@ defmodule MithrilUI.Components.Link do
 
   attr :variant, :any,
     default: :primary,
-    values: [:default, :primary, :secondary, :accent, :muted, :neutral, "default", "primary", "secondary", "accent", "muted", "neutral"],
+    values: [
+      :default,
+      :primary,
+      :secondary,
+      :accent,
+      :muted,
+      :neutral,
+      "default",
+      "primary",
+      "secondary",
+      "accent",
+      "muted",
+      "neutral"
+    ],
     doc: "Link variant (atom or string)"
 
   attr :underline, :any,
@@ -87,7 +100,9 @@ defmodule MithrilUI.Components.Link do
 
   attr :external, :boolean, default: false, doc: "Open in new tab (href only)"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
-  attr :rest, :global, include: ~w(download hreflang ping referrerpolicy rel type method csrf_token)
+
+  attr :rest, :global,
+    include: ~w(download hreflang ping referrerpolicy rel type method csrf_token)
 
   slot :inner_block, required: true, doc: "Link content"
 
@@ -264,10 +279,28 @@ defmodule MithrilUI.Components.Link do
   attr :variant, :any,
     default: :primary,
     values: [
-      :primary, :secondary, :accent, :ghost, :link, :outline,
-      :neutral, :info, :success, :warning, :error,
-      "primary", "secondary", "accent", "ghost", "link", "outline",
-      "neutral", "info", "success", "warning", "error"
+      :primary,
+      :secondary,
+      :accent,
+      :ghost,
+      :link,
+      :outline,
+      :neutral,
+      :info,
+      :success,
+      :warning,
+      :error,
+      "primary",
+      "secondary",
+      "accent",
+      "ghost",
+      "link",
+      "outline",
+      "neutral",
+      "info",
+      "success",
+      "warning",
+      "error"
     ],
     doc: "Button variant (atom or string)"
 
