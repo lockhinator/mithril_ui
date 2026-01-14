@@ -5,9 +5,10 @@ defmodule Storybook.Components.Typography.Link do
 
   def description do
     """
-    Link component for styled anchor elements.
+    Link component for styled anchor elements with full Phoenix LiveView support.
     Provides consistent link styles with support for colors, underline behaviors,
-    and various visual variants including navigation and button-styled links.
+    and various visual variants. Supports traditional `href` links as well as
+    LiveView navigation via `navigate` and `patch` attributes.
     """
   end
 
@@ -15,9 +16,33 @@ defmodule Storybook.Components.Typography.Link do
     [
       %Variation{
         id: :default,
-        description: "Default styled link",
+        description: "Default styled link with href",
         attributes: %{href: "#"},
         slots: ["Click here"]
+      },
+      %VariationGroup{
+        id: :navigation_types,
+        description: "Navigation types (href, navigate, patch)",
+        variations: [
+          %Variation{
+            id: :href,
+            description: "Traditional href link",
+            attributes: %{href: "/about"},
+            slots: ["Regular link"]
+          },
+          %Variation{
+            id: :navigate,
+            description: "LiveView navigate (client-side navigation)",
+            attributes: %{navigate: "/dashboard"},
+            slots: ["Navigate link"]
+          },
+          %Variation{
+            id: :patch,
+            description: "LiveView patch (updates URL without remount)",
+            attributes: %{patch: "/users?page=2"},
+            slots: ["Patch link"]
+          }
+        ]
       },
       %VariationGroup{
         id: :colors,
@@ -42,6 +67,11 @@ defmodule Storybook.Components.Typography.Link do
             id: :muted,
             attributes: %{href: "#", color: :muted},
             slots: ["Muted link"]
+          },
+          %Variation{
+            id: :neutral,
+            attributes: %{href: "#", color: :neutral},
+            slots: ["Neutral link"]
           }
         ]
       },
@@ -68,7 +98,7 @@ defmodule Storybook.Components.Typography.Link do
       },
       %Variation{
         id: :external,
-        description: "External link (opens in new tab)",
+        description: "External link (opens in new tab with icon)",
         attributes: %{href: "https://example.com", external: true},
         slots: ["External site"]
       },
@@ -85,6 +115,11 @@ defmodule Storybook.Components.Typography.Link do
             id: :medium,
             attributes: %{href: "#", weight: :medium},
             slots: ["Medium weight"]
+          },
+          %Variation{
+            id: :semibold,
+            attributes: %{href: "#", weight: :semibold},
+            slots: ["Semibold weight"]
           },
           %Variation{
             id: :bold,

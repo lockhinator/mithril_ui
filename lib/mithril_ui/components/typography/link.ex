@@ -1,43 +1,56 @@
 defmodule MithrilUI.Components.Link do
   @moduledoc """
-  Link component for styled anchor elements.
+  Link component for styled anchor elements with full Phoenix LiveView support.
 
   Provides consistent link styles with support for colors, underline
-  behaviors, and various visual variants.
+  behaviors, and various visual variants. Supports both traditional `href`
+  links and LiveView navigation via `navigate` and `patch`.
 
   ## Examples
 
-  Basic link:
+  Basic link with href:
 
-      <.link href="/about">About Us</.link>
+      <.styled_link href="/about">About Us</.styled_link>
+
+  LiveView navigation (client-side, no page reload):
+
+      <.styled_link navigate={~p"/dashboard"}>Dashboard</.styled_link>
+
+  LiveView patch (updates URL without remounting):
+
+      <.styled_link patch={~p"/users?page=2"}>Page 2</.styled_link>
 
   With colors:
 
-      <.link href="/docs" color={:primary}>Documentation</.link>
+      <.styled_link href="/docs" color={:primary}>Documentation</.styled_link>
 
-  Without underline by default:
+  External link (opens in new tab):
 
-      <.link href="/page" underline={:hover}>Hover to underline</.link>
-
-  ## Note
-
-  This component wraps the standard Phoenix link for styling purposes.
-  For navigation, consider using Phoenix.Component.link/1 directly.
+      <.styled_link href="https://example.com" external>External Site</.styled_link>
   """
 
   use Phoenix.Component
 
   @doc """
-  Renders a styled anchor link.
+  Renders a styled link with support for LiveView navigation.
+
+  Supports three navigation modes:
+  - `href` - Traditional link (full page navigation)
+  - `navigate` - LiveView client-side navigation (remounts LiveView)
+  - `patch` - LiveView patch (updates URL, triggers handle_params)
 
   ## Attributes
 
-    * `:href` - Link destination URL (required).
+    * `:href` - Link destination URL for traditional navigation.
+    * `:navigate` - LiveView navigate path (client-side navigation with remount).
+    * `:patch` - LiveView patch path (updates URL without remount).
     * `:color` - Link color. Options: `:default`, `:primary`, `:secondary`, `:accent`, `:muted`, `:neutral`.
     * `:underline` - Underline behavior. Options: `:always`, `:hover`, `:none`.
     * `:weight` - Font weight. Options: `:normal`, `:medium`, `:semibold`, `:bold`.
-    * `:external` - Open in new tab. Defaults to false.
+    * `:external` - Open in new tab (only applies to href links). Defaults to false.
     * `:class` - Additional CSS classes.
+
+  One of `href`, `navigate`, or `patch` must be provided.
 
   ## Slots
 
@@ -46,12 +59,16 @@ defmodule MithrilUI.Components.Link do
   ## Examples
 
       <.styled_link href="/">Home</.styled_link>
+      <.styled_link navigate={~p"/dashboard"}>Dashboard</.styled_link>
+      <.styled_link patch={~p"/users?sort=name"}>Sort by Name</.styled_link>
       <.styled_link href="/about" color={:primary} underline={:hover}>About</.styled_link>
       <.styled_link href="https://example.com" external>External Site</.styled_link>
   """
   @spec styled_link(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :href, :string, required: true, doc: "Link destination URL"
+  attr :href, :string, default: nil, doc: "Link destination URL for traditional navigation"
+  attr :navigate, :string, default: nil, doc: "LiveView navigate path"
+  attr :patch, :string, default: nil, doc: "LiveView patch path"
 
   attr :color, :atom,
     default: :primary,
@@ -68,25 +85,43 @@ defmodule MithrilUI.Components.Link do
     values: [:normal, :medium, :semibold, :bold],
     doc: "Font weight"
 
-  attr :external, :boolean, default: false, doc: "Open in new tab"
+  attr :external, :boolean, default: false, doc: "Open in new tab (href only)"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
-  attr :rest, :global, include: ~w(download hreflang ping referrerpolicy rel type)
+  attr :rest, :global, include: ~w(download hreflang ping referrerpolicy rel type method csrf_token)
 
   slot :inner_block, required: true, doc: "Link content"
 
+  def styled_link(%{navigate: nav} = assigns) when not is_nil(nav) do
+    ~H"""
+    <.link
+      navigate={@navigate}
+      class={link_classes(@color, @underline, @weight, @class)}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  def styled_link(%{patch: patch} = assigns) when not is_nil(patch) do
+    ~H"""
+    <.link
+      patch={@patch}
+      class={link_classes(@color, @underline, @weight, @class)}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
   def styled_link(assigns) do
     ~H"""
-    <a
+    <.link
       href={@href}
       target={@external && "_blank"}
       rel={@external && "noopener noreferrer"}
-      class={[
-        color_class(@color),
-        underline_class(@underline),
-        weight_class(@weight),
-        "transition-colors",
-        @class
-      ]}
+      class={link_classes(@color, @underline, @weight, @class)}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -104,69 +139,127 @@ defmodule MithrilUI.Components.Link do
           d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
         />
       </svg>
-    </a>
+    </.link>
     """
+  end
+
+  defp link_classes(color, underline, weight, extra_class) do
+    [
+      color_class(color),
+      underline_class(underline),
+      weight_class(weight),
+      "transition-colors",
+      extra_class
+    ]
   end
 
   @doc """
   Renders a navigation link with active state support.
 
+  Supports LiveView navigation via `navigate` and `patch` attributes.
+
   ## Attributes
 
-    * `:href` - Link destination URL.
+    * `:href` - Link destination URL for traditional navigation.
+    * `:navigate` - LiveView navigate path.
+    * `:patch` - LiveView patch path.
     * `:active` - Whether link represents current page.
     * `:class` - Additional CSS classes.
+
+  One of `href`, `navigate`, or `patch` must be provided.
 
   ## Examples
 
       <.nav_link href="/" active={@current_path == "/"}>Home</.nav_link>
-      <.nav_link href="/about" active={@current_path == "/about"}>About</.nav_link>
+      <.nav_link navigate={~p"/dashboard"} active={@live_action == :dashboard}>Dashboard</.nav_link>
+      <.nav_link patch={~p"/users?tab=settings"} active={@tab == :settings}>Settings</.nav_link>
   """
   @spec nav_link(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :href, :string, required: true, doc: "Link destination"
+  attr :href, :string, default: nil, doc: "Link destination URL"
+  attr :navigate, :string, default: nil, doc: "LiveView navigate path"
+  attr :patch, :string, default: nil, doc: "LiveView patch path"
   attr :active, :boolean, default: false, doc: "Active state"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Link content"
 
-  def nav_link(assigns) do
+  def nav_link(%{navigate: nav} = assigns) when not is_nil(nav) do
     ~H"""
-    <a
-      href={@href}
-      class={[
-        "font-medium transition-colors",
-        @active && "text-primary",
-        !@active && "text-base-content/70 hover:text-base-content",
-        @class
-      ]}
+    <.link
+      navigate={@navigate}
+      class={nav_link_classes(@active, @class)}
       aria-current={@active && "page"}
       {@rest}
     >
       {render_slot(@inner_block)}
-    </a>
+    </.link>
     """
   end
 
+  def nav_link(%{patch: patch} = assigns) when not is_nil(patch) do
+    ~H"""
+    <.link
+      patch={@patch}
+      class={nav_link_classes(@active, @class)}
+      aria-current={@active && "page"}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  def nav_link(assigns) do
+    ~H"""
+    <.link
+      href={@href}
+      class={nav_link_classes(@active, @class)}
+      aria-current={@active && "page"}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  defp nav_link_classes(active, extra_class) do
+    [
+      "font-medium transition-colors",
+      active && "text-primary",
+      !active && "text-base-content/70 hover:text-base-content",
+      extra_class
+    ]
+  end
+
   @doc """
-  Renders a button-styled link.
+  Renders a button-styled link with LiveView navigation support.
 
   ## Attributes
 
-    * `:href` - Link destination URL.
+    * `:href` - Link destination URL for traditional navigation.
+    * `:navigate` - LiveView navigate path.
+    * `:patch` - LiveView patch path.
     * `:variant` - Button variant. Options: `:primary`, `:secondary`, `:accent`, `:ghost`, `:outline`.
     * `:size` - Button size. Options: `:xs`, `:sm`, `:md`, `:lg`.
+    * `:external` - Open in new tab (href only). Defaults to false.
     * `:class` - Additional CSS classes.
+
+  One of `href`, `navigate`, or `patch` must be provided.
 
   ## Examples
 
       <.button_link href="/signup" variant={:primary}>Sign Up</.button_link>
+      <.button_link navigate={~p"/dashboard"} variant={:primary}>Go to Dashboard</.button_link>
+      <.button_link patch={~p"/settings"} variant={:ghost}>Settings</.button_link>
       <.button_link href="/learn" variant={:ghost}>Learn More</.button_link>
   """
   @spec button_link(map()) :: Phoenix.LiveView.Rendered.t()
 
-  attr :href, :string, required: true, doc: "Link destination"
+  attr :href, :string, default: nil, doc: "Link destination URL"
+  attr :navigate, :string, default: nil, doc: "LiveView navigate path"
+  attr :patch, :string, default: nil, doc: "LiveView patch path"
 
   attr :variant, :atom,
     default: :primary,
@@ -178,24 +271,52 @@ defmodule MithrilUI.Components.Link do
     values: [:xs, :sm, :md, :lg],
     doc: "Button size"
 
-  attr :external, :boolean, default: false, doc: "Open in new tab"
+  attr :external, :boolean, default: false, doc: "Open in new tab (href only)"
   attr :class, :any, default: nil, doc: "Additional CSS classes"
   attr :rest, :global
 
   slot :inner_block, required: true, doc: "Link content"
 
-  def button_link(assigns) do
+  def button_link(%{navigate: nav} = assigns) when not is_nil(nav) do
     ~H"""
-    <a
-      href={@href}
-      target={@external && "_blank"}
-      rel={@external && "noopener noreferrer"}
-      class={["btn", variant_class(@variant), size_class(@size), @class]}
+    <.link
+      navigate={@navigate}
+      class={button_link_classes(@variant, @size, @class)}
       {@rest}
     >
       {render_slot(@inner_block)}
-    </a>
+    </.link>
     """
+  end
+
+  def button_link(%{patch: patch} = assigns) when not is_nil(patch) do
+    ~H"""
+    <.link
+      patch={@patch}
+      class={button_link_classes(@variant, @size, @class)}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  def button_link(assigns) do
+    ~H"""
+    <.link
+      href={@href}
+      target={@external && "_blank"}
+      rel={@external && "noopener noreferrer"}
+      class={button_link_classes(@variant, @size, @class)}
+      {@rest}
+    >
+      {render_slot(@inner_block)}
+    </.link>
+    """
+  end
+
+  defp button_link_classes(variant, size, extra_class) do
+    ["btn", variant_class(variant), size_class(size), extra_class]
   end
 
   # Color classes

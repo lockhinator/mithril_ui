@@ -25,6 +25,9 @@ defmodule MithrilUI.Components do
   - `:feedback` - Alert, Toast, Modal, Drawer, Progress, Spinner, Skeleton
   - `:forms` - Input, Textarea, Select, Checkbox, Radio, Toggle, Range, FileInput
   - `:typography` - Heading, Text, Link, Blockquote, Code, Kbd
+  - `:overlays` - Tooltip, Popover
+  - `:extended` - Rating, Indicator, Stepper, Gallery, Banner, ChatBubble, Footer, Carousel
+  - `:utility` - ThemeSwitcher, Clipboard, SpeedDial
   """
 
   defmacro __using__(opts) do
@@ -44,58 +47,72 @@ defmodule MithrilUI.Components do
   defp import_components(:all) do
     quote do
       # Actions
-      # import MithrilUI.Components.Button
-      # import MithrilUI.Components.ButtonGroup
-      # import MithrilUI.Components.Dropdown
+      import MithrilUI.Components.Button
+      import MithrilUI.Components.ButtonGroup
+      import MithrilUI.Components.Dropdown
 
       # Navigation
-      # import MithrilUI.Components.Navbar
-      # import MithrilUI.Components.Sidebar
-      # import MithrilUI.Components.Breadcrumb
-      # import MithrilUI.Components.Pagination
-      # import MithrilUI.Components.Tabs
-      # import MithrilUI.Components.BottomNavigation
+      import MithrilUI.Components.Navbar
+      import MithrilUI.Components.Sidebar
+      import MithrilUI.Components.Breadcrumb
+      import MithrilUI.Components.Pagination
+      import MithrilUI.Components.Tabs
+      import MithrilUI.Components.BottomNavigation
 
       # Data Display
-      # import MithrilUI.Components.Card
-      # import MithrilUI.Components.Table
-      # import MithrilUI.Components.Avatar
-      # import MithrilUI.Components.Badge
-      # import MithrilUI.Components.Accordion
-      # import MithrilUI.Components.ListGroup
-      # import MithrilUI.Components.Timeline
+      import MithrilUI.Components.Card
+      import MithrilUI.Components.Table
+      import MithrilUI.Components.Avatar
+      import MithrilUI.Components.Badge
+      import MithrilUI.Components.Accordion
+      import MithrilUI.Components.ListGroup
+      import MithrilUI.Components.Timeline
 
       # Feedback
-      # import MithrilUI.Components.Alert
-      # import MithrilUI.Components.Toast
-      # import MithrilUI.Components.Modal
-      # import MithrilUI.Components.Drawer
-      # import MithrilUI.Components.Progress
-      # import MithrilUI.Components.Spinner
-      # import MithrilUI.Components.Skeleton
+      import MithrilUI.Components.Alert
+      import MithrilUI.Components.Toast
+      import MithrilUI.Components.Modal
+      import MithrilUI.Components.Drawer
+      import MithrilUI.Components.Progress
+      import MithrilUI.Components.Spinner
+      import MithrilUI.Components.Skeleton
 
       # Forms
-      # import MithrilUI.Components.Input
-      # import MithrilUI.Components.Textarea
-      # import MithrilUI.Components.Select
-      # import MithrilUI.Components.Checkbox
-      # import MithrilUI.Components.Radio
-      # import MithrilUI.Components.Toggle
-      # import MithrilUI.Components.Range
-      # import MithrilUI.Components.FileInput
+      import MithrilUI.Components.Input
+      import MithrilUI.Components.Textarea
+      import MithrilUI.Components.Select
+      import MithrilUI.Components.Checkbox
+      import MithrilUI.Components.Radio
+      import MithrilUI.Components.Toggle
+      import MithrilUI.Components.Range
+      import MithrilUI.Components.FileInput
 
       # Typography
-      # import MithrilUI.Components.Heading
-      # import MithrilUI.Components.Text
-      # import MithrilUI.Components.Link
-      # import MithrilUI.Components.Blockquote
-      # import MithrilUI.Components.Code
-      # import MithrilUI.Components.Kbd
+      import MithrilUI.Components.Heading
+      import MithrilUI.Components.Text
+      import MithrilUI.Components.Link
+      import MithrilUI.Components.Blockquote
+      import MithrilUI.Components.Code
+      import MithrilUI.Components.Kbd
+
+      # Overlays
+      import MithrilUI.Components.Tooltip
+      import MithrilUI.Components.Popover
+
+      # Extended
+      import MithrilUI.Components.Rating
+      import MithrilUI.Components.Indicator
+      import MithrilUI.Components.Stepper
+      import MithrilUI.Components.Gallery
+      import MithrilUI.Components.Banner
+      import MithrilUI.Components.ChatBubble
+      import MithrilUI.Components.Footer
+      import MithrilUI.Components.Carousel
 
       # Utility
-      # import MithrilUI.Components.ThemeSwitcher
-      # import MithrilUI.Components.Clipboard
-      # import MithrilUI.Components.SpeedDial
+      import MithrilUI.Components.ThemeSwitcher
+      import MithrilUI.Components.Clipboard
+      import MithrilUI.Components.SpeedDial
     end
   end
 
@@ -105,63 +122,88 @@ defmodule MithrilUI.Components do
         case category do
           :actions ->
             quote do
-              # import MithrilUI.Components.Button
-              # import MithrilUI.Components.ButtonGroup
-              # import MithrilUI.Components.Dropdown
+              import MithrilUI.Components.Button
+              import MithrilUI.Components.ButtonGroup
+              import MithrilUI.Components.Dropdown
             end
 
           :navigation ->
             quote do
-              # import MithrilUI.Components.Navbar
-              # import MithrilUI.Components.Sidebar
-              # import MithrilUI.Components.Breadcrumb
-              # import MithrilUI.Components.Pagination
-              # import MithrilUI.Components.Tabs
-              # import MithrilUI.Components.BottomNavigation
+              import MithrilUI.Components.Navbar
+              import MithrilUI.Components.Sidebar
+              import MithrilUI.Components.Breadcrumb
+              import MithrilUI.Components.Pagination
+              import MithrilUI.Components.Tabs
+              import MithrilUI.Components.BottomNavigation
             end
 
           :data_display ->
             quote do
-              # import MithrilUI.Components.Card
-              # import MithrilUI.Components.Table
-              # import MithrilUI.Components.Avatar
-              # import MithrilUI.Components.Badge
-              # import MithrilUI.Components.Accordion
-              # import MithrilUI.Components.ListGroup
-              # import MithrilUI.Components.Timeline
+              import MithrilUI.Components.Card
+              import MithrilUI.Components.Table
+              import MithrilUI.Components.Avatar
+              import MithrilUI.Components.Badge
+              import MithrilUI.Components.Accordion
+              import MithrilUI.Components.ListGroup
+              import MithrilUI.Components.Timeline
             end
 
           :feedback ->
             quote do
-              # import MithrilUI.Components.Alert
-              # import MithrilUI.Components.Toast
-              # import MithrilUI.Components.Modal
-              # import MithrilUI.Components.Drawer
-              # import MithrilUI.Components.Progress
-              # import MithrilUI.Components.Spinner
-              # import MithrilUI.Components.Skeleton
+              import MithrilUI.Components.Alert
+              import MithrilUI.Components.Toast
+              import MithrilUI.Components.Modal
+              import MithrilUI.Components.Drawer
+              import MithrilUI.Components.Progress
+              import MithrilUI.Components.Spinner
+              import MithrilUI.Components.Skeleton
             end
 
           :forms ->
             quote do
-              # import MithrilUI.Components.Input
-              # import MithrilUI.Components.Textarea
-              # import MithrilUI.Components.Select
-              # import MithrilUI.Components.Checkbox
-              # import MithrilUI.Components.Radio
-              # import MithrilUI.Components.Toggle
-              # import MithrilUI.Components.Range
-              # import MithrilUI.Components.FileInput
+              import MithrilUI.Components.Input
+              import MithrilUI.Components.Textarea
+              import MithrilUI.Components.Select
+              import MithrilUI.Components.Checkbox
+              import MithrilUI.Components.Radio
+              import MithrilUI.Components.Toggle
+              import MithrilUI.Components.Range
+              import MithrilUI.Components.FileInput
             end
 
           :typography ->
             quote do
-              # import MithrilUI.Components.Heading
-              # import MithrilUI.Components.Text
-              # import MithrilUI.Components.Link
-              # import MithrilUI.Components.Blockquote
-              # import MithrilUI.Components.Code
-              # import MithrilUI.Components.Kbd
+              import MithrilUI.Components.Heading
+              import MithrilUI.Components.Text
+              import MithrilUI.Components.Link
+              import MithrilUI.Components.Blockquote
+              import MithrilUI.Components.Code
+              import MithrilUI.Components.Kbd
+            end
+
+          :overlays ->
+            quote do
+              import MithrilUI.Components.Tooltip
+              import MithrilUI.Components.Popover
+            end
+
+          :extended ->
+            quote do
+              import MithrilUI.Components.Rating
+              import MithrilUI.Components.Indicator
+              import MithrilUI.Components.Stepper
+              import MithrilUI.Components.Gallery
+              import MithrilUI.Components.Banner
+              import MithrilUI.Components.ChatBubble
+              import MithrilUI.Components.Footer
+              import MithrilUI.Components.Carousel
+            end
+
+          :utility ->
+            quote do
+              import MithrilUI.Components.ThemeSwitcher
+              import MithrilUI.Components.Clipboard
+              import MithrilUI.Components.SpeedDial
             end
 
           _ ->
