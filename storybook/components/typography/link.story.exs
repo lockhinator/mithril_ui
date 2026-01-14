@@ -6,7 +6,7 @@ defmodule Storybook.Components.Typography.Link do
   def description do
     """
     Link component for styled anchor elements with full Phoenix LiveView support.
-    Provides consistent link styles with support for colors, underline behaviors,
+    Provides consistent link styles with support for variants, underline behaviors,
     and various visual variants. Supports traditional `href` links as well as
     LiveView navigation via `navigate` and `patch` attributes.
     """
@@ -45,32 +45,32 @@ defmodule Storybook.Components.Typography.Link do
         ]
       },
       %VariationGroup{
-        id: :colors,
-        description: "Link colors",
+        id: :variants,
+        description: "Link variants",
         variations: [
           %Variation{
             id: :primary,
-            attributes: %{href: "#", color: :primary},
+            attributes: %{href: "#", variant: :primary},
             slots: ["Primary link"]
           },
           %Variation{
             id: :secondary,
-            attributes: %{href: "#", color: :secondary},
+            attributes: %{href: "#", variant: :secondary},
             slots: ["Secondary link"]
           },
           %Variation{
             id: :accent,
-            attributes: %{href: "#", color: :accent},
+            attributes: %{href: "#", variant: :accent},
             slots: ["Accent link"]
           },
           %Variation{
             id: :muted,
-            attributes: %{href: "#", color: :muted},
+            attributes: %{href: "#", variant: :muted},
             slots: ["Muted link"]
           },
           %Variation{
             id: :neutral,
-            attributes: %{href: "#", color: :neutral},
+            attributes: %{href: "#", variant: :neutral},
             slots: ["Neutral link"]
           }
         ]

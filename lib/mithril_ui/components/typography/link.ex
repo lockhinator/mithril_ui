@@ -2,8 +2,8 @@ defmodule MithrilUI.Components.Link do
   @moduledoc """
   Link component for styled anchor elements with full Phoenix LiveView support.
 
-  Provides consistent link styles with support for colors, underline
-  behaviors, and various visual variants. Supports both traditional `href`
+  Provides consistent link styles with support for variants, underline
+  behaviors, and various visual options. Supports both traditional `href`
   links and LiveView navigation via `navigate` and `patch`.
 
   ## Examples
@@ -20,9 +20,9 @@ defmodule MithrilUI.Components.Link do
 
       <.styled_link patch={~p"/users?page=2"}>Page 2</.styled_link>
 
-  With colors:
+  With variants:
 
-      <.styled_link href="/docs" color={:primary}>Documentation</.styled_link>
+      <.styled_link href="/docs" variant={:primary}>Documentation</.styled_link>
 
   External link (opens in new tab):
 
@@ -44,7 +44,7 @@ defmodule MithrilUI.Components.Link do
     * `:href` - Link destination URL for traditional navigation.
     * `:navigate` - LiveView navigate path (client-side navigation with remount).
     * `:patch` - LiveView patch path (updates URL without remount).
-    * `:color` - Link color. Options: `:default`, `:primary`, `:secondary`, `:accent`, `:muted`, `:neutral`.
+    * `:variant` - Link variant. Options: `:default`, `:primary`, `:secondary`, `:accent`, `:muted`, `:neutral`.
     * `:underline` - Underline behavior. Options: `:always`, `:hover`, `:none`.
     * `:weight` - Font weight. Options: `:normal`, `:medium`, `:semibold`, `:bold`.
     * `:external` - Open in new tab (only applies to href links). Defaults to false.
@@ -61,7 +61,7 @@ defmodule MithrilUI.Components.Link do
       <.styled_link href="/">Home</.styled_link>
       <.styled_link navigate={~p"/dashboard"}>Dashboard</.styled_link>
       <.styled_link patch={~p"/users?sort=name"}>Sort by Name</.styled_link>
-      <.styled_link href="/about" color={:primary} underline={:hover}>About</.styled_link>
+      <.styled_link href="/about" variant={:primary} underline={:hover}>About</.styled_link>
       <.styled_link href="https://example.com" external>External Site</.styled_link>
   """
   @spec styled_link(map()) :: Phoenix.LiveView.Rendered.t()
@@ -70,10 +70,10 @@ defmodule MithrilUI.Components.Link do
   attr :navigate, :string, default: nil, doc: "LiveView navigate path"
   attr :patch, :string, default: nil, doc: "LiveView patch path"
 
-  attr :color, :atom,
+  attr :variant, :atom,
     default: :primary,
     values: [:default, :primary, :secondary, :accent, :muted, :neutral],
-    doc: "Link color"
+    doc: "Link variant"
 
   attr :underline, :atom,
     default: :hover,
@@ -95,7 +95,7 @@ defmodule MithrilUI.Components.Link do
     ~H"""
     <.link
       navigate={@navigate}
-      class={link_classes(@color, @underline, @weight, @class)}
+      class={link_classes(@variant, @underline, @weight, @class)}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -107,7 +107,7 @@ defmodule MithrilUI.Components.Link do
     ~H"""
     <.link
       patch={@patch}
-      class={link_classes(@color, @underline, @weight, @class)}
+      class={link_classes(@variant, @underline, @weight, @class)}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -121,7 +121,7 @@ defmodule MithrilUI.Components.Link do
       href={@href}
       target={@external && "_blank"}
       rel={@external && "noopener noreferrer"}
-      class={link_classes(@color, @underline, @weight, @class)}
+      class={link_classes(@variant, @underline, @weight, @class)}
       {@rest}
     >
       {render_slot(@inner_block)}
@@ -143,9 +143,9 @@ defmodule MithrilUI.Components.Link do
     """
   end
 
-  defp link_classes(color, underline, weight, extra_class) do
+  defp link_classes(variant, underline, weight, extra_class) do
     [
-      color_class(color),
+      link_variant_class(variant),
       underline_class(underline),
       weight_class(weight),
       "transition-colors",
@@ -319,13 +319,13 @@ defmodule MithrilUI.Components.Link do
     ["btn", variant_class(variant), size_class(size), extra_class]
   end
 
-  # Color classes
-  defp color_class(:default), do: "text-base-content"
-  defp color_class(:primary), do: "text-primary hover:text-primary-focus"
-  defp color_class(:secondary), do: "text-secondary hover:text-secondary-focus"
-  defp color_class(:accent), do: "text-accent hover:text-accent-focus"
-  defp color_class(:muted), do: "text-base-content/60 hover:text-base-content"
-  defp color_class(:neutral), do: "text-neutral hover:text-neutral-focus"
+  # Link variant classes (text colors for styled links)
+  defp link_variant_class(:default), do: "text-base-content"
+  defp link_variant_class(:primary), do: "text-primary hover:text-primary-focus"
+  defp link_variant_class(:secondary), do: "text-secondary hover:text-secondary-focus"
+  defp link_variant_class(:accent), do: "text-accent hover:text-accent-focus"
+  defp link_variant_class(:muted), do: "text-base-content/60 hover:text-base-content"
+  defp link_variant_class(:neutral), do: "text-neutral hover:text-neutral-focus"
 
   # Underline classes
   defp underline_class(:always), do: "underline"

@@ -48,12 +48,12 @@ defmodule MithrilUI.Components.LinkTest do
       assert html =~ "Page 2"
     end
 
-    test "applies color classes" do
+    test "applies variant classes" do
       assigns = %{}
 
       html =
         rendered_to_string(~H"""
-        <Link.styled_link href="/" color={:secondary}>Link</Link.styled_link>
+        <Link.styled_link href="/" variant={:secondary}>Link</Link.styled_link>
         """)
 
       assert html =~ "text-secondary"
