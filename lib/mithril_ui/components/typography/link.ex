@@ -319,35 +319,59 @@ defmodule MithrilUI.Components.Link do
     ["btn", variant_class(variant), size_class(size), extra_class]
   end
 
+  # Normalize string values to atoms
+  defp to_atom(value) when is_atom(value), do: value
+  defp to_atom(value) when is_binary(value), do: String.to_existing_atom(value)
+
   # Link variant classes (text colors for styled links)
-  defp link_variant_class(:default), do: "text-base-content"
-  defp link_variant_class(:primary), do: "text-primary hover:text-primary-focus"
-  defp link_variant_class(:secondary), do: "text-secondary hover:text-secondary-focus"
-  defp link_variant_class(:accent), do: "text-accent hover:text-accent-focus"
-  defp link_variant_class(:muted), do: "text-base-content/60 hover:text-base-content"
-  defp link_variant_class(:neutral), do: "text-neutral hover:text-neutral-focus"
+  defp link_variant_class(variant) do
+    case to_atom(variant) do
+      :default -> "text-base-content"
+      :primary -> "text-primary hover:text-primary-focus"
+      :secondary -> "text-secondary hover:text-secondary-focus"
+      :accent -> "text-accent hover:text-accent-focus"
+      :muted -> "text-base-content/60 hover:text-base-content"
+      :neutral -> "text-neutral hover:text-neutral-focus"
+    end
+  end
 
   # Underline classes
-  defp underline_class(:always), do: "underline"
-  defp underline_class(:hover), do: "hover:underline"
-  defp underline_class(:none), do: "no-underline"
+  defp underline_class(underline) do
+    case to_atom(underline) do
+      :always -> "underline"
+      :hover -> "hover:underline"
+      :none -> "no-underline"
+    end
+  end
 
   # Weight classes
-  defp weight_class(:normal), do: "font-normal"
-  defp weight_class(:medium), do: "font-medium"
-  defp weight_class(:semibold), do: "font-semibold"
-  defp weight_class(:bold), do: "font-bold"
+  defp weight_class(weight) do
+    case to_atom(weight) do
+      :normal -> "font-normal"
+      :medium -> "font-medium"
+      :semibold -> "font-semibold"
+      :bold -> "font-bold"
+    end
+  end
 
   # Button variant classes
-  defp variant_class(:primary), do: "btn-primary"
-  defp variant_class(:secondary), do: "btn-secondary"
-  defp variant_class(:accent), do: "btn-accent"
-  defp variant_class(:ghost), do: "btn-ghost"
-  defp variant_class(:outline), do: "btn-outline"
+  defp variant_class(variant) do
+    case to_atom(variant) do
+      :primary -> "btn-primary"
+      :secondary -> "btn-secondary"
+      :accent -> "btn-accent"
+      :ghost -> "btn-ghost"
+      :outline -> "btn-outline"
+    end
+  end
 
   # Button size classes
-  defp size_class(:xs), do: "btn-xs"
-  defp size_class(:sm), do: "btn-sm"
-  defp size_class(:md), do: nil
-  defp size_class(:lg), do: "btn-lg"
+  defp size_class(size) do
+    case to_atom(size) do
+      :xs -> "btn-xs"
+      :sm -> "btn-sm"
+      :md -> nil
+      :lg -> "btn-lg"
+    end
+  end
 end
