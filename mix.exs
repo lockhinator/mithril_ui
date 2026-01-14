@@ -1,7 +1,7 @@
 defmodule MithrilUi.MixProject do
   use Mix.Project
 
-  @version "0.1.3"
+  @version "0.1.4"
   @source_url "https://github.com/lockhinator/mithril_ui"
 
   def project do
@@ -44,7 +44,6 @@ defmodule MithrilUi.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {MithrilUi.Application, []},
       extra_applications: [:logger]
     ]
   end
