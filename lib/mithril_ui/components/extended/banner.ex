@@ -16,6 +16,16 @@ defmodule MithrilUI.Components.Banner do
         Special offer: 20% off today!
       </.banner>
 
+  Banner with action:
+
+      <.banner variant="info">
+        <:icon><svg>...</svg></:icon>
+        New version available!
+        <:action>
+          <a href="/changelog" class="link">View changelog</a>
+        </:action>
+      </.banner>
+
   CTA banner:
 
       <.banner_cta href="/signup">
@@ -29,7 +39,7 @@ defmodule MithrilUI.Components.Banner do
   alias Phoenix.LiveView.JS
 
   @positions ~w(top bottom)
-  @variants ~w(default info success warning error)
+  @variants ~w(default primary secondary accent neutral info success warning error)
 
   @doc """
   Renders a simple announcement banner.
@@ -38,7 +48,7 @@ defmodule MithrilUI.Components.Banner do
 
     * `:id` - Banner ID (required for dismissible banners).
     * `:position` - Position: top, bottom. Defaults to "top".
-    * `:variant` - Style variant: default, info, success, warning, error.
+    * `:variant` - Style variant: default, primary, secondary, accent, neutral, info, success, warning, error.
     * `:fixed` - Fix to viewport. Defaults to false.
     * `:dismissible` - Show close button. Defaults to false.
     * `:class` - Additional CSS classes.
@@ -47,6 +57,7 @@ defmodule MithrilUI.Components.Banner do
 
     * `:icon` - Optional leading icon.
     * `:inner_block` - Banner content (required).
+    * `:action` - Optional action content (buttons, links) aligned to the right.
 
   ## Examples
 
@@ -55,6 +66,14 @@ defmodule MithrilUI.Components.Banner do
       <.banner id="notice" variant="info" dismissible>
         <:icon><svg>...</svg></:icon>
         Check out our updated documentation.
+      </.banner>
+
+      <.banner variant="info">
+        <:icon><svg>...</svg></:icon>
+        New version available!
+        <:action>
+          <a href="/changelog" class="link link-hover font-semibold">View changelog</a>
+        </:action>
       </.banner>
   """
   @spec banner(map()) :: Phoenix.LiveView.Rendered.t()
@@ -69,6 +88,7 @@ defmodule MithrilUI.Components.Banner do
 
   slot :icon
   slot :inner_block, required: true
+  slot :action
 
   def banner(assigns) do
     ~H"""
@@ -92,27 +112,36 @@ defmodule MithrilUI.Components.Banner do
           {render_slot(@inner_block)}
         </div>
       </div>
-      <button
-        :if={@dismissible && @id}
-        type="button"
-        class="btn btn-ghost btn-sm btn-circle"
-        aria-label="Close"
-        phx-click={JS.hide(to: "##{@id}")}
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+      <div :if={@action != [] || (@dismissible && @id)} class="flex items-center gap-3 shrink-0">
+        <div :if={@action != []}>
+          {render_slot(@action)}
+        </div>
+        <button
+          :if={@dismissible && @id}
+          type="button"
+          class="btn btn-ghost btn-sm btn-circle"
+          aria-label="Close"
+          phx-click={JS.hide(to: "##{@id}")}
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
     """
   end
 
   defp variant_classes("default"), do: "bg-base-200 text-base-content"
+  defp variant_classes("primary"), do: "bg-primary text-primary-content"
+  defp variant_classes("secondary"), do: "bg-secondary text-secondary-content"
+  defp variant_classes("accent"), do: "bg-accent text-accent-content"
+  defp variant_classes("neutral"), do: "bg-neutral text-neutral-content"
   defp variant_classes("info"), do: "bg-info text-info-content"
   defp variant_classes("success"), do: "bg-success text-success-content"
   defp variant_classes("warning"), do: "bg-warning text-warning-content"
