@@ -108,27 +108,31 @@ defmodule MithrilUI.MCP.Tools do
     ]
   end
 
+  @valid_categories ~w(actions forms feedback data_display navigation overlays typography extended utility)
+
   @doc """
   Calls a tool by name with the given arguments.
   """
   def call_tool("list_components", args) do
     category = Map.get(args, "category")
 
-    components =
-      if category do
-        ComponentSelector.list_components(category: String.to_existing_atom(category))
-      else
-        ComponentSelector.list_components()
-      end
+    if category && category not in @valid_categories do
+      {:error, "Invalid category"}
+    else
+      components =
+        if category do
+          ComponentSelector.list_components(category: String.to_atom(category))
+        else
+          ComponentSelector.list_components()
+        end
 
-    result =
-      Enum.map_join(components, "\n", fn c ->
-        "- **#{c.name}** (#{c.category}): #{c.description}"
-      end)
+      result =
+        Enum.map_join(components, "\n", fn c ->
+          "- **#{c.name}** (#{c.category}): #{c.description}"
+        end)
 
-    {:ok, "## Components\n\n#{result}"}
-  rescue
-    ArgumentError -> {:error, "Invalid category"}
+      {:ok, "## Components\n\n#{result}"}
+    end
   end
 
   def call_tool("get_component", %{"name" => name}) do
