@@ -45,12 +45,12 @@ defmodule MithrilUI.Components.TextTest do
     end
 
     test "applies size classes" do
-      assigns = %{}
-
       for {size, class} <- [xs: "text-xs", sm: "text-sm", lg: "text-lg"] do
+        assigns = %{size: size}
+
         html =
           rendered_to_string(~H"""
-          <Text.text size={size}>Text</Text.text>
+          <Text.text size={@size}>Text</Text.text>
           """)
 
         assert html =~ class

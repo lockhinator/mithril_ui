@@ -33,12 +33,12 @@ defmodule MithrilUI.Components.HeadingTest do
     end
 
     test "renders h3 through h6" do
-      assigns = %{}
-
       for level <- 3..6 do
+        assigns = %{level: level}
+
         html =
           rendered_to_string(~H"""
-          <Heading.heading level={level}>Heading</Heading.heading>
+          <Heading.heading level={@level}>Heading</Heading.heading>
           """)
 
         assert html =~ "<h#{level}"

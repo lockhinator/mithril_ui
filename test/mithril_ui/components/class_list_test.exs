@@ -391,7 +391,7 @@ defmodule MithrilUI.Components.ClassListTest do
         rendered_to_string(~H"""
         <Button.button class={[
           "base-class",
-          if(@selected_photo && @photo.id == @selected_photo.id,
+          if(@selected_photo && @photo.id == Map.get(@selected_photo || %{}, :id),
             do: "is-selected",
             else: "not-selected"
           )

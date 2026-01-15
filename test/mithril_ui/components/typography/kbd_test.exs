@@ -129,12 +129,12 @@ defmodule MithrilUI.Components.KbdTest do
 
   describe "kbd_arrow/1" do
     test "renders arrow keys" do
-      assigns = %{}
-
       for direction <- [:up, :down, :left, :right] do
+        assigns = %{direction: direction}
+
         html =
           rendered_to_string(~H"""
-          <Kbd.kbd_arrow direction={direction} />
+          <Kbd.kbd_arrow direction={@direction} />
           """)
 
         assert html =~ "<kbd"
