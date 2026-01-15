@@ -21,7 +21,7 @@ Add `mithril_ui` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:mithril_ui, "~> 0.1.0"}
+    {:mithril_ui, "~> 0.1.5"}
   ]
 end
 ```
@@ -247,7 +247,6 @@ Mithril UI includes an MCP server for AI assistants like Claude Code.
 ## Documentation
 
 - [HexDocs](https://hexdocs.pm/mithril_ui)
-- [Storybook](http://localhost:4000/storybook) (run `mix phx.server`)
 
 ## Requirements
 
