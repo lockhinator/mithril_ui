@@ -22,7 +22,7 @@ defmodule MithrilUI.Components.SidebarTest do
       assert html =~ "Home"
     end
 
-    test "renders menu items with navigation" do
+    test "renders menu items with navigation using Phoenix.Component.link" do
       assigns = %{}
 
       html =
@@ -34,11 +34,62 @@ defmodule MithrilUI.Components.SidebarTest do
         </Sidebar.sidebar>
         """)
 
-      assert html =~ "navigate="
-      assert html =~ "/dashboard"
-      assert html =~ "patch="
-      assert html =~ "/settings"
+      # <.link> with navigate generates data-phx-link="redirect"
+      assert html =~ ~s(data-phx-link="redirect")
+      assert html =~ ~s(href="/dashboard")
+
+      # <.link> with patch generates data-phx-link="patch"
+      assert html =~ ~s(data-phx-link="patch")
+      assert html =~ ~s(href="/settings")
+
+      # <.link> with href renders as regular anchor
       assert html =~ ~s(href="/about")
+    end
+
+    test "renders item with navigate only" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.sidebar>
+          <:item navigate="/dashboard">Dashboard</:item>
+        </Sidebar.sidebar>
+        """)
+
+      assert html =~ ~s(data-phx-link="redirect")
+      assert html =~ ~s(href="/dashboard")
+      assert html =~ "Dashboard"
+    end
+
+    test "renders item with patch only" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.sidebar>
+          <:item patch="/settings">Settings</:item>
+        </Sidebar.sidebar>
+        """)
+
+      assert html =~ ~s(data-phx-link="patch")
+      assert html =~ ~s(href="/settings")
+      assert html =~ "Settings"
+    end
+
+    test "renders item with href only" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.sidebar>
+          <:item href="/about">About</:item>
+        </Sidebar.sidebar>
+        """)
+
+      # href-only links should not have data-phx-link attribute
+      refute html =~ "data-phx-link"
+      assert html =~ ~s(href="/about")
+      assert html =~ "About"
     end
 
     test "renders active item" do
@@ -239,10 +290,52 @@ defmodule MithrilUI.Components.SidebarTest do
 
       assert html =~ "menu-sm"
     end
+
+    test "renders item with navigate using Phoenix.Component.link" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.menu>
+          <:item navigate="/dashboard">Dashboard</:item>
+        </Sidebar.menu>
+        """)
+
+      assert html =~ ~s(data-phx-link="redirect")
+      assert html =~ ~s(href="/dashboard")
+    end
+
+    test "renders item with patch using Phoenix.Component.link" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.menu>
+          <:item patch="/settings">Settings</:item>
+        </Sidebar.menu>
+        """)
+
+      assert html =~ ~s(data-phx-link="patch")
+      assert html =~ ~s(href="/settings")
+    end
+
+    test "renders item with href only" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.menu>
+          <:item href="/about">About</:item>
+        </Sidebar.menu>
+        """)
+
+      refute html =~ "data-phx-link"
+      assert html =~ ~s(href="/about")
+    end
   end
 
   describe "submenu_item/1" do
-    test "renders submenu item" do
+    test "renders submenu item with Phoenix.Component.link" do
       assigns = %{}
 
       html =
@@ -251,7 +344,10 @@ defmodule MithrilUI.Components.SidebarTest do
         """)
 
       assert html =~ "<li>"
+      # Verify <.link> is used (generates <a> with data-phx-link for navigate)
       assert html =~ "<a"
+      assert html =~ ~s(data-phx-link="redirect")
+      assert html =~ ~s(href="/profile")
       assert html =~ "Profile"
     end
 
@@ -276,6 +372,30 @@ defmodule MithrilUI.Components.SidebarTest do
 
       assert html =~ "disabled"
       assert html =~ "aria-disabled"
+    end
+
+    test "renders submenu item with patch" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.submenu_item patch="/settings">Settings</Sidebar.submenu_item>
+        """)
+
+      assert html =~ ~s(data-phx-link="patch")
+      assert html =~ ~s(href="/settings")
+    end
+
+    test "renders submenu item with href only" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Sidebar.submenu_item href="/external">External</Sidebar.submenu_item>
+        """)
+
+      refute html =~ "data-phx-link"
+      assert html =~ ~s(href="/external")
     end
   end
 end
