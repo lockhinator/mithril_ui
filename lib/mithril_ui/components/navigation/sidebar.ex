@@ -127,16 +127,18 @@ defmodule MithrilUI.Components.Sidebar do
     <% end %>
     <%= for item <- @item do %>
       <li>
-        <a
+        <.link
+          navigate={item[:navigate]}
+          patch={item[:patch]}
+          href={item[:href]}
           class={item_classes(item[:active], item[:disabled], item[:class])}
-          {item_link_attrs(item)}
           aria-disabled={item[:disabled]}
         >
           {render_slot(item)}
           <span :if={item[:badge]} class={badge_classes(item[:badge_variant])}>
             {item[:badge]}
           </span>
-        </a>
+        </.link>
       </li>
     <% end %>
     <%= for _divider <- @divider do %>
@@ -203,12 +205,14 @@ defmodule MithrilUI.Components.Sidebar do
       @class
     ]}>
       <li :for={item <- @item}>
-        <a
+        <.link
+          navigate={item[:navigate]}
+          patch={item[:patch]}
+          href={item[:href]}
           class={item_classes(item[:active], item[:disabled], item[:class])}
-          {item_link_attrs(item)}
         >
           {render_slot(item)}
-        </a>
+        </.link>
       </li>
     </ul>
     """
@@ -243,13 +247,15 @@ defmodule MithrilUI.Components.Sidebar do
   def submenu_item(assigns) do
     ~H"""
     <li>
-      <a
+      <.link
+        navigate={@navigate}
+        patch={@patch}
+        href={@href}
         class={item_classes(@active, @disabled, @class)}
-        {item_link_attrs(assigns)}
         aria-disabled={@disabled}
       >
         {render_slot(@inner_block)}
-      </a>
+      </.link>
     </li>
     """
   end
@@ -272,13 +278,4 @@ defmodule MithrilUI.Components.Sidebar do
 
   defp badge_classes(nil), do: "badge badge-sm"
   defp badge_classes(variant), do: "badge badge-sm badge-#{variant}"
-
-  defp item_link_attrs(item) do
-    cond do
-      item[:navigate] -> [navigate: item[:navigate]]
-      item[:patch] -> [patch: item[:patch]]
-      item[:href] -> [href: item[:href]]
-      true -> []
-    end
-  end
 end
