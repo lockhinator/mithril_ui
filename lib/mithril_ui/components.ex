@@ -23,7 +23,7 @@ defmodule MithrilUI.Components do
   - `:navigation` - Navbar, Sidebar, Breadcrumb, Pagination, Tabs, BottomNavigation
   - `:data_display` - Card, Table, Avatar, Badge, Accordion, ListGroup, Timeline
   - `:feedback` - Alert, Toast, Modal, Drawer, Progress, Spinner, Skeleton
-  - `:forms` - Input, Textarea, Select, Checkbox, Radio, Toggle, Range, FileInput
+  - `:forms` - Input, Textarea, Select, SearchSelect, Checkbox, Radio, Toggle, Range, FileInput
   - `:typography` - Heading, Text, Link, Blockquote, Code, Kbd
   - `:overlays` - Tooltip, Popover
   - `:extended` - Rating, Indicator, Stepper, Gallery, Banner, ChatBubble, Footer, Carousel
@@ -81,6 +81,7 @@ defmodule MithrilUI.Components do
       import MithrilUI.Components.Input
       import MithrilUI.Components.Textarea
       import MithrilUI.Components.Select
+      import MithrilUI.Components.SearchSelect
       import MithrilUI.Components.Checkbox
       import MithrilUI.Components.Radio
       import MithrilUI.Components.Toggle
@@ -172,6 +173,7 @@ defmodule MithrilUI.Components do
       import MithrilUI.Components.Input
       import MithrilUI.Components.Textarea
       import MithrilUI.Components.Select
+      import MithrilUI.Components.SearchSelect
       import MithrilUI.Components.Checkbox
       import MithrilUI.Components.Radio
       import MithrilUI.Components.Toggle
