@@ -350,8 +350,12 @@ defmodule MithrilUI.Components.SearchSelect do
   def clear_selection(id) do
     JS.set_attribute({"value", ""}, to: "##{id}-value")
     |> JS.set_attribute({"value", ""}, to: "##{id}-input")
+    # Reset placeholder by removing the custom one (browser will use the placeholder attribute)
+    |> JS.remove_attribute("placeholder", to: "##{id}-input")
     |> JS.dispatch("change", to: "##{id}-value")
     |> JS.dispatch("input", to: "##{id}-value")
+    # Hide the clear button since there's nothing to clear now
+    |> JS.hide(to: "##{id} [aria-label='Clear selection']")
   end
 
   # Private helpers
