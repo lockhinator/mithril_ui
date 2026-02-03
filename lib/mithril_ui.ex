@@ -17,7 +17,7 @@ defmodule MithrilUI do
 
   Add Mithril UI to your dependencies:
 
-      {:mithril_ui, "~> 0.1.0"}
+      {:mithril_ui, "~> 0.1.8"}
 
   Import components in your module:
 
