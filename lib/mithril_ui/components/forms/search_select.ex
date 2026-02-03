@@ -204,8 +204,17 @@ defmodule MithrilUI.Components.SearchSelect do
           phx-click={clear_selection(@id)}
           aria-label="Clear selection"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
           </svg>
         </button>
 
@@ -218,8 +227,17 @@ defmodule MithrilUI.Components.SearchSelect do
           aria-label="Toggle dropdown"
           tabindex="-1"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
           </svg>
         </button>
 
@@ -363,8 +381,15 @@ defmodule MithrilUI.Components.SearchSelect do
   defp get_selected_display(%{value: nil}), do: nil
   defp get_selected_display(%{value: ""}), do: nil
 
-  defp get_selected_display(%{value: value, options: options, value_key: value_key, display_key: display_key}) do
-    case Enum.find(options, fn opt -> to_string(get_option_value(opt, value_key)) == to_string(value) end) do
+  defp get_selected_display(%{
+         value: value,
+         options: options,
+         value_key: value_key,
+         display_key: display_key
+       }) do
+    case Enum.find(options, fn opt ->
+           to_string(get_option_value(opt, value_key)) == to_string(value)
+         end) do
       nil -> nil
       option -> get_option_display(option, display_key)
     end
