@@ -194,6 +194,36 @@ defmodule MithrilUI.AI.ComponentRegistry do
       a11y: %{role: "combobox", keyboard: ["Enter", "Space", "ArrowUp", "ArrowDown"]}
     },
     %{
+      name: :search_select,
+      module: MithrilUI.Components.SearchSelect,
+      category: :forms,
+      description: "Searchable select dropdown with filtering for large option lists",
+      use_when: [
+        "Large list of options that needs filtering",
+        "User needs to search/filter options",
+        "Options are loaded dynamically or streamed",
+        "Typeahead/autocomplete functionality needed"
+      ],
+      do_not_use_when: [
+        "Small list of options (use Select instead)",
+        "Multiple selections needed (use Checkbox group)",
+        "Simple dropdown menu (use Dropdown)"
+      ],
+      related: [:select, :input, :dropdown],
+      alternatives: %{
+        select: "For small static option lists",
+        input: "For free-form text entry",
+        dropdown: "For action menus"
+      },
+      variants: ["bordered"],
+      sizes: ["xs", "sm", "md", "lg"],
+      a11y: %{
+        role: "combobox",
+        keyboard: ["Enter", "Space", "ArrowUp", "ArrowDown", "Escape"],
+        aria_attributes: ["aria-expanded", "aria-autocomplete", "aria-haspopup"]
+      }
+    },
+    %{
       name: :checkbox,
       module: MithrilUI.Components.Checkbox,
       category: :forms,
