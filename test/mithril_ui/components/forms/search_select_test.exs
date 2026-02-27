@@ -601,36 +601,36 @@ defmodule MithrilUI.Components.SearchSelectTest do
 
       # Should set hidden input value to empty
       assert Enum.any?(ops, fn op ->
-        op == ["set_attr", %{attr: ["value", ""], to: "#test-select-value"}]
-      end)
+               op == ["set_attr", %{attr: ["value", ""], to: "#test-select-value"}]
+             end)
 
       # Should set visible input value to empty
       assert Enum.any?(ops, fn op ->
-        op == ["set_attr", %{attr: ["value", ""], to: "#test-select-input"}]
-      end)
+               op == ["set_attr", %{attr: ["value", ""], to: "#test-select-input"}]
+             end)
 
       # Should remove placeholder attribute
       assert Enum.any?(ops, fn op ->
-        op == ["remove_attr", %{attr: "placeholder", to: "#test-select-input"}]
-      end)
+               op == ["remove_attr", %{attr: "placeholder", to: "#test-select-input"}]
+             end)
 
       # Should hide the clear button
       assert Enum.any?(ops, fn op ->
-        case op do
-          ["hide", %{to: to}] -> String.contains?(to, "Clear selection")
-          _ -> false
-        end
-      end)
+               case op do
+                 ["hide", %{to: to}] -> String.contains?(to, "Clear selection")
+                 _ -> false
+               end
+             end)
 
       # Should dispatch change event
       assert Enum.any?(ops, fn op ->
-        op == ["dispatch", %{event: "change", to: "#test-select-value"}]
-      end)
+               op == ["dispatch", %{event: "change", to: "#test-select-value"}]
+             end)
 
       # Should dispatch input event
       assert Enum.any?(ops, fn op ->
-        op == ["dispatch", %{event: "input", to: "#test-select-value"}]
-      end)
+               op == ["dispatch", %{event: "input", to: "#test-select-value"}]
+             end)
     end
   end
 end
