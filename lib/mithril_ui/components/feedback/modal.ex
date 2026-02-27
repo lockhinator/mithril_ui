@@ -84,19 +84,18 @@ defmodule MithrilUI.Components.Modal do
     >
       <div
         id={"#{@id}-backdrop"}
-        class="modal-backdrop bg-black/50"
+        class="modal-backdrop bg-black/50 hidden"
         aria-hidden="true"
         phx-click={JS.exec("data-cancel", to: "##{@id}")}
       />
       <div
         id={"#{@id}-container"}
-        class={["modal-box relative", @class]}
+        class={["modal-box relative hidden", @class]}
         role="dialog"
         aria-modal="true"
         aria-labelledby={@title != [] && "#{@id}-title"}
         phx-window-keydown={JS.exec("data-cancel", to: "##{@id}")}
         phx-key="escape"
-        phx-click-away={JS.exec("data-cancel", to: "##{@id}")}
       >
         <button
           type="button"
