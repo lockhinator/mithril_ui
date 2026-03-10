@@ -6,6 +6,14 @@ defmodule MithrilUI.Components.AlertTest do
 
   alias MithrilUI.Components.Alert
 
+  def test_icon(assigns) do
+    assigns = Phoenix.Component.assign(assigns, :class, assigns[:class] || "")
+
+    ~H"""
+    <span class={@class}>test-custom-icon</span>
+    """
+  end
+
   describe "alert/1 rendering" do
     test "renders basic alert" do
       assigns = %{}
@@ -124,6 +132,18 @@ defmodule MithrilUI.Components.AlertTest do
         """)
 
       refute html =~ "<svg"
+    end
+
+    test "renders custom icon when icon is a function component" do
+      assigns = %{custom_icon: &__MODULE__.test_icon/1}
+
+      html =
+        rendered_to_string(~H"""
+        <Alert.alert icon={@custom_icon}>Message</Alert.alert>
+        """)
+
+      assert html =~ "test-custom-icon"
+      assert html =~ "h-6 w-6 shrink-0"
     end
   end
 
