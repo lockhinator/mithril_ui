@@ -23,6 +23,20 @@ defmodule MithrilUI.Components.Alert do
         Your changes have been saved.
       </.alert>
 
+  ## Icon Override
+
+  Each variant has a built-in default icon. To use a custom icon (e.g. a Heroicon
+  from the consuming application), pass a function component to the `:icon` attribute.
+  Do NOT place icon components inside the alert body — use the `:icon` attribute instead.
+
+      <.alert variant="error" icon={&Heroicons.exclamation_triangle/1}>
+        Something went wrong.
+      </.alert>
+
+  To hide the icon entirely:
+
+      <.alert variant="info" icon={false}>No icon here.</.alert>
+
   ## DaisyUI Classes
 
   - `alert` - Base alert styling
@@ -47,13 +61,27 @@ defmodule MithrilUI.Components.Alert do
     * `:variant` - The alert type: info, success, warning, error.
     * `:title` - Optional title displayed prominently.
     * `:dismissible` - Whether to show a dismiss button. Defaults to false.
-    * `:icon` - Whether to show a default icon for the variant. Defaults to true.
+    * `:icon` - Controls the alert icon. Accepts:
+      * `true` (default) — shows the built-in icon for the variant.
+      * `false` — hides the icon.
+      * A function component (e.g. `&Heroicons.exclamation_triangle/1`) — renders
+        that component as the icon. The component receives a `class` assign.
     * `:class` - Additional CSS classes.
 
   ## Slots
 
     * `:inner_block` - The alert message content (required).
     * `:actions` - Optional action buttons/links.
+
+  ## Icon Override
+
+  Icons are built-in — do NOT wrap content with icon components or pass icons
+  inside the inner_block. To customize the icon, pass a function component
+  to the `:icon` attribute:
+
+      <.alert variant="error" icon={&Heroicons.exclamation_triangle/1}>
+        Something went wrong.
+      </.alert>
 
   ## Examples
 
@@ -70,7 +98,7 @@ defmodule MithrilUI.Components.Alert do
   attr :variant, :string, default: "info", values: @variants
   attr :title, :string, default: nil
   attr :dismissible, :boolean, default: false
-  attr :icon, :boolean, default: true
+  attr :icon, :any, default: true
   attr :class, :any, default: nil
 
   slot :inner_block, required: true
@@ -83,7 +111,7 @@ defmodule MithrilUI.Components.Alert do
       role="alert"
       class={alert_classes(@variant, @class)}
     >
-      <.alert_icon :if={@icon} variant={@variant} />
+      <.alert_icon :if={@icon != false} icon={@icon} variant={@variant} />
       <div class="flex-1">
         <h3 :if={@title} class="font-bold">{@title}</h3>
         <div class={@title && "text-sm"}>
@@ -117,7 +145,10 @@ defmodule MithrilUI.Components.Alert do
     """
   end
 
-  defp alert_icon(assigns) do
+  # When icon is true, render the built-in default SVG for the variant.
+  # When icon is a function component (e.g. &Heroicons.exclamation_triangle/1),
+  # call it and pass the standard icon classes so it matches the alert layout.
+  defp alert_icon(%{icon: true} = assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -132,6 +163,14 @@ defmodule MithrilUI.Components.Alert do
         d={icon_path(@variant)}
       />
     </svg>
+    """
+  end
+
+  defp alert_icon(%{icon: icon} = assigns) when is_function(icon) do
+    assigns = assign(assigns, :icon_assigns, %{class: "h-6 w-6 shrink-0", __changed__: %{}})
+
+    ~H"""
+    {@icon.(@icon_assigns)}
     """
   end
 
