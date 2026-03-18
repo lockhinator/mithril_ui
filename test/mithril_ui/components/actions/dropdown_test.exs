@@ -229,6 +229,68 @@ defmodule MithrilUI.Components.DropdownTest do
     end
   end
 
+  describe "dropdown item values" do
+    test "renders phx-value-* attributes from values map" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Dropdown.dropdown id="test">
+          <:trigger>Trigger</:trigger>
+          <:item phx-click="download" values={%{cluster: "prod"}}>Download</:item>
+        </Dropdown.dropdown>
+        """)
+
+      assert html =~ ~s(phx-value-cluster="prod")
+      assert html =~ ~s(phx-click="download")
+    end
+
+    test "renders multiple phx-value-* attributes from values map" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Dropdown.dropdown id="test">
+          <:trigger>Trigger</:trigger>
+          <:item phx-click="action" values={%{cluster: "prod", region: "us-east"}}>Action</:item>
+        </Dropdown.dropdown>
+        """)
+
+      assert html =~ ~s(phx-value-cluster="prod")
+      assert html =~ ~s(phx-value-region="us-east")
+    end
+
+    test "renders item without values map" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Dropdown.dropdown id="test">
+          <:trigger>Trigger</:trigger>
+          <:item phx-click="action">Action</:item>
+        </Dropdown.dropdown>
+        """)
+
+      assert html =~ ~s(phx-click="action")
+      refute html =~ "phx-value-"
+    end
+
+    test "values map works alongside explicit phx-value-id" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Dropdown.dropdown id="test">
+          <:trigger>Trigger</:trigger>
+          <:item phx-click="action" phx-value-id="123" values={%{extra: "data"}}>Action</:item>
+        </Dropdown.dropdown>
+        """)
+
+      assert html =~ ~s(phx-value-id="123")
+      assert html =~ ~s(phx-value-extra="data")
+    end
+  end
+
   describe "dropdown dividers" do
     test "renders divider between items" do
       assigns = %{}
@@ -454,6 +516,21 @@ defmodule MithrilUI.Components.DropdownTest do
         """)
 
       assert html =~ "dropdown-end"
+    end
+
+    test "renders phx-value-* attributes from values map" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <Dropdown.animated_dropdown id="test">
+          <:trigger>Open</:trigger>
+          <:item phx-click="action" values={%{cluster: "staging"}}>Action</:item>
+        </Dropdown.animated_dropdown>
+        """)
+
+      assert html =~ ~s(phx-value-cluster="staging")
+      assert html =~ ~s(phx-click="action")
     end
   end
 

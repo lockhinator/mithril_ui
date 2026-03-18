@@ -199,6 +199,61 @@ defmodule MithrilUI.HelpersTest do
     end
   end
 
+  describe "phx_values/1" do
+    test "returns empty list for nil" do
+      assert Helpers.phx_values(nil) == []
+    end
+
+    test "returns empty list for empty map" do
+      assert Helpers.phx_values(%{}) == []
+    end
+
+    test "converts single key-value pair" do
+      result = Helpers.phx_values(%{cluster: "prod"})
+      assert result == [{"phx-value-cluster", "prod"}]
+    end
+
+    test "converts multiple key-value pairs" do
+      result = Helpers.phx_values(%{cluster: "prod", region: "us-east"})
+      assert {"phx-value-cluster", "prod"} in result
+      assert {"phx-value-region", "us-east"} in result
+      assert length(result) == 2
+    end
+
+    test "converts non-string values to strings" do
+      result = Helpers.phx_values(%{id: 42, active: true})
+      assert {"phx-value-id", "42"} in result
+      assert {"phx-value-active", "true"} in result
+    end
+
+    test "handles string keys" do
+      result = Helpers.phx_values(%{"action" => "delete"})
+      assert result == [{"phx-value-action", "delete"}]
+    end
+
+    test "converts nil values to string" do
+      result = Helpers.phx_values(%{cluster: nil})
+      assert result == [{"phx-value-cluster", ""}]
+    end
+
+    test "excludes keys that conflict with explicit phx-value-* attrs in slot assigns" do
+      slot = %{
+        :"phx-value-id" => "123",
+        :"phx-click" => "action",
+        values: %{id: "456", extra: "data"}
+      }
+
+      result = Helpers.phx_values(%{id: "456", extra: "data"}, slot)
+      assert result == [{"phx-value-extra", "data"}]
+    end
+
+    test "returns all keys when no slot assigns provided" do
+      result = Helpers.phx_values(%{id: "456", extra: "data"})
+      assert {"phx-value-id", "456"} in result
+      assert {"phx-value-extra", "data"} in result
+    end
+  end
+
   describe "has_errors?/1" do
     test "returns false for nil" do
       refute Helpers.has_errors?(nil)
