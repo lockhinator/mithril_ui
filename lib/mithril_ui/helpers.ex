@@ -181,13 +181,31 @@ defmodule MithrilUI.Helpers do
       iex> MithrilUI.Helpers.phx_values(%{})
       []
   """
-  @spec phx_values(map() | nil) :: [{String.t(), String.t()}]
-  def phx_values(nil), do: []
-  def phx_values(values) when values == %{}, do: []
+  @spec phx_values(map() | nil, map() | nil) :: [{String.t(), String.t()}]
+  def phx_values(values, slot_assigns \\ nil)
+  def phx_values(nil, _slot_assigns), do: []
+  def phx_values(values, _slot_assigns) when values == %{}, do: []
 
-  def phx_values(values) when is_map(values) do
-    Enum.map(values, fn {key, value} ->
+  def phx_values(values, slot_assigns) when is_map(values) do
+    excluded = existing_phx_value_keys(slot_assigns)
+
+    values
+    |> Enum.reject(fn {key, _} -> to_string(key) in excluded end)
+    |> Enum.map(fn {key, value} ->
       {"phx-value-#{key}", to_string(value)}
+    end)
+  end
+
+  defp existing_phx_value_keys(nil), do: MapSet.new()
+
+  defp existing_phx_value_keys(assigns) when is_map(assigns) do
+    assigns
+    |> Map.keys()
+    |> Enum.reduce(MapSet.new(), fn key, acc ->
+      case to_string(key) do
+        "phx-value-" <> suffix -> MapSet.put(acc, suffix)
+        _ -> acc
+      end
     end)
   end
 

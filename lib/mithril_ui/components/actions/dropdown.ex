@@ -63,7 +63,7 @@ defmodule MithrilUI.Components.Dropdown do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
   import MithrilUI.Animations
-  import MithrilUI.Helpers, only: [phx_values: 1]
+  import MithrilUI.Helpers, only: [phx_values: 2]
 
   @positions ~w(end top bottom left right)
 
@@ -165,7 +165,7 @@ defmodule MithrilUI.Components.Dropdown do
           tabindex={if item[:disabled], do: "-1", else: "0"}
           aria-disabled={item[:disabled]}
           {assigns_to_attributes(item, [:disabled, :class, :inner_block, :values])}
-          {phx_values(item[:values])}
+          {phx_values(item[:values], item)}
         >
           {render_slot(item)}
         </a>

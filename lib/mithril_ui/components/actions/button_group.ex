@@ -40,7 +40,7 @@ defmodule MithrilUI.Components.ButtonGroup do
   """
 
   use Phoenix.Component
-  import MithrilUI.Helpers, only: [phx_values: 1]
+  import MithrilUI.Helpers, only: [phx_values: 2]
 
   @variants ~w(primary secondary accent ghost link outline neutral info success warning error)
   @sizes ~w(xs sm md lg)
@@ -117,7 +117,7 @@ defmodule MithrilUI.Components.ButtonGroup do
         }
         disabled={@disabled || btn[:disabled]}
         {assigns_to_attributes(btn, [:active, :disabled, :class, :type, :inner_block, :values])}
-        {phx_values(btn[:values])}
+        {phx_values(btn[:values], btn)}
       >
         {render_slot(btn)}
       </button>

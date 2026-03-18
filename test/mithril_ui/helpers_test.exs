@@ -230,6 +230,28 @@ defmodule MithrilUI.HelpersTest do
       result = Helpers.phx_values(%{"action" => "delete"})
       assert result == [{"phx-value-action", "delete"}]
     end
+
+    test "converts nil values to string" do
+      result = Helpers.phx_values(%{cluster: nil})
+      assert result == [{"phx-value-cluster", ""}]
+    end
+
+    test "excludes keys that conflict with explicit phx-value-* attrs in slot assigns" do
+      slot = %{
+        :"phx-value-id" => "123",
+        :"phx-click" => "action",
+        values: %{id: "456", extra: "data"}
+      }
+
+      result = Helpers.phx_values(%{id: "456", extra: "data"}, slot)
+      assert result == [{"phx-value-extra", "data"}]
+    end
+
+    test "returns all keys when no slot assigns provided" do
+      result = Helpers.phx_values(%{id: "456", extra: "data"})
+      assert {"phx-value-id", "456"} in result
+      assert {"phx-value-extra", "data"} in result
+    end
   end
 
   describe "has_errors?/1" do
