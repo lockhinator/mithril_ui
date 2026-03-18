@@ -63,6 +63,7 @@ defmodule MithrilUI.Components.Dropdown do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
   import MithrilUI.Animations
+  import MithrilUI.Helpers, only: [phx_values: 1]
 
   @positions ~w(end top bottom left right)
 
@@ -85,6 +86,8 @@ defmodule MithrilUI.Components.Dropdown do
     * `:item` - Menu items with optional click handlers.
       - `:disabled` - Whether item is disabled.
       - `:class` - Additional classes for the item.
+      - `:values` - Map of arbitrary `phx-value-*` attributes
+        (e.g., `%{cluster: "name"}` renders as `phx-value-cluster="name"`).
     * `:divider` - Visual separator between items.
     * `:content` - Custom content block (alternative to items).
 
@@ -123,6 +126,10 @@ defmodule MithrilUI.Components.Dropdown do
     attr :navigate, :string
     attr :patch, :string
     attr :href, :string
+
+    attr :values, :map,
+      doc:
+        "Map of arbitrary phx-value-* attributes (e.g., %{cluster: \"name\"} becomes phx-value-cluster=\"name\")"
   end
 
   slot :divider
@@ -157,7 +164,8 @@ defmodule MithrilUI.Components.Dropdown do
           class={item_classes(item[:disabled], item[:class])}
           tabindex={if item[:disabled], do: "-1", else: "0"}
           aria-disabled={item[:disabled]}
-          {assigns_to_attributes(item, [:disabled, :class, :inner_block])}
+          {assigns_to_attributes(item, [:disabled, :class, :inner_block, :values])}
+          {phx_values(item[:values])}
         >
           {render_slot(item)}
         </a>
@@ -214,6 +222,10 @@ defmodule MithrilUI.Components.Dropdown do
     attr :navigate, :string
     attr :patch, :string
     attr :href, :string
+
+    attr :values, :map,
+      doc:
+        "Map of arbitrary phx-value-* attributes (e.g., %{cluster: \"name\"} becomes phx-value-cluster=\"name\")"
   end
 
   slot :divider

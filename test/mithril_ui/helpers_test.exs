@@ -199,6 +199,39 @@ defmodule MithrilUI.HelpersTest do
     end
   end
 
+  describe "phx_values/1" do
+    test "returns empty list for nil" do
+      assert Helpers.phx_values(nil) == []
+    end
+
+    test "returns empty list for empty map" do
+      assert Helpers.phx_values(%{}) == []
+    end
+
+    test "converts single key-value pair" do
+      result = Helpers.phx_values(%{cluster: "prod"})
+      assert result == [{"phx-value-cluster", "prod"}]
+    end
+
+    test "converts multiple key-value pairs" do
+      result = Helpers.phx_values(%{cluster: "prod", region: "us-east"})
+      assert {"phx-value-cluster", "prod"} in result
+      assert {"phx-value-region", "us-east"} in result
+      assert length(result) == 2
+    end
+
+    test "converts non-string values to strings" do
+      result = Helpers.phx_values(%{id: 42, active: true})
+      assert {"phx-value-id", "42"} in result
+      assert {"phx-value-active", "true"} in result
+    end
+
+    test "handles string keys" do
+      result = Helpers.phx_values(%{"action" => "delete"})
+      assert result == [{"phx-value-action", "delete"}]
+    end
+  end
+
   describe "has_errors?/1" do
     test "returns false for nil" do
       refute Helpers.has_errors?(nil)

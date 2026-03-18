@@ -164,6 +164,34 @@ defmodule MithrilUI.Helpers do
   def field_errors(_), do: []
 
   @doc """
+  Converts a map of values to `phx-value-*` HTML attributes.
+
+  This is useful for slots that need to pass arbitrary `phx-value-*` attributes
+  to their rendered elements, since Phoenix LiveView does not support `:global`
+  attributes on slots.
+
+  ## Examples
+
+      iex> MithrilUI.Helpers.phx_values(%{cluster: "prod", region: "us-east"})
+      [{"phx-value-cluster", "prod"}, {"phx-value-region", "us-east"}]
+
+      iex> MithrilUI.Helpers.phx_values(nil)
+      []
+
+      iex> MithrilUI.Helpers.phx_values(%{})
+      []
+  """
+  @spec phx_values(map() | nil) :: [{String.t(), String.t()}]
+  def phx_values(nil), do: []
+  def phx_values(values) when values == %{}, do: []
+
+  def phx_values(values) when is_map(values) do
+    Enum.map(values, fn {key, value} ->
+      {"phx-value-#{key}", to_string(value)}
+    end)
+  end
+
+  @doc """
   Checks if a form field has any errors.
 
   ## Examples

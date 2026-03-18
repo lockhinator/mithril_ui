@@ -233,6 +233,35 @@ defmodule MithrilUI.Components.ButtonGroupTest do
       assert html =~ ~s(phx-value-item="test")
     end
 
+    test "renders phx-value-* attributes from values map" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <ButtonGroup.button_group>
+          <:button phx-click="select" values={%{cluster: "prod", action: "deploy"}}>Select</:button>
+        </ButtonGroup.button_group>
+        """)
+
+      assert html =~ ~s(phx-value-cluster="prod")
+      assert html =~ ~s(phx-value-action="deploy")
+      assert html =~ ~s(phx-click="select")
+    end
+
+    test "values map works alongside explicit phx-value-item" do
+      assigns = %{}
+
+      html =
+        rendered_to_string(~H"""
+        <ButtonGroup.button_group>
+          <:button phx-click="select" phx-value-item="test" values={%{extra: "data"}}>Select</:button>
+        </ButtonGroup.button_group>
+        """)
+
+      assert html =~ ~s(phx-value-item="test")
+      assert html =~ ~s(phx-value-extra="data")
+    end
+
     test "renders button with custom type" do
       assigns = %{}
 

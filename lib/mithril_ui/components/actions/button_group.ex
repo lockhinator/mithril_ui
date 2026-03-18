@@ -40,6 +40,7 @@ defmodule MithrilUI.Components.ButtonGroup do
   """
 
   use Phoenix.Component
+  import MithrilUI.Helpers, only: [phx_values: 1]
 
   @variants ~w(primary secondary accent ghost link outline neutral info success warning error)
   @sizes ~w(xs sm md lg)
@@ -92,6 +93,10 @@ defmodule MithrilUI.Components.ButtonGroup do
     attr :"phx-value-id", :any
     attr :value, :any
     attr :name, :string
+
+    attr :values, :map,
+      doc:
+        "Map of arbitrary phx-value-* attributes (e.g., %{action: \"delete\"} becomes phx-value-action=\"delete\")"
   end
 
   def button_group(assigns) do
@@ -111,7 +116,8 @@ defmodule MithrilUI.Components.ButtonGroup do
           )
         }
         disabled={@disabled || btn[:disabled]}
-        {assigns_to_attributes(btn, [:active, :disabled, :class, :type, :inner_block])}
+        {assigns_to_attributes(btn, [:active, :disabled, :class, :type, :inner_block, :values])}
+        {phx_values(btn[:values])}
       >
         {render_slot(btn)}
       </button>
